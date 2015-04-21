@@ -1,0 +1,4 @@
+<map id="picojson::input::skip_ws" name="picojson::input::skip_ws">
+<area shape="rect" id="node2" href="$classpicojson_1_1input.html#a3e8ba0b09a989efa0dc583096984ea8e" title="picojson::input::getc" alt="" coords="222,5,361,32"/>
+<area shape="rect" id="node3" href="$classpicojson_1_1input.html#a96ccc244e73b2ab87ded38c98e98d573" title="picojson::input::ungetc" alt="" coords="215,56,368,83"/>
+</map>

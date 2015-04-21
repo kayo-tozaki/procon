@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>Procon Html Generator: 総合概要</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Procon Html Generator
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li class="current"><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Procon Html Generator 詳解</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>本プログラムは、リソースと指定されたJSONファイルを用いてwebサイト(の問題表示部分)を出力するプログラムである。</p>
+<h1><a class="anchor" id="処理の概要"></a>
+処理の概要</h1>
+<p>本プログラムは、コマンドライン引数として支持されたJSONファイルの内容をもとにhtmlを作成するために作成された。<br />
+ 入力されるJSONの文法が正しいかをJsonValidatorを用いて検証するので、文法に誤りがあった場合はそこで処理を終了する。<br />
+ また、JsonValidatorはJAVAで書かれているプログラムを使用しているため、本プログラムを実行するにはJAVAの実行環境が必須である。<br />
+ そして、内容の検証が済んだJsonを"picojson"というライブラリを用いてパースしながら必要なデータを抽出し、htmlを作成していく。<br />
+ 作成するhtmlのひな形はテンプレートとしてresouresフォルダに格納されており、</p>
+<ul>
+<li>problemTemplate.html</li>
+<li>listTemplate.html</li>
+<li>tableTemplate.html</li>
+</ul>
+<p>の3つがこれに当たる。<br />
+</p>
+<h1><a class="anchor" id="コンパイル方法"></a>
+コンパイル方法</h1>
+<p>本プログラムのコンパイルは、Visual Studioを用いる場合は通常通りのビルドで可能である。<br />
+ g++でコンパイルする場合は、"-std=gnu++11"オプションを指定し、すべてのcppファイルを指定する。<br />
+ また、コンパイル環境はwindows、Linuxでの確認を行った(Macは不明)。</p>
+<h1><a class="anchor" id="実行にあたって"></a>
+実行にあたって</h1>
+<p>本プログラムでは、入力するJsonファイル名をプログラム起動時のコマンドライン引数として読み込ませる。<br />
+ そして、サンプル入出力の内容が格納されたファイルをプログラムと同一フォルダに配置する。<br />
+ また、起動の際にresourceフォルダ内に以下のファイルが揃っていなければ正常に動作しない。<br />
+</p>
+<ul>
+<li>json-schema-validator-2.2.6-lib.jar</li>
+<li>problemTemplate.html</li>
+<li>listTemplate.html</li>
+<li>tableTemplate.html</li>
+<li>schema.json</li>
+</ul>
+<h1><a class="anchor" id="作成されるファイル"></a>
+作成されるファイル</h1>
+<p>プログラムが正常に実行されると、プログラムと同一階層に"problem{日付}.html"が作成される。<br />
+ そして、"{日付}"フォルダが作成され、その中に各問題のhtmlが配置される。</p>
+<h1><a class="anchor" id="jsonファイルについて"></a>
+jsonファイルについて</h1>
+<p>jsonファイルの文法については、付属の"JSON構文.txt"及び"schema.json"を参照すること。</p>
+<p>fujihiro_sn </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年04月06日(月) 02時08分22秒作成 - Procon Html Generator / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>Procon Html Generator: JsonValidator.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Procon Html Generator
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>総合概要</span></a></li>
+      <li><a href="namespaces.html"><span>名前空間</span></a></li>
+      <li><a href="annotated.html"><span>クラス</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="検索" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>ファイルメンバ</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">JsonValidator.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_json_validator_8h.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef JSONVALIDATOR_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define JSONVALIDATOR_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="picojson_8h.html">picojson.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_json_validator.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_json_validator.html">JsonValidator</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_json_validator.html">JsonValidator</a>(std::string str);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_json_validator.html#a294bfad8c54e4ae66c2982015a6f2fcb">~JsonValidator</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_json_validator.html#a34b7209c626fb3d9946624c625b82855">setSchema</a>(<span class="keyword">const</span> std::string&amp; filePath);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::string <a class="code" href="class_json_validator.html#a23156e4815fe6b47f38389f77607ede6">getError</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    std::string <a class="code" href="class_json_validator.html#adb21370f78a5f2100a845c03e07f5ff9">getErrorList</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_json_validator.html#ad6bbde0a9c67e68d42e8245ede67e4a6">validation</a>(<span class="keyword">const</span> std::string&amp; filePath);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_json_validator.html">JsonValidator</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::string checkSyntax(std::ifstream&amp; ifs);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::string genErrList(<span class="keyword">const</span> std::string&amp; filePath);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    std::string m_schemaPath;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::string m_errStr;   <span class="comment">//エラーがあったらそれに関する文字列が入る(空ならエラーは起きていない)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    std::string m_errList;  <span class="comment">//発生したエラーのリストが入る</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> std::string c_command; <span class="comment">//バリデータのコマンド.オプションとかファイルは指定していないただのコマンド</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_json_validator_html_adb21370f78a5f2100a845c03e07f5ff9"><div class="ttname"><a href="class_json_validator.html#adb21370f78a5f2100a845c03e07f5ff9">JsonValidator::getErrorList</a></div><div class="ttdeci">std::string getErrorList()</div><div class="ttdef"><b>Definition:</b> JsonValidator.cpp:25</div></div>
+<div class="ttc" id="class_json_validator_html_a23156e4815fe6b47f38389f77607ede6"><div class="ttname"><a href="class_json_validator.html#a23156e4815fe6b47f38389f77607ede6">JsonValidator::getError</a></div><div class="ttdeci">std::string getError()</div><div class="ttdef"><b>Definition:</b> JsonValidator.cpp:21</div></div>
+<div class="ttc" id="class_json_validator_html"><div class="ttname"><a href="class_json_validator.html">JsonValidator</a></div><div class="ttdef"><b>Definition:</b> JsonValidator.h:11</div></div>
+<div class="ttc" id="class_json_validator_html_a294bfad8c54e4ae66c2982015a6f2fcb"><div class="ttname"><a href="class_json_validator.html#a294bfad8c54e4ae66c2982015a6f2fcb">JsonValidator::~JsonValidator</a></div><div class="ttdeci">~JsonValidator()</div><div class="ttdef"><b>Definition:</b> JsonValidator.cpp:13</div></div>
+<div class="ttc" id="class_json_validator_html_a34b7209c626fb3d9946624c625b82855"><div class="ttname"><a href="class_json_validator.html#a34b7209c626fb3d9946624c625b82855">JsonValidator::setSchema</a></div><div class="ttdeci">void setSchema(const std::string &amp;filePath)</div><div class="ttdef"><b>Definition:</b> JsonValidator.cpp:16</div></div>
+<div class="ttc" id="class_json_validator_html_ad6bbde0a9c67e68d42e8245ede67e4a6"><div class="ttname"><a href="class_json_validator.html#ad6bbde0a9c67e68d42e8245ede67e4a6">JsonValidator::validation</a></div><div class="ttdeci">void validation(const std::string &amp;filePath)</div><div class="ttdef"><b>Definition:</b> JsonValidator.cpp:29</div></div>
+<div class="ttc" id="picojson_8h_html"><div class="ttname"><a href="picojson_8h.html">picojson.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+2015年04月06日(月) 02時08分20秒作成 - Procon Html Generator / 構成:  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9.1
+</small></address>
+</body>
+</html>

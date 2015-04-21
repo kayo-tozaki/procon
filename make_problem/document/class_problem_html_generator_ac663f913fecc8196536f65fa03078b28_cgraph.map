@@ -1,0 +1,5 @@
+<map id="ProblemHtmlGenerator::setInput" name="ProblemHtmlGenerator::setInput">
+<area shape="rect" id="node2" href="$class_html_editor.html#a118ffd4f02ce871a6b0c053020a17974" title="HtmlEditor::replace" alt="" coords="208,31,341,57"/>
+<area shape="rect" id="node3" href="$class_str_replacer.html#acc3a29fdb585f0f3aa019ffd6ddf90b1" title="StrReplacer::replace" alt="" coords="389,5,529,32"/>
+<area shape="rect" id="node4" href="$class_str_replacer.html#a932e179524764a4d666fe143187813a1" title="StrReplacer::getStr" alt="" coords="393,56,526,83"/>
+</map>

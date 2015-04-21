@@ -1,0 +1,5 @@
+<map id="クラス階層図" name="クラス階層図">
+<area shape="rect" id="node1" href="$class_html_editor.html" title="HtmlEditor" alt="" coords="5,31,88,57"/>
+<area shape="rect" id="node2" href="$class_list_html_generator.html" title="ListHtmlGenerator" alt="" coords="150,5,277,32"/>
+<area shape="rect" id="node3" href="$class_problem_html_generator.html" title="ProblemHtmlGenerator" alt="" coords="136,56,291,83"/>
+</map>

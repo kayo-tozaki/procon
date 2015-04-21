@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/screen.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/modal.css" media="all">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../../javascripts/clock.js" type="text/javascript"></script>
+    <script src="../../javascripts/modal.js" type="text/javascript"></script>
+
+	<title>Koding Contest</title>
+</head>
+<body>
+    
+	<div id="header_navi_wrapper">
+    	<div id="header_navi" class="cf">
+            <a href="../../index.html">
+                <h1 id="header_navi_title">
+                    工 Programing Contest
+                </h1>
+            </a>
+            <div class="pro"></div>
+            <div class="prob">
+                <a href="./result.html">結果</a>
+            </div>
+            <div class="prob">
+                <a id="modal_open" class="button_link">提出</a>
+            </div>
+            <div class="prob">
+				<a href="../problem20150210.html">問題</a>
+            </div>        
+        </div>
+    </div>
+    
+    <div id="head_margin">
+    </div>
+
+    <!-- modal window-->
+    <div id="modal_window">
+        <div id="modal_title_bar">
+            <div id="modal_title">
+                提出
+            </div>
+            <a id="close_botton" class="modal_close button_link">
+                <div id="close"></div>
+            </a>
+        </div>
+        <div id="modal_content">
+            <form action="../../judge/upload.php" method="post" enctype="multipart/form-data" name="modal_submit"onSubmit="return check()">
+                <p>チーム名</p>
+
+                <input type="text" name="team_name" maxlength="10" method="POST" accept-charset="utf-8">
+
+                <p>問題番号を選んで下さい</p>
+				<select name="problem_num" id="pn">
+					<option value = "1">Problem A</option>
+					<option value = "2">Problem B</option>
+					<option value = "3">Problem C</option>
+					<option value = "4">Problem D</option>
+					<option value = "5" selected >Problem E</option>
+				</select>
+
+
+                <p>ソースコード</p>
+
+                <textarea name="source" id="source" cols="60" rows="10"></textarea>
+                <br>
+                <input class="up" type="submit" value="Submit" onclick="team_name_cookie_submit()">
+            </form>   
+        </div>
+    </div>
+    <!-- /modal window-->
+
+    <div id="pageinfo">
+    	<h2 id="title">
+			パイプ工場
+        </h2>
+        <div id="limit">
+			Time Limit : 2 sec, Memory Limit : 65516 KB
+        </div>
+    </div>
+    
+	<div id="base">
+    	<h3>Question</h3>
+		<p class="sentence">
+			　R君の将来の目標は、山梨県のパイプ工場で働くことです。その工場では今、バイトを募集しているそうです。春休みのため、暇を持て余しているR君はバイトに応募してみることにしました。
+		</p>
+		<p class="sentence">
+			　バイトには見事受かり、現在仕事をしている最中です。この工場での仕事はパイプのパーツをつなぎ合わせ、パイプを生産することです。また、給料は日給制のようです。毎日R君は、自分が働いた分の給料を確認しているとあることに気づきました。熱心に頑張った日に貰った給料よりも、適当にやった日に給料が多い時があるのです。どのような給料の計算方法なのか不思議に思ったR君は、M社長に直々に尋ねることにしました。
+		</p>
+		<p class="sentence">
+			 その結果、給料の計算方法は「パイプの長さの和×パイプの本数」であることが分かりました。この計算方法を知った今は、どのように仕事をすれば給料が多くもらえるが分かります。
+		</p>
+		<p class="sentence">
+			　ツイートの行数Nとツイートの内容Sが与えられるので、その中に含まれるアカウントの数を出力するプログラムを作成してください。
+		</p>
+
+        <h3>Input</h3>
+		<p class="sentence">
+			入力は以下のような形式で与えられる
+		</p>
+		<div class="sample">
+<i>N</i><br><i>S<sub>1</sub></i><br><i>S<sub>2</sub></i><br>...<br><i>S<sub>n</sub></i><br></div>
+
+        <h3>Constraints</h3>
+		<div class="sentence">
+1≦<i>N</i>≦10<br>0≦|<i>S<sub>i</sub></i>|≦1000<br></div>
+		<p class="sentence">
+			(|Si|はi番目の文字列の長さを表します)
+		</p>
+
+        <h3>Output</h3>
+		<p class="sentence">
+			入力文字列に含まれるTwitterアカウントの数を出力してください。また、出力の末尾には改行を入れてください。
+		</p>
+
+        <h3>Sample</h3>
+		<h4>Sample Input 1</h4>
+		<pre class="sample">
+3
+1 1 1
+3 3
+
+</pre>
+		<h4>Sample Output 1</h4>
+		<pre class="sample">
+12
+
+</pre>
+		<p class="sentence">
+			問題作成者のアカウントです。フォローしましょう。
+		</p>
+		<h4>Sample Input 2</h4>
+		<pre class="sample">
+4
+3 3 3 3
+1 1 1
+
+</pre>
+		<h4>Sample Output 2</h4>
+		<pre class="sample">
+48
+
+</pre>
+		<p class="sentence">
+			@Kogakuinと@Meijiが見つかるはずです。
+		</p>
+		<h4>Sample Input 3</h4>
+		<pre class="sample">
+5
+1 2 3 4 5
+4 3 2 1
+
+</pre>
+		<h4>Sample Output 3</h4>
+		<pre class="sample">
+76
+
+</pre>
+		<p class="sentence">
+			@ueoaのみがアカウントです。文字数の決まりに気を付けましょう。
+		</p>
+
+    </div>
+    
+    <div id="head_margin">
+    </div>
+    
+   	<div id="footer_wrapper">	
+    	<div id="header_navi" class="cf">
+			<div id="footer_time"></div>
+			<div id="footer">Do your best.</div>
+        </div>
+	</div>
+	
+</body>
+</html>
+
