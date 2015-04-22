@@ -1,0 +1,23 @@
+Array
+(
+    [0] => a_1
+    [1] => 
+    [2] => Startig compile...
+    [3] => judge compile tle...
+    [4] => python3 run command set
+    [5] => Startig action...
+    [6] => judge action tle...
+    [7] => Finish action
+    [8] => Start compare...
+    [9] => Wrong Answer!
+    [10] => 130
+    [11] => get data
+    [12] => submit_data.log
+    [13] => end get data
+    [14] => add tag
+    [15] => read submit_data.log
+    [16] => end add tag
+    [17] => start creating web page...
+    [18] => finished renewal page
+    [19] => All programs finished!
+)
