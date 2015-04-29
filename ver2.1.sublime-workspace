@@ -4,12 +4,92 @@
 		"selected_items":
 		[
 			[
-				"subm",
-				"submit_150421"
+				"fi",
+				"file_name"
+			],
+			[
+				"Fi",
+				"File"
+			],
+			[
+				"file",
+				"file_name"
+			],
+			[
+				"ex",
+				"exist?〔function〕"
+			],
+			[
+				"file_",
+				"file_name〔variable〕"
+			],
+			[
+				"st",
+				"startup"
+			],
+			[
+				"w",
+				"when	when …"
+			],
+			[
+				"ret",
+				"return〔function〕"
+			],
+			[
+				"com",
+				"compile_tle〔function〕"
+			],
+			[
+				"se",
+				"select_language"
+			],
+			[
+				"ma",
+				"machine_name"
+			],
+			[
+				"C",
+				"Car"
+			],
+			[
+				"ge",
+				"getAllData〔function〕"
+			],
+			[
+				"get",
+				"getQdata〔function〕"
+			],
+			[
+				"al",
+				"allowable"
+			],
+			[
+				"ac",
+				"action_sec"
+			],
+			[
+				"pr",
+				"prob_condi"
 			],
 			[
 				"qu",
-				"question"
+				"questino_no"
+			],
+			[
+				"D",
+				"Database"
+			],
+			[
+				"ta",
+				"table_date"
+			],
+			[
+				"log",
+				"$log_path〔variable〕"
+			],
+			[
+				"subm",
+				"submit_150421"
 			],
 			[
 				"que",
@@ -32,10 +112,6 @@
 				"if?	$… = ( … ) ? … : …"
 			],
 			[
-				"ta",
-				"table_name"
-			],
-			[
 				"tab",
 				"$table_name〔variable〕"
 			],
@@ -46,10 +122,6 @@
 			[
 				"sub",
 				"submit"
-			],
-			[
-				"file",
-				"file_name〔argument〕"
 			],
 			[
 				"ca",
@@ -120,20 +192,12 @@
 				"result"
 			],
 			[
-				"w",
-				"write_web"
-			],
-			[
 				"tea",
 				"team_name"
 			],
 			[
 				"write",
 				"write_data"
-			],
-			[
-				"ret",
-				"return"
 			],
 			[
 				"tem",
@@ -224,10 +288,6 @@
 				"language"
 			],
 			[
-				"se",
-				"second"
-			],
-			[
 				"in",
 				"input_numbers"
 			],
@@ -268,56 +328,62 @@
 	"buffers":
 	[
 		{
-			"contents": "echo \"各種サービスの開始\"\n#sudo service apache2 start\n#sudo service mysql start\n\n\necho \"MySQL の初期化\"\n\nFLAG=`mysql -uroot -e \"select user from mysql.user where user='procon'\"`\n#echo $FLAG\nif [[ -n \"$FLAG\"  ]]; then\n	echo \"user was already created\"\nelse\n	echo \"create user \"\n	mysql -uroot -e \"create user 'procon'@'localhost' identified by 'procon';\" && echo \"Comp\" || echo \"faild Create User\"\nfi\n\nFLAG=`mysql -uroot -e \"show databases like 'submit'\"`\nif [[ -n $FLAG ]]; then\n	echo \"database was already created\"\nelse\n	mysql -uroot -e \"create database submit;\" && echo \"Database create comp\" || echo \"faild create database\"\nfi\n\nFLAG=`mysql -uroot -e \"show databases like 'questions'\"`\nif [[ -n $FLAG ]]; then\n	echo \"database was already created\"\nelse\n	mysql -uroot -e \"create database questions;\" && echo \"Database create comp\" || echo \"faild create database\"\nfi\n\nDATE=`date +\"%y%m%d\"`\nFLAG=`mysql -uroot -e \"show tables from submit like 'submit_$DATE'\"`\n#echo mysql -uroot -e \"show tables from submit like 'submit_$DATE'\"\n if [[ -n $FLAG ]]; then\n 	echo \"table was already created\"\n else\n 	mysql -uroot -e \"create table submit.submit_$DATE(post_time bigint ,team_name varchar(20),problem_num int,language int,status int);\"&& echo \"table create comp\" || echo \"faild create table\"\n 	mysql -uroot -e \"GRANT ALL ON submit.* to procon@localhost;\" && echo \"comp set grant\" || echo \"faild grant\"\nfi\n\nFLAG=`mysql -uroot -e \"show tables from questions like 'question_$DATE'\"`\n#echo mysql -uroot -e \"show tables from submit like 'submit_$DATE'\"\n if [[ -n $FLAG ]]; then\n 	echo \"table was already created\"\n else\n 	mysql -uroot -e \"create table questions.question_$DATE(question varchar(2) ,time int,mem bigint,testcase int,preci int);\"&& echo \"table create comp\" || echo \"faild create table\"\n 	mysql -uroot -e \"GRANT ALL ON questions.* to procon@localhost;\" && echo \"comp set grant\" || echo \"faild grant\"\nfi\n\n",
-			"file": "sql.sh",
-			"file_size": 1914,
-			"file_write_time": 130740962550000000,
+			"file": "ver2.2/judge/run.sh",
 			"settings":
 			{
-				"buffer_size": 1887,
+				"buffer_size": 85,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "ver2.1/judge/uploader_DB.php",
+			"file": "ver2.2/judge/judge_test.rb",
 			"settings":
 			{
-				"buffer_size": 1524,
+				"buffer_size": 1715,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "ver2.1/parse.rb",
+			"contents": "/**\n* @file source.cpp\n*\n* @mainpage\n* 本プログラムは、リソースと指定されたJSONファイルを用いてwebサイト(の問題表示部分)を出力するプログラムである。\n*\n* @section 処理の概要\n* 本プログラムは、コマンドライン引数として支持されたJSONファイルの内容をもとにhtmlを作成するために作成された。<br>\n* 入力されるJSONの文法が正しいかをJsonValidatorを用いて検証するので、文法に誤りがあった場合はそこで処理を終了する。<br>\n* また、JsonValidatorはJAVAで書かれているプログラムを使用しているため、本プログラムを実行するにはJAVAの実行環境が必須である。<br>\n* そして、内容の検証が済んだJsonを\"picojson\"というライブラリを用いてパースしながら必要なデータを抽出し、htmlを作成していく。<br>\n* 作成するhtmlのひな形はテンプレートとしてresouresフォルダに格納されており、\n*\n* - problemTemplate.html\n* - listTemplate.html\n* - tableTemplate.html\n*\n* の3つがこれに当たる。<br>\n*\n* @section コンパイル方法\n* 本プログラムのコンパイルは、Visual Studioを用いる場合は通常通りのビルドで可能である。<br>\n* g++でコンパイルする場合は、\"-std=gnu++11\"オプションを指定し、すべてのcppファイルを指定する。<br>\n*\n* @section 実行にあたって\n* 本プログラムでは、入力するJsonファイル名をプログラム起動時のコマンドライン引数として読み込ませる。<br>\n* そして、サンプル入出力の内容が格納されたファイルをプログラムと同一フォルダに配置する。<br>\n* また、起動の際にresourceフォルダ内に以下のファイルが揃っていなければ正常に動作しない。<br>\n* \n* - json-schema-validator-2.2.6-lib.jar\n* - problemTemplate.html\n* - listTemplate.html\n* - tableTemplate.html\n* - schema.json\n*\n* @section 作成されるファイル\n* プログラムが正常に実行されると、プログラムと同一階層に\"problem{日付}.html\"が作成される。<br>\n* そして、\"{日付}\"フォルダが作成され、その中に各問題のhtmlが配置される。\n* \n* @section jsonファイルについて\n* jsonファイルの文法については、付属の\"JSON構文.txt\"及び\"schema.json\"を参照すること。\n*\n* @auther fujihiro_sn\n*/\n\n#include <iostream>\n#include <fstream>\n#include <sstream>\n#include <iomanip>\n#include \"picojson.h\"\n#include \"JsonValidator.h\"\n#include \"StrReplacer.h\"\n#include \"ListHtmlGenerator.h\"\n#include \"ProblemHtmlGenerator.h\"\n\nvoid genListPage(picojson::object contestObj);\nvoid genProblemPage(picojson::object contestObj);\nstd::string genSection(picojson::array section, std::string id, std::string class_);\nstd::string genSamples(picojson::array samples);\n\n\n\nint main(int argc, char *argv[]) {\n\n	using std::cout;\n	using std::cerr;\n	using std::cin;\n	using std::endl;\n\n	if (argc != 2) {\n		cerr << \"invalid argument\" << endl;\n		cerr << \"usage : program.exe [contest json]\" << endl;\n		return 1;\n	}\n	\n	JsonValidator test(\"./resources/schema.json\");\n	\n	test.validation(argv[1]);\n\n	std::string err = test.getError();\n	if (!err.empty()) {\n		cout << test.getError() << endl;\n		cout << test.getErrorList() << endl;\n		return 2;\n	}\n	\n	std::ifstream ifs(argv[1]);\n	picojson::value v;\n\n	if (ifs.fail()) {		//missing file\n		cout << \"cannot open contest json\" << endl;\n		return 1;\n	}\n\n	ifs >> v;\n	std::string perr = picojson::get_last_error();\n	if (!perr.empty()) {	//パース失敗\n		cout << perr << endl;\n		return 1;\n	}\n\n	//ここまでで全データの検証が済んでいるので、これ以降データのチェックは基本行わない\n\n	//コンテストデータのメインオブジェクトを取得\n	picojson::object contestObj = v.get<picojson::object>()[\"contest\"].get<picojson::object>();\n\n	genListPage(contestObj);\n	genProblemPage(contestObj);\n	//cout << v.get<picojson::object>()[\"contest\"].get<picojson::object>()[\"name\"].get<std::string>() << endl;\n	\n	return 0;\n}\n\n/**\n* 日付文字列を作成する\n* @param[in] date 日付情報が格納されたpicojsonオブジェクト\n* @return 日付の文字列\n*/\nstd::string genDate(picojson::object date) {\n	std::stringstream ssm;\n	\n	ssm << date[\"year\"].get<double>() << std::setw(2) << std::setfill('0') << date[\"month\"].get<double>() << std::setw(2) << std::setfill('0') << date[\"day\"].get<double>();\n	return ssm.str();\n}\n\n/**\n* 問題一覧ページを作成する\n* @param[in] contestObj コンテスト情報が格納されたpicojsonオブジェクト\n* @return void\n*/\nvoid genListPage(picojson::object contestObj) {\n\n	ListHtmlGenerator listPage;\n\n	listPage.setTitle(contestObj[\"name\"].get<std::string>());\n	listPage.setDate(genDate(contestObj[\"date\"].get<picojson::object>()));\n\n	picojson::array questions = contestObj[\"question\"].get<picojson::array>();\n	for (size_t i = 0; i < questions.size(); i++) {\n		picojson::object question = questions[i].get<picojson::object>();\n		std::string title = question[\"title\"].get<std::string>();\n		int timeLimit = question[\"time\"].get<double>();\n		int memLimit = question[\"mem\"].get<double>();\n		listPage.addProblemData(title, i + 1, timeLimit, memLimit);\n	}\n\n}\n\n/**\n* 問題ページを作成する\n* @param[in] contestObj コンテスト情報が格納されたpicojsonオブジェクト\n* @return void\n*/\nvoid genProblemPage(picojson::object contestObj) {\n\n	std::string date = genDate(contestObj[\"date\"].get<picojson::object>());\n	\n	system((\"mkdir \" + date).c_str());	//ディレクトリ作成\n\n	picojson::array questions = contestObj[\"question\"].get<picojson::array>();\n\n	//問題数分ループ\n	for (size_t i = 0; i < questions.size(); i++) {\n		ProblemHtmlGenerator problemPage;\n		picojson::object question = questions[i].get<picojson::object>();\n\n		//必要な情報を取得\n		std::string title = question[\"title\"].get<std::string>();\n		int timeLimit = question[\"time\"].get<double>();\n		int memLimit = question[\"mem\"].get<double>();\n\n		//情報を設定していく\n		problemPage.setProblemInfo(title, timeLimit, memLimit);\n		problemPage.setDate(date);\n		problemPage.setProblemNum(i + 1, questions.size());\n\n		problemPage.setStatement(genSection(question[\"statement\"].get<picojson::array>(), \"question\", \"sentence\"));\n		problemPage.setInput(genSection(question[\"input\"].get<picojson::array>(), \"input\", \"sample\"));\n		problemPage.setConstraints(genSection(question[\"constraints\"].get<picojson::array>(), \"constraints\", \"sentence\"));\n		problemPage.setOutput(genSection(question[\"output\"].get<picojson::array>(), \"output\", \"sample\"));\n\n		problemPage.setSample(genSamples(question[\"sample\"].get<picojson::array>()));\n	}\n\n}\n\n/**\n* statementやinputなどの節を作成する\n* @param[in] section セクション部分が格納されたpicojson配列\n* @param[in] id \"input\"か\"output\"か指定(htmlの見た目制御用)(現在は使用していない)\n* @param[in] class_ \"sentence\"か\"sample\"かを指定(htmlの見た目制御用)\n* @return 節のhtml文字列\n*/\nstd::string genSection(picojson::array section, std::string id, std::string class_) {\n	std::stringstream ssm;\n\n	for (auto j = section.begin(); j != section.end(); j++) {\n\n		if (j->is<std::string>()) {		//sentense\n\n			ssm << \"\\t\\t<p class=\\\"sentence\\\">\" << std::endl << \"\\t\\t\\t\" << j->get<std::string>() << std::endl << \"\\t\\t</p>\" << std::endl;\n\n		} else if (j->is<picojson::array>()) {		//array\n\n			std::stringstream sample;\n			for (auto k = j->get<picojson::array>().begin(); k != j->get<picojson::array>().end(); k++) {\n				sample << k->get<std::string>() << \"<br>\";\n			}\n\n			ssm << \"\\t\\t<div class=\\\"\" << class_ << \"\\\">\" << std::endl;\n			ssm << sample.str() << \"</div>\" << std::endl;\n\n		} else if (j->is<picojson::object>()) {	//Image\n			picojson::object& img = j->get<picojson::object>();\n			if (img[\"image\"].is<std::string>()) {\n				std::string imgName = img[\"image\"].get<std::string>();\n				ssm << \"\\t\\t<div class=\\\"image\\\"><img src=\\\"./\" << imgName << \"\\\"></div>\" << std::endl;\n			}\n		}\n\n	}\n	return ssm.str();\n}\n\n/**\n* サンプル部分を作成する関数\n* @param[in] samples サンプル部分が格納されたpicojsonオブジェクト\n* @return サンプル部分のhtml文字列\n*/\nstd::string genSamples(picojson::array samples) {\n	int sCounter = 1;	//サンプルの個数\n\n	std::stringstream ssm;\n	for (auto j = samples.begin(); j != samples.end(); j++, sCounter++) {\n\n		picojson::object& sampleObj = j->get<picojson::object>();\n\n		std::ifstream iifs(sampleObj[\"sampleIn\"].get<std::string>());\n		std::ifstream iofs(sampleObj[\"sampleOut\"].get<std::string>());\n\n		// ファイルが開けなかった場合*2\n		if (iifs.fail()) {\n			std::cerr << std::string(\"cannot open \" + sampleObj[\"sampleIn\"].get<std::string>()) << std::endl;\n			exit(2);\n		}\n		if (iofs.fail()) {\n			std::cerr << std::string(\"cannot open \" + sampleObj[\"sampleOut\"].get<std::string>()) << std::endl;\n			exit(2);\n		}\n		// 2つのイテレータに入出力それぞれのファイル内容を読み込ませる\n		std::istreambuf_iterator<char> iIt(iifs), oIt(iofs);\n		std::istreambuf_iterator<char> ilast, olast;\n		std::string iStr(iIt, ilast), oStr(oIt, olast);\n\n		// 読み込んだサンプル内容をhtmlとして整形していく\n		// sample input\n		ssm << \"\\t\\t<h4>Sample Input \" << sCounter << \"</h4>\" << std::endl;\n		ssm << \"\\t\\t<pre class=\\\"sample\\\">\" << std::endl;\n		ssm << iStr << \"</pre>\" << std::endl;\n		// sample output\n		ssm << \"\\t\\t<h4>Sample Output \" << sCounter << \"</h4>\" << std::endl;\n		ssm << \"\\t\\t<pre class=\\\"sample\\\">\" << std::endl;\n		ssm << oStr << \"</pre>\" << std::endl;\n\n		// 画像が定義されていたら\n		if (sampleObj[\"image\"].is<std::string>()) {\n			std::string fileName = sampleObj[\"image\"].get<std::string>();\n			ssm << \"\\t\\t<div class=\\\"image\\\"><img src=\\\"./\" << fileName << \"\\\"></div>\" << std::endl;\n		}\n\n		//説明文が定義されていたら\n		if (sampleObj[\"string\"].is<std::string>()) {\n			ssm << \"\\t\\t<p class=\\\"sentence\\\">\" << std::endl << \"\\t\\t\\t\" << sampleObj[\"string\"].get<std::string>() << std::endl << \"\\t\\t</p>\" << std::endl;\n		}\n\n\n	}\n	return ssm.str();\n}\n\n",
+			"file": "make_problem/source/Source.cpp",
+			"file_size": 9516,
+			"file_write_time": 130740185120000000,
 			"settings":
 			{
-				"buffer_size": 1187,
+				"buffer_size": 8226,
+				"line_ending": "Windows",
+				"scratch": true
+			}
+		},
+		{
+			"file": "ver2.2/judge/classtest.rb",
+			"settings":
+			{
+				"buffer_size": 274,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "ver2.1/index.html",
+			"file": "ver2.2/judge/upload.php",
 			"settings":
 			{
-				"buffer_size": 2484,
+				"buffer_size": 1503,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "update.php",
+			"file": "ver2.2/judge/judge.rb",
 			"settings":
 			{
-				"buffer_size": 1584,
+				"buffer_size": 6365,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<html>\n<head>\n<title>judging...</title>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../stylesheets/screen.css\" media=\"all\">\n</head>\n<body>\n<div id=\"base\">\nNow Sending ... <img src=\"../images/loading.gif\">\n<?php\n//check team name (if not alphabet...)\n// if (ctype_alpha($_POST['team_name']) == false) {\n//  	$js = <<<EOD\n// PHP Error. Please wirte team name only <font color = \"red\">Alphabet.</font><a href=\"javascript:history.back();\"> please retry</a>\n// EOD;\n// 	echo($js);\n// }else{\n	//save source files\n	 $post_time = time();\n	// $fh = fopen(\"../submit_file/$post_time\",'w');\n	// fwrite($fh,$_POST['source']);\n	// fclose($fh);\n\n\n	//Connection to DB\n	$table_name = \"submit_\".date(\"ymd\");\n	if(!$link = mysql_connect('localhost','procon','procon')){\n		die('Connection Error.'.mysql_error());\n	}		\n\n	if(!$db_select = mysql_select_db('submit',$link)){\n		die('Selection Error.'.mysql_error());\n	}\n\n	//Make data insert to DB\n	$team_name = \"test\"; 		//$_POST['team_name'];\n	$problem_num = 1;		//$_POST['problem_num'];\n	$language = 2;		//$_POST['language'];\n	$status = 1;\n\n	$insert_sql = sprintf(\"INSERT INTO %s (post_time,team_name,problem_num,language,status) VALUES ('%d','%s','%d','%d','%d')\",$table_name,$post_time,$team_name,$problem_num,$language,$status);\n	$result_flag = mysql_query($insert_sql);\n  	if(!$result_flag) {\n  		die('Error. Insert cannot.'.mysql_error());\n  	}\n\n  	exec('bash run.sh',$op);\n  	$log_fh = fopen(\"$post_time/run.log\",'w');\n  	fwrite($log_fh, $op);\n  	fclose($log_fh);\n\n//}\n?>\n</div>\n\n</body>\n</html>",
-			"file": "uploader_DB.php",
-			"file_size": 1529,
-			"file_write_time": 130740583140000000,
+			"file": "ver2.2/sql.sh",
 			"settings":
 			{
-				"buffer_size": 1529,
+				"buffer_size": 1983,
 				"line_ending": "Unix"
 			}
 		}
@@ -329,10 +395,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 367.0,
-		"last_filter": "",
+		"height": 147.0,
+		"last_filter": "ruby",
 		"selected_items":
 		[
+			[
+				"ruby",
+				"Set Syntax: Ruby"
+			],
 			[
 				"insta",
 				"Package Control: Install Package"
@@ -356,10 +426,6 @@
 			[
 				"syntax php",
 				"Set Syntax: PHP"
-			],
-			[
-				"ruby",
-				"Set Syntax: Ruby"
 			],
 			[
 				"syntac",
@@ -390,7 +456,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 593.0
+		"width": 521.0
 	},
 	"console":
 	{
@@ -412,18 +478,23 @@
 	"expanded_folders":
 	[
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2",
-		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.1",
-		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.1/judge"
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.2",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.2/judge"
 	],
 	"file_history":
 	[
-		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/parse.rb",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.2/judge/upload.php",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.2/judge/uploader_DB.php",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.2/sql.sh",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/update.php",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.1/index.html",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/sql.sh",
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.1/judge/parse.rb",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.1/parse.rb",
+		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/parse.rb",
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/ver2.1/judge/upload.php",
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/database.php",
-		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/update.php",
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/uploder_DB.php",
-		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/sql.sh",
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/database.md",
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/procon/source/resources/problemTemplate.html",
 		"/Users/natsudama/Documents/College_current/Kprocon/ver2.2/procon/source/resources/listTemplate.html",
@@ -539,12 +610,7 @@
 		"/Users/natsudama/Downloads/tokyo.json",
 		"/Users/natsudama/Documents/procon/remove.rb",
 		"/Users/natsudama/Documents/procon/judge.rb",
-		"/Users/natsudama/Documents/procon/config_sample",
-		"/Users/natsudama/.mikutter/settings/setting.yml",
-		"/Users/natsudama/.mikutter/settings/core/token",
-		"/Users/natsudama/Documents/procon/helloworld.cpp",
-		"/Users/natsudama/ProcLangage/ruby/test1209.rb",
-		"/Users/natsudama/Downloads/ruby_status/cre_result.rb"
+		"/Users/natsudama/Documents/procon/config_sample"
 	],
 	"find":
 	{
@@ -562,6 +628,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ps alx",
+			"puts",
+			"log",
 			"#",
 			"submit_test",
 			"java",
@@ -603,24 +672,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "sql.sh",
+					"file": "ver2.2/judge/run.sh",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1887,
+						"buffer_size": 85,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								850,
-								850
+								85,
+								85
 							]
 						],
 						"settings":
@@ -628,16 +697,26 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -648,171 +727,59 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_thread_running": true,
-							"origin_encoding": "UTF-8",
+							"origin_encoding": "ASCII",
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 1,
-					"file": "ver2.1/judge/uploader_DB.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1524,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1401,
-								1401
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_thread_running": true,
-							"origin_encoding": "ASCII",
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "ver2.1/parse.rb",
+					"file": "ver2.2/judge/judge_test.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1187,
+						"buffer_size": 1715,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1181,
-								1181
+								1357,
+								1357
 							]
 						],
 						"settings":
@@ -821,16 +788,26 @@
 							"auto_complete": false,
 							"bh_regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -841,71 +818,59 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_thread_running": true,
 							"origin_encoding": "ASCII",
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": true
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 110.0,
+						"translation.y": 621.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "ver2.1/index.html",
-					"semi_transient": true,
+					"buffer": 2,
+					"file": "make_problem/source/Source.cpp",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2484,
+						"buffer_size": 8226,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1176,
+								1176
 							]
 						],
 						"settings":
@@ -913,6 +878,31 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_double_quote",
 								"bh_double_quote_center",
 								"bh_double_quote_open",
@@ -923,64 +913,130 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"encoding_helper_encoding": "SHIFT_JIS",
+							"encoding_thread_running": true,
+							"in_converting": true,
+							"origin_encoding": "SHIFT_JIS",
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3779.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "ver2.2/judge/classtest.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 274,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								237,
+								237
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_complete": false,
+							"bh_regions":
+							[
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
 							],
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_thread_running": true,
-							"origin_encoding": "UTF-8",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -991,36 +1047,47 @@
 			[
 				{
 					"buffer": 4,
-					"file": "update.php",
+					"file": "ver2.2/judge/upload.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1584,
+						"buffer_size": 1503,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								317,
-								317
+								312,
+								312
 							]
 						],
 						"settings":
 						{
 							"BracketHighlighterBusy": false,
+							"auto_complete": false,
 							"bh_regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -1031,69 +1098,59 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_thread_running": true,
-							"origin_encoding": "ASCII",
+							"origin_encoding": "UTF-8",
 							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "uploader_DB.php",
-					"semi_transient": true,
+					"file": "ver2.2/judge/judge.rb",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1529,
+						"buffer_size": 6365,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3501,
+								3501
 							]
 						],
 						"settings":
@@ -1101,16 +1158,26 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -1121,52 +1188,133 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_thread_running": true,
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1517.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "ver2.2/sql.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1983,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1381,
+								1382
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_thread_running": true,
-							"origin_encoding": "ASCII",
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1195,18 +1343,6 @@
 				0,
 				2,
 				1
-			],
-			[
-				0,
-				1,
-				1,
-				2
-			],
-			[
-				1,
-				1,
-				2,
-				2
 			]
 		],
 		"cols":
@@ -1218,7 +1354,6 @@
 		"rows":
 		[
 			0.0,
-			0.447002488332,
 			1.0
 		]
 	},
@@ -1232,7 +1367,7 @@
 		"height": 0.0
 	},
 	"pinned_build_system": "",
-	"project": "ver2.1.sublime-project",
+	"project": "ver2.2.sublime-project",
 	"replace":
 	{
 		"height": 46.0
@@ -1265,7 +1400,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 3,
+	"selected_group": 0,
 	"settings":
 	{
 	},

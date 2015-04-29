@@ -57,15 +57,15 @@ def compile_tle(file_name)
 
 	sleep 2
 	if %x(ps alx |grep "g++ #{file_name_tle}.cpp -").empty? == false && ($language == 0 || $language == 1)
-		kill_command = %Q(kill `ps alx |grep "#{file_name_tle}"` ) 
+		kill_command = %Q(kill `ps alx |grep "g++ #{file_name_tle}.cpp"` ) 
 		puts "over time. kill compile process"
 
 		#web page 先行更新（TLE）
 		save_add_data($questino_no*100+4*10+$rank*1,$team_name,$submit_time)
 		IO.popen(kill_command)
 		exit
-	elsif %x(ps alx |grep "g++ [M]ain.java -").empty? == false && ($language == 2)
-		kill_command = %Q(kill `ps alx |grep "#{file_name_tle}"` ) 
+	elsif %x(ps alx |grep "javac [M]ain.java").empty? == false && ($language == 2)
+		kill_command = %Q(kill `ps alx |grep "[M]ain.java"` ) 
 		puts "over time. kill compile process"
 
 		#web page 先行更新（TLE）

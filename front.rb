@@ -1,1 +1,0 @@
-create table submit.uptime(post_time bigint not null, team_name varchar(20),problem_num int not null, langage int not null );

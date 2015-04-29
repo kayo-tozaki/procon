@@ -48,5 +48,5 @@ FLAG=`mysql -uroot -e "show tables from questions like 'question_$DATE'"`
 fi
 
 echo "parse.rbの実行"
-ruby ./judge/parse.rb
-
+ruby /parse.rb
+sudo ln -s /var/run/mysqld/mysqld.sock /tmp/mysql.sock

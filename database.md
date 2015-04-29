@@ -37,6 +37,8 @@ create table submit_test(post_time bigint ,team_name varchar(20),problem_num int
 | :--  | :--            |
 | 1    | 提出完了       |
 | 2    | コンパイル済み |
+| 21   | コンパイル失敗(コンパイルエラー）|
+| 22   |コンパイル失敗（コンパイルのTLE）|
 | 3    | 実行済み       |
 | 4    | 比較済み       |
 | 5    | 結果表示済み   |
