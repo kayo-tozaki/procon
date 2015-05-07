@@ -111,7 +111,7 @@ end
 #以下、継承したもの。
 class Compile_C < Compile
 	def command_language()
-		return("g++ main.c -o #{$time} 2> ../log/#{$time}_compile")
+		return("g++ main.c 2> ../log/#{$time}_compile")
 	end	
 	def judge_compile_tle_command
 		CTLE_C.new.judge_tle()
@@ -119,7 +119,7 @@ class Compile_C < Compile
 end
 class Compile_Cpp < Compile
 	def command_language()
-		return("g++ main.cpp -o #{$time} -std=c++11 2> ../log/#{$time}_compile")
+		return("g++ main.cpp -std=c++11 2> ../log/#{$time}_compile")
 	end	
 	def judge_compile_tle_command
 		CTLE_Cpp.new.judge_tle
