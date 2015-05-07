@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/screen.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/modal.css" media="all">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../../javascripts/clock.js" type="text/javascript"></script>
+    <script src="../../javascripts/modal.js" type="text/javascript"></script>
+
+	<title>KogCoder Contest</title>
+</head>
+<body>
+    
+	<div id="header_navi_wrapper">
+    	<div id="header_navi" class="cf">
+            <a href="../../index.html">
+                <h1 id="header_navi_title">
+                    KogCoder Programing Contest
+                </h1>
+            </a>
+            <div class="pro"></div>
+            <div class="prob">
+                <a href="./result.html">結果</a>
+            </div>
+            <div class="prob">
+                <a id="modal_open" class="button_link">提出</a>
+            </div>
+            <div class="prob">
+				<a href="../problem20150425.html">問題</a>
+            </div>        
+        </div>
+    </div>
+    
+    <div id="head_margin">
+    </div>
+
+    <!-- modal window-->
+    <div id="modal_window">
+        <div id="modal_title_bar">
+            <div id="modal_title">
+                提出
+            </div>
+            <a id="close_botton" class="modal_close button_link">
+                <div id="close"></div>
+            </a>
+        </div>
+        <div id="modal_content">
+            <form action="../../judge/upload.php" method="post" enctype="multipart/form-data" name="modal_submit"onSubmit="return check()">
+                <p>チーム名</p>
+
+                <input type="text" name="team_name" maxlength="10" method="POST" accept-charset="utf-8">
+
+                <p>問題番号を選んで下さい</p>
+				<select name="problem_num" id="pn">
+					<option value = "1">Problem A</option>
+					<option value = "2" selected >Problem B</option>
+					<option value = "3">Problem C</option>
+					<option value = "4">Problem D</option>
+					<option value = "5">Problem E</option>
+					<option value = "6">Problem F</option>
+					<option value = "7">Problem G</option>
+					<option value = "8">Problem H</option>
+				</select>
+
+
+                <p>プログラミング言語</p>
+                <select name="language" id="la">
+                    <option value="0">C(g++ 4.7.2)</option>
+                    <option value="1">C++11(g++ 4.7.2 -std=c++11)</option>
+                    <option value="2">Java(javac 1.8.0_40)</option>
+                    <option value="3">Ruby(ruby 2.0.0p589)</option>
+                    <option value="4">Python2 (python 2.7.3)</option>
+                    <option value="5">Python3 (python 3.2.3)</option>
+
+
+                </select>
+                <p>ソースコード</p>
+
+                <textarea name="source" id="source" cols="60" rows="10"></textarea>
+                <br>
+                <input class="up" type="submit" value="Submit" onclick="team_name_cookie_submit()">
+            </form>   
+        </div>
+    </div>
+    <!-- /modal window-->
+
+    <div id="pageinfo">
+    	<h2 id="title">
+			8乗6倍バズーカ
+        </h2>
+        <div id="limit">
+			Time Limit : 2 sec, Memory Limit : 65536 KB
+        </div>
+    </div>
+    
+	<div id="base">
+    	<h3>Question</h3>
+		<p class="sentence">
+			 勇者を目指して日々特訓中のMくんは，必殺技の「８乗６倍バズーカ」を習得中です．<br>この必殺技の威力は，その時の精神力に比例し，関数で表すことできます．<br>F(精神力) = (精神力^8 + 6*精神力 ) ÷ 2<br>と定義されます.
+		</p>
+		<p class="sentence">
+			 Mくんは，精神力を十分に高めることができませんが，少しずつ「８乗６倍バズーカ」を打てるようになってきました．<br>精神力が与えられるので「８乗６倍バズーカ」の威力を求めてください.
+		</p>
+
+        <h3>Input</h3>
+		<p class="sentence">
+			入力は以下のような形式で与えられます.
+		</p>
+		<div class="sample">
+<i>a</i><br></div>
+
+        <h3>Constraints</h3>
+		<p class="sentence">
+			<i>a</i>:<i>0≦a≦50</i>の整数
+		</p>
+
+        <h3>Output</h3>
+		<div class="sample">
+<i>n</i><br></div>
+		<p class="sentence">
+			n:nは小数点以下1桁まで正確に出力すること.
+		</p>
+
+        <h3>Sample</h3>
+		<h4>Sample Input 1</h4>
+		<pre class="sample">
+4
+</pre>
+		<h4>Sample Output 1</h4>
+		<pre class="sample">
+32780
+</pre>
+		<h4>Sample Input 2</h4>
+		<pre class="sample">
+44
+</pre>
+		<h4>Sample Output 2</h4>
+		<pre class="sample">
+7024111812740
+</pre>
+
+    </div>
+    
+    <div id="head_margin">
+    </div>
+    
+   	<div id="footer_wrapper">	
+    	<div id="header_navi" class="cf">
+			<div id="footer_time"></div>
+			<div id="footer">Do your best.</div>
+        </div>
+	</div>
+	
+</body>
+</html>
+
