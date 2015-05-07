@@ -140,6 +140,8 @@ class TLE
 		@submit_file_name = Preparation.new.kind_file()
 		@submit_file_name[0] = "[#{@submit_file_name[0]}]"
 		#puts "submit_file_name is #{@submit_file_name}"
+		#example file name "[m]ain.cpp"
+		#言語によって異なる
 	end
 	def make_command
 		get_file_name()
