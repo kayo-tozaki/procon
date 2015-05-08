@@ -7,7 +7,7 @@
 <div id="base">
 <img src="../images/loading.gif" width = "">
 <?php
-check team name (if not alphabet...)
+//check team name (if not alphabet...)
  if (ctype_alpha($_POST['team_name']) == false) {
   	$js = <<<EOD
  PHP Error. Please wirte team name only <font color = "red">Alphabet.</font><a href="javascript:history.back();"> please retry</a>
@@ -41,8 +41,8 @@ EOD;
   		die('Error. Insert cannot.'.mysql_error());
   	}
 
-  	exec('bash run.sh',$op);
-  	$log_fh = fopen("$post_time/run.log",'w');
+  	exec('bash run.sh &',$op);
+  	$log_fh = fopen("../log/".$post_time."_run.log",'w');
   	fwrite($log_fh, $op);
   	fclose($log_fh);
 

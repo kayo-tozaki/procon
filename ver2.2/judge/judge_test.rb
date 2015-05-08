@@ -72,7 +72,7 @@ class Preparation
 			return("error,not data")
 		end
 	end
-	end
+end
 
 class Compile 
 	def command_language()
@@ -135,7 +135,6 @@ class Compile_Java < Compile
 end
 
 class TLE
-
 	def get_file_name
 		@submit_file_name = Preparation.new.kind_file()
 		@submit_file_name[0] = "[#{@submit_file_name[0]}]"
@@ -146,8 +145,12 @@ class TLE
 		get_file_name()
 		return("please insert compile command")
 	end
+	def sleep_time
+		return 2	#please set wait time (for action_tle)
+	end
 	def judge_tle
-		sleep 2
+		time = sleep_time()
+		sleep time
 		command = make_comand()
 		puts "judge_tle start : #{command}"
 		#puts %x(ps alx |grep "#{command}").empty? 
@@ -183,17 +186,46 @@ class CTLE_Java < TLE
 end
 
 class Action 
-  def make_command
+  def make_command(times)
     return("Action command")
   end
   
   def action
     puts "Start action"
-    command = make_comamnd()
-   #Rubyの実行
-    
+    times = 1
+    while times <= $input_times
+	    command = make_comamnd(times)
+	    input_filename = $questino_no + "_" + times
+	    IO.popen("#{command} < #{input_filename}")
+	    judge_tle()
+	    times += 1
+	end 
+  end
+  
+  def judge_tle
+  	command.new.judge_tle
   end
 end
+
+class Action_C < Action
+	def make_command(times)
+		return ("./a.out ") 
+	end
+
+	def judge_tle
+		ATLE_C.new.judge_tle()
+	end
+end
+
+class ATLE_C < TLE
+	def make_command()
+		return()
+	end
+	def sleep_time
+		return $action_sec
+	end
+end
+
 
 Preparation.new.startup()
 case $language

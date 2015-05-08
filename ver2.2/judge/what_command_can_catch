@@ -1,0 +1,17 @@
+ruby
+ => grep [r]uby
+
+c
+ => grep [a].out
+
+c++
+ => grep [a].out
+
+java
+ => grep [j]ava
+
+python2,3
+ => grep [p]ython |grep [ファイル名の1文字目]以下
+
+ruby
+ => grep [r]uby

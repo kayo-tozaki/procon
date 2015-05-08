@@ -49,4 +49,3 @@ fi
 
 echo "parse.rbの実行"
 ruby parse.rb
-#sudo ln -s /var/run/mysqld/mysqld.sock /tmp/mysql.sock

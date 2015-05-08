@@ -1,6 +1,6 @@
 {
     "contest": {
-        "name": "KogCoder closed online contest",
+        "name": "chory0 offline contest",
         "date": {
             "year": 2015,
             "month": 2,
@@ -24,12 +24,12 @@
                 "input": [
                     "入力は以下のような形式で与えられる",
                     [
-						"<i>N<sub>a</sub></i> <i>N<sub>b</sub></i> <i>T<sub>a</sub></i> <i>T<sub>b</sub></i>"
+                        "<i>N<sub>a</sub></i> <i>N<sub>b</sub></i> <i>T<sub>a</sub></i> <i>T<sub>b</sub></i>"
                     ]
                 ],
                 "constraints": [
                     "入力は全て整数である。",
-					"<i>N<sub>a</sub></i>:Aさんが解いた問題数<br><i>N<sub>b</sub></i>:Bさんが解いた問題数<br><i>T<sub>a</sub></i>:Aさんが解いた時間<br><i>N<sub>a</sub></i>:Bさんが解いた時間"
+                    "<i>N<sub>a</sub></i>:Aさんが解いた問題数<br><i>N<sub>b</sub></i>:Bさんが解いた問題数<br><i>T<sub>a</sub></i>:Aさんが解いた時間<br><i>N<sub>a</sub></i>:Bさんが解いた時間"
                 ],
                 "output": [
                     "Aさんのほうが上の順位の場合は&quot;A&quot;を出力してください。Bさんのほうが上の順位の場合は&quot;B&quot;を出力してください。また、出力の末尾には改行を入れてください。"
@@ -49,7 +49,7 @@
             {
                 "problem": "B",
                 "title": "九九の和",
-				"author": "choll",
+                "author": "choll",
                 "time": 1,
                 "mem": 65536,
                 "numOfTestcase": 3,
@@ -110,7 +110,7 @@
                     "入力は全て-100から100までの有理数である。<br>小数点以下３桁まで与えられる．"
                 ],
                 "output": [
-				],
+                ],
                 "sample": [
                     {
                         "sampleIn": "Csample_in_1.txt",
@@ -174,8 +174,8 @@
             },
             {
                 "problem": "E",
-				"title": "パイプ工場",
-				"author": "ry0u_yd",
+                "title": "パイプ工場",
+                "author": "ry0u_yd",
                 "time": 2,
                 "mem": 65516,
                 "numOfTestcase": 4,
@@ -183,7 +183,7 @@
                 "statement": [
                     "　R君の将来の目標は、山梨県のパイプ工場で働くことです。その工場では今、バイトを募集しているそうです。春休みのため、暇を持て余しているR君はバイトに応募してみることにしました。",
                     "　バイトには見事受かり、現在仕事をしている最中です。この工場での仕事はパイプのパーツをつなぎ合わせ、パイプを生産することです。また、給料は日給制のようです。毎日R君は、自分が働いた分の給料を確認しているとあることに気づきました。熱心に頑張った日に貰った給料よりも、適当にやった日に給料が多い時があるのです。どのような給料の計算方法なのか不思議に思ったR君は、M社長に直々に尋ねることにしました。",
-					" その結果、給料の計算方法は「パイプの長さの和×パイプの本数」であることが分かりました。この計算方法を知った今は、どのように仕事をすれば給料が多くもらえるが分かります。",
+                    " その結果、給料の計算方法は「パイプの長さの和×パイプの本数」であることが分かりました。この計算方法を知った今は、どのように仕事をすれば給料が多くもらえるが分かります。",
                     "　ツイートの行数Nとツイートの内容Sが与えられるので、その中に含まれるアカウントの数を出力するプログラムを作成してください。"
                 ],
                 "input": [
@@ -223,7 +223,95 @@
                         "string": "@ueoaのみがアカウントです。文字数の決まりに気を付けましょう。"
                     }
                 ]
+            },
+            {
+                "problem": "F",
+                "title": "problem gen test case",
+                "author": "fujihiro",
+                "time": 1,
+                "mem": 16,
+                "numOfTestcase": 1,
+                "precision": 0,
+                "statement": [
+                    "色々な言語のHalloWorld( ＾ω＾)",
+                    "C言語",
+                    {
+                        "code": "test.c"
+                    },
+                    "C++",
+                    {
+                        "code": "test.cpp"
+                    },
+                    "C#",
+                    {
+                        "code": "test.cs"
+                    },
+                    "Erlang",
+                    {
+                        "code": "test.erl"
+                    },
+                    "Fortran90",
+                    {
+                        "code": "test.f"
+                    },
+                    "Go言語",
+                    {
+                        "code": "test.go"
+                    },
+                    "Haskell",
+                    {
+                        "code": "test.hs"
+                    },
+                    "JAVA",
+                    {
+                        "code": "test.java"
+                    },
+                    "JavaScript",
+                    {
+                        "code": "test.js"
+                    },
+                    "Pascal",
+                    {
+                        "code": "test.pas"
+                    },
+                    "Python(2.*)",
+                    {
+                        "code": "test.py"
+                    },
+                    "R",
+                    {
+                        "code": "test.r"
+                    },
+                    "Ruby",
+                    {
+                        "code": "test.rb"
+                    },
+                    "Swift",
+                    {
+                        "code": "test.swift"
+                    }
+                ],
+                "input": [
+                    "入力は与えられない",
+                    [
+                        "　"
+                    ]
+                ],
+                "constraints": [
+                    "　"
+                ],
+                "output": [
+                    "Hello World"
+                ],
+                "sample": [
+                    {
+                        "sampleIn": "Fsample_in_1.txt",
+                        "sampleOut": "Fsample_out_1.txt",
+                        "string": "簡単ですね( ＾ω＾)"
+                    }
+                ]
             }
+
         ]
     }
 }

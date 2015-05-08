@@ -57,11 +57,11 @@
                 <p>問題番号を選んで下さい</p>
 				<select name="problem_num" id="pn"  class="inputBox">
 					<option value = "1">Problem A</option>
-					<option value = "2" selected >Problem B</option>
+					<option value = "2">Problem B</option>
 					<option value = "3">Problem C</option>
 					<option value = "4">Problem D</option>
 					<option value = "5">Problem E</option>
-					<option value = "6">Problem F</option>
+					<option value = "6" selected >Problem F</option>
 				</select>
 
 
@@ -88,71 +88,153 @@
 
     <div id="pageinfo">
     	<h2 id="title">
-			九九の和
+			problem gen test case
         </h2>
         <div id="limit">
-			Time Limit : 1 sec, Memory Limit : 65536 KB
+			Time Limit : 1 sec, Memory Limit : 16 KB
         </div>
     </div>
     
 	<div id="base">
     	<h3>Question</h3>
 		<p class="sentence">
-			　今年も工学院小学生は，九九を勉強する季節がやってきました．小学２年生に九九を教えます．小学２年生のおバカなＭ君は歩きながら九九を暗唱し，頑張って覚えようとしていますが，なかなか覚えられません．一方で，同じ通学路で通っている小学１年生の天才Ｒ君は足し算が得意なので，聞こえるもの全ての総和をすぐに計算出来ます。
+			色々な言語のHalloWorld( ＾ω＾)
 		</p>
 		<p class="sentence">
-			Ｍ君が唱えた九九の積（９×９までとは限らない）の総和を瞬時に計算し，Ｒ君の言う総和が正しいかどうか判定するプログラムを作ってください．
+			C言語
 		</p>
+<div class="source"><pre><code class="language-c">/* A Hello World program in C. */
+#include &lt;stdio.h&gt;
+int main()
+{
+	printf("Hello World\n");
+	return 0;
+}</code></pre></div>
+		<p class="sentence">
+			C++
+		</p>
+<div class="source"><pre><code class="language-cpp">// A Hello World program in C++.
+#include &lt;iostream&gt;
+int main(){
+	std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+	return 0;
+}</code></pre></div>
+		<p class="sentence">
+			C#
+		</p>
+<div class="source"><pre><code class="language-csharp">// A Hello World program in C#.
+using System;
+class HelloWorld{
+	[STAThread]
+	static void Main(string[] args){
+		Console.WriteLine("Hello World");
+	}
+}</code></pre></div>
+		<p class="sentence">
+			Erlang
+		</p>
+<div class="source"><pre><code class="language-erlang">%% A Hello World program in Erlang
+-module(hello).
+-export([start/0]).
+start() -&gt; io:fwrite("Hello World!\n").</code></pre></div>
+		<p class="sentence">
+			Fortran90
+		</p>
+<div class="source"><pre><code class="language-fortran">! A Hello World program in Fortran90
+PROGRAM HELLO
+	PRINT *, 'Hello World'
+END PROGRAM</code></pre></div>
+		<p class="sentence">
+			Go言語
+		</p>
+<div class="source"><pre><code class="language-go">// A Hello World program in Go
+package main
+import "fmt"
+func main() {
+	fmt.Print("Hello World\n")
+}</code></pre></div>
+		<p class="sentence">
+			Haskell
+		</p>
+<div class="source"><pre><code class="language-haskell">-- A Hello World program in Haskell
+main=putStrLn "Hello World"</code></pre></div>
+		<p class="sentence">
+			JAVA
+		</p>
+<div class="source"><pre><code class="language-java">// A Hello World program in Java
+public class Hello {
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+	}
+}</code></pre></div>
+		<p class="sentence">
+			JavaScript
+		</p>
+<div class="source"><pre><code class="language-javascript">// A Hello World program in JavaScript
+hello = function() {
+  if (typeof console === "object") {
+    console.log("Hello World");
+  } else {
+    print("Hello World");
+  }
+};
+hello();</code></pre></div>
+		<p class="sentence">
+			Pascal
+		</p>
+<div class="source"><pre><code class="language-clike">{ A Hello World program in Pascal }
+program hello;
+begin
+	WriteLn('Hello World');
+end.</code></pre></div>
+		<p class="sentence">
+			Python(2.*)
+		</p>
+<div class="source"><pre><code class="language-python"># A Hello World program in Python(~2.7)
+print "Hello world"</code></pre></div>
+		<p class="sentence">
+			R
+		</p>
+<div class="source"><pre><code class="language-r"># A Hello World program in R
+print("Hello World")</code></pre></div>
+		<p class="sentence">
+			Ruby
+		</p>
+<div class="source"><pre><code class="language-ruby"># A Hello World program in Ruby
+puts "Hello World"</code></pre></div>
+		<p class="sentence">
+			Swift
+		</p>
+<div class="source"><pre><code class="language-swift"># A Hello World program in Swift
+println("Hello World")</code></pre></div>
 
         <h3>Input</h3>
 		<p class="sentence">
-			N
+			入力は与えられない
 		</p>
+		<div class="sample">
+　<br></div>
 
         <h3>Constraints</h3>
 		<p class="sentence">
-			Ｎは自然数です
-		</p>
-		<p class="sentence">
-			<i>１≦Ｎ＜１００００（10<sup>5</sup>)</i>
+			　
 		</p>
 
         <h3>Output</h3>
 		<p class="sentence">
-			Ａ
-		</p>
-		<p class="sentence">
-			1×１からn×nまでの積の総和を出力してください．
+			Hello World
 		</p>
 
         <h3>Sample</h3>
 		<h4>Sample Input 1</h4>
 		<pre class="sample">
-﻿3
 </pre>
 		<h4>Sample Output 1</h4>
 		<pre class="sample">
-﻿36
-</pre>
+Hello World</pre>
 		<p class="sentence">
-			１×１，１×２，１×３，２×１，２×２，２×３，３×１，３×２，３×３の和
+			簡単ですね( ＾ω＾)
 		</p>
-		<h4>Sample Input 2</h4>
-		<pre class="sample">
-﻿9
-</pre>
-		<h4>Sample Output 2</h4>
-		<pre class="sample">
-﻿2045
-</pre>
-		<h4>Sample Input 3</h4>
-		<pre class="sample">
-﻿7777
-</pre>
-		<h4>Sample Output 3</h4>
-		<pre class="sample">
-﻿914745084031009
-</pre>
 
     </div>
     
