@@ -39,21 +39,21 @@ class Preparation
 	puts "complete getQdata"
 	end
 	
-  def file_changer()
-      file_name = kind_file()
-      if File.exist?(file_name)
-        IO.popen("rm -rf #{file_name}")
-      end
-      command = %Q(cp ../submit_file/#{$time} #{file_name})
-      IO.popen(command)
-      sleep 0.01
-      if File.exist?(file_name)
-        puts "complete filename_changer"
-      else
-        puts "cannot change file_name"
-      end
-   end
-    
+	def file_changer()
+	    file_name = kind_file()
+	    if File.exist?(file_name)
+	      IO.popen("rm -rf #{file_name}")
+	    end
+	    command = %Q(cp ../submit_file/#{$time} #{file_name})
+	    IO.popen(command)
+	    sleep 0.01
+	    if File.exist?(file_name)
+	      puts "complete filename_changer"
+	    else
+	      puts "cannot change file_name"
+	    end
+	end
+	    
 	def kind_file()
 		case $language
 		when 0
@@ -72,7 +72,7 @@ class Preparation
 			return("error,not data")
 		end
 	end
-end
+	end
 
 class Compile 
 	def command_language()
@@ -141,7 +141,6 @@ class TLE
 		@submit_file_name[0] = "[#{@submit_file_name[0]}]"
 		#puts "submit_file_name is #{@submit_file_name}"
 		#example file name "[m]ain.cpp"
-		#言語によって異なる
 	end
 	def make_command
 		get_file_name()
