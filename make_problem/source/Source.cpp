@@ -20,6 +20,7 @@
 * @section コンパイル方法
 * 本プログラムのコンパイルは、Visual Studioを用いる場合は通常通りのビルドで可能である。<br>
 * g++でコンパイルする場合は、"-std=gnu++11"オプションを指定し、すべてのcppファイルを指定する。<br>
+* また、コンパイル環境はwindows、Linuxでの確認を行った(Macは不明)。
 *
 * @section 実行にあたって
 * 本プログラムでは、入力するJsonファイル名をプログラム起動時のコマンドライン引数として読み込ませる。<br>
@@ -43,6 +44,7 @@
 */
 
 #include <iostream>
+#include <map>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
@@ -184,6 +186,111 @@ void genProblemPage(picojson::object contestObj) {
 }
 
 /**
+* 文字列中のhtmlエスケープ文字を変換する
+*@param[in] 変換対象文字列
+*@return 変換後文字列
+*/
+std::string toUsableHtmlStr(std::string str) {
+
+	static std::string from = "<>&";
+	static std::vector<std::string> to = { "&lt;", "&gt;", "&amp;" };
+	static std::map<char, std::string> convTable;
+	if (convTable.empty()) {
+		for (size_t i = 0; i < from.size(); i++) {
+			convTable[from[i]] = to[i];
+		}
+	}
+
+	std::string::size_type pos = 0;
+	while ((pos = str.find_first_of(from, pos)) != std::string::npos) {
+		char c = str[pos];
+		str.erase(pos, 1);
+		str.insert(pos, convTable[c]);
+		pos += convTable[c].size();
+	}
+	return str;
+}
+
+/**
+* ソースコードの拡張子とprismの言語指定子との対応付けが記されたファイルを読み込む関数
+*@return ソースコードの拡張子をキーとした連想配列を返す
+*/
+std::map<std::string, std::string> initSyntaxLanguageList() {
+	std::ifstream languageListFile("./resources/syntax.csv");
+	std::string buffer;
+
+	std::map<std::string, std::string> list;
+
+	if (languageListFile.fail()) {	// cannot open the resource file
+		std::cout << "cannot open syntax.csv" << std::endl;
+		return list;	// return empty map
+	}
+
+	languageListFile >> buffer;
+
+	// ファイルを読み込む
+	while (!languageListFile.eof()) {
+		// １行読み込む
+		languageListFile >> buffer;
+
+		// ファイルから読み込んだ１行の文字列を区切り文字で分けてリストに追加する
+		std::istringstream streambuffer(buffer);// 文字列ストリーム
+		std::string ext;						// 1セル目にある拡張子
+		std::string language;					// 2セル目にある言語名
+		std::getline(streambuffer, ext, ',');
+		std::getline(streambuffer, language, ',');
+
+		list[ext] = language;	// add language correspondence relationship
+
+	}
+
+	return list;
+}
+
+/**
+* ソースコードブロックを作成する関数
+*@param[in] fileame ソースコードファイル
+*@return ソースコードを展開したhtml文字列
+*/
+std::string genCodeBlock(std::string filename) {
+
+	static std::map<std::string, std::string> syntaxLangList = initSyntaxLanguageList();
+
+	std::stringstream ssm;
+	std::string extension;
+	std::ifstream ifs(filename);	// open the code file
+
+	if (ifs.fail()) {	// the file could not be opened
+		std::cout << "cannot open " << filename << std::endl;
+		return std::string();
+	}
+
+	// get extension
+	std::string::size_type pos;
+	if ((pos = filename.find_last_of(".")) != std::string::npos) {
+		extension = filename.substr(pos+1);
+	}
+
+	// check the extension 
+	if (!syntaxLangList.count(extension)) { // if extension does not exit in syntax list
+		ssm << "<div class=\"source\"><pre><code class=\"language-clike\">";	// set default(c-like)
+	} else {								// if exist in list
+		ssm << "<div class=\"source\"><pre><code class=\"language-" << syntaxLangList[extension] << "\">";	// set language's syntax
+	}
+
+	// load a source code from the file stream
+	std::istreambuf_iterator<char> it(ifs);
+	std::istreambuf_iterator<char> ilast;
+	std::string iStr(it, ilast);
+
+	// import the file contents to html using "pre" and "code" tag
+	ssm << toUsableHtmlStr(iStr) << "</code></pre></div>";
+
+	return ssm.str();
+}
+
+
+/**
 * statementやinputなどの節を作成する
 * @param[in] section セクション部分が格納されたpicojson配列
 * @param[in] id "input"か"output"か指定(htmlの見た目制御用)(現在は使用していない)
@@ -193,13 +300,14 @@ void genProblemPage(picojson::object contestObj) {
 std::string genSection(picojson::array section, std::string id, std::string class_) {
 	std::stringstream ssm;
 
+	// process all array's emlement 
 	for (auto j = section.begin(); j != section.end(); j++) {
 
-		if (j->is<std::string>()) {		//sentense
+		if (j->is<std::string>()) {		// sentense
 
 			ssm << "\t\t<p class=\"sentence\">" << std::endl << "\t\t\t" << j->get<std::string>() << std::endl << "\t\t</p>" << std::endl;
 
-		} else if (j->is<picojson::array>()) {		//array
+		} else if (j->is<picojson::array>()) {		// array
 
 			std::stringstream sample;
 			for (auto k = j->get<picojson::array>().begin(); k != j->get<picojson::array>().end(); k++) {
@@ -209,11 +317,18 @@ std::string genSection(picojson::array section, std::string id, std::string clas
 			ssm << "\t\t<div class=\"" << class_ << "\">" << std::endl;
 			ssm << sample.str() << "</div>" << std::endl;
 
-		} else if (j->is<picojson::object>()) {	//Image
-			picojson::object& img = j->get<picojson::object>();
-			if (img["image"].is<std::string>()) {
-				std::string imgName = img["image"].get<std::string>();
+		} else if (j->is<picojson::object>()) {	// Image or Code
+			picojson::object& obj = j->get<picojson::object>();
+
+			if (obj["image"].is<std::string>()) {		// if the object is image 
+				std::string imgName = obj["image"].get<std::string>();
 				ssm << "\t\t<div class=\"image\"><img src=\"./" << imgName << "\"></div>" << std::endl;
+			} else if (obj["code"].is<std::string>()) {	// if the object is code
+				std::string filename = obj["code"].get<std::string>();
+				ssm << genCodeBlock(filename) << std::endl;
+			} else {
+				picojson::object::iterator unknown = obj.begin();
+				std::cout << unknown->first << " is a unknown property" << std::endl;
 			}
 		}
 

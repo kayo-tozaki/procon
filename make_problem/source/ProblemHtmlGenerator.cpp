@@ -86,7 +86,7 @@ void ProblemHtmlGenerator::setSample(const std::string& str) {
 */
 std::string genSlect(int numOfProblem, int selectedNum) {
 	std::stringstream ssm;
-	ssm << "\t\t\t\t<select name=\"problem_num\" id=\"pn\">" << std::endl;
+	ssm << "\t\t\t\t<select name=\"problem_num\" id=\"pn\"  class=\"inputBox\">" << std::endl;
 	for (size_t i = 0; i < numOfProblem; i++) {
 		if (i + 1 == selectedNum) {
 			ssm << "\t\t\t\t\t<option value = \"" << i + 1 << "\" selected >" << "Problem " << static_cast<char>(i + 'A') << "</option>" << std::endl;

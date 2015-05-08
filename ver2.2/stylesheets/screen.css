@@ -1,20 +1,19 @@
-@import url(http://fonts.googleapis.com/css?family=Noticia+Text);
-@import url(http://fonts.googleapis.com/css?family=Vollkorn);
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+@import url(http://fonts.googleapis.com/css?family=Noticia+Text);
+@import url(http://fonts.googleapis.com/css?family=Vollkorn);
 @font-face {
   font-family: 'Han Sans';
   src: url("../SourceHanSansJP-Light.woff") format("woff");
 }
-
-/* line 15, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 html {
   height: 100%;
 }
 
-/* line 19, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 19, ../sass/screen.scss */
 body {
   font-family: 'Han Sans';
   background-image: url("../images/bg.jpg");
@@ -24,23 +23,18 @@ body {
 }
 
 /* clearfix */
-/* line 29, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 29, ../sass/screen.scss */
 .cf {
   width: 100%;
 }
-/* line 31, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 31, ../sass/screen.scss */
 .cf:after {
   content: "";
   display: block;
   clear: both;
 }
 
-/* line 38, D:/GoogleDrive/html/procon/sass/screen.scss */
-textarea {
-  resize: none;
-}
-
-/* line 42, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 41, ../sass/screen.scss */
 #top_title {
   background-image: url("../images/top_title.jpg");
   width: 776px;
@@ -48,32 +42,32 @@ textarea {
   padding: 5px 15px 0 15px;
   box-shadow: 0px 0px 5px;
 }
-/* line 49, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 48, ../sass/screen.scss */
 #top_title > h1 {
   font-family: 'Vollkorn', serif;
   margin: 10px auto;
   font-size: 32px;
   font-weight: normal;
 }
-/* line 56, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 55, ../sass/screen.scss */
 #top_title > #c1 {
   margin-left: 1em;
 }
-/* line 59, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 58, ../sass/screen.scss */
 #top_title > #c2 {
   margin-left: 2.5em;
 }
-/* line 62, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 #top_title > #c3 {
   margin-left: 5em;
 }
 
-/* line 67, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 66, ../sass/screen.scss */
 #information {
   font-size: 1.2em;
 }
 
-/* line 72, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 71, ../sass/screen.scss */
 #contest_title {
   font-family: 'Vollkorn', serif;
   position: relative;
@@ -83,7 +77,7 @@ textarea {
   font-size: 1.5em;
   background-color: #777;
 }
-/* line 80, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 79, ../sass/screen.scss */
 #contest_title:after {
   content: "";
   position: absolute;
@@ -96,7 +90,7 @@ textarea {
   border-right: solid 5px #444;
 }
 
-/* line 93, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 92, ../sass/screen.scss */
 #header_navi_wrapper {
   position: fixed;
   width: 100%;
@@ -108,13 +102,13 @@ textarea {
   background-color: #333333;
 }
 
-/* line 104, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 103, ../sass/screen.scss */
 #header_navi {
   width: 840px;
   margin: 0 auto;
 }
 
-/* line 109, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 #header_navi_title {
   float: left;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -124,7 +118,7 @@ textarea {
   font-weight: normal;
 }
 
-/* line 118, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 117, ../sass/screen.scss */
 .pro {
   float: right;
   margin: 12px 0 12px auto;
@@ -134,7 +128,7 @@ textarea {
   height: 20px;
 }
 
-/* line 128, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 127, ../sass/screen.scss */
 .prob {
   font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
   float: right;
@@ -147,7 +141,7 @@ textarea {
   border-color: #ffffff;
   text-align: center;
 }
-/* line 139, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 138, ../sass/screen.scss */
 .prob a {
   display: block;
   color: white;
@@ -155,7 +149,7 @@ textarea {
   text-decoration: none;
 }
 
-/* line 149, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 148, ../sass/screen.scss */
 #footer_wrapper {
   position: fixed;
   width: 100%;
@@ -167,7 +161,7 @@ textarea {
   background-color: #333333;
 }
 
-/* line 162, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 161, ../sass/screen.scss */
 #footer {
   font-family: 'Vollkorn', serif;
   float: right;
@@ -177,7 +171,7 @@ textarea {
   margin: 7px 0 15px auto;
 }
 
-/* line 171, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 170, ../sass/screen.scss */
 #footer_time {
   font-family: 'Noticia Text', serif;
   float: left;
@@ -187,13 +181,13 @@ textarea {
   margin: 3px auto 15px 0;
 }
 
-/* line 180, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 179, ../sass/screen.scss */
 #head_margin {
   height: 40px;
   width: 100%;
 }
 
-/* line 187, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 186, ../sass/screen.scss */
 #pageinfo {
   width: 770px;
   height: 80px;
@@ -204,7 +198,7 @@ textarea {
   border-style: solid;
   border-color: #DDD;
 }
-/* line 198, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 197, ../sass/screen.scss */
 #pageinfo > #title {
   font-family: 'Vollkorn', serif;
   height: 40px;
@@ -213,7 +207,7 @@ textarea {
   border-bottom: #999 solid 2px;
   font-weight: normal;
 }
-/* line 206, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 205, ../sass/screen.scss */
 #pageinfo > #limit {
   font-family: 'Noticia Text', serif;
   margin: 2px 0 0 5px;
@@ -221,7 +215,7 @@ textarea {
   font-size: 17px;
 }
 
-/* line 215, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 214, ../sass/screen.scss */
 #base {
   width: 770px;
   background-color: white;
@@ -231,19 +225,19 @@ textarea {
   border-style: solid;
   border-color: #ffffff;
 }
-/* line 226, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 225, ../sass/screen.scss */
 #base h3 {
   font-family: 'Vollkorn', serif;
   margin: 1em 0;
   font-size: 1.2em;
   font-weight: bold;
 }
-/* line 232, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 231, ../sass/screen.scss */
 #base h4 {
   margin: 0;
 }
 
-/* line 237, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 236, ../sass/screen.scss */
 .base-w {
   height: 100px;
   width: 95%;
@@ -255,14 +249,14 @@ textarea {
   font-family: serif;
 }
 
-/* line 249, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 248, ../sass/screen.scss */
 .sentence {
   padding: 0 0 0 10px;
   margin: 1em 0px;
   border-left: solid 4px #CCC;
 }
 
-/* line 255, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 254, ../sass/screen.scss */
 .sample {
   font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
   padding: 5px 10px;
@@ -271,13 +265,19 @@ textarea {
   background-color: #CCC;
 }
 
-/* line 263, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 262, ../sass/screen.scss */
+.source {
+  margin: 5px 10px;
+  border: solid 2px #777;
+}
+
+/* line 268, ../sass/screen.scss */
 .image {
   text-align: center;
   width: 550px;
 }
 
-/* line 268, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 273, ../sass/screen.scss */
 table.brwsr2 {
   margin: 10px;
   width: 750px;
@@ -288,18 +288,18 @@ table.brwsr2 {
   border-spacing: 0 10px;
   background: #f5f5f5;
 }
-/* line 277, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 282, ../sass/screen.scss */
 table.brwsr2 a {
   color: black;
   text-decoration: underline;
 }
-/* line 280, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 285, ../sass/screen.scss */
 table.brwsr2 a:hover {
   color: #991212;
   font-style: normal;
   text-decoration: underline;
 }
-/* line 287, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 292, ../sass/screen.scss */
 table.brwsr2 th {
   vertical-align: middle;
   height: 20px;
@@ -311,7 +311,7 @@ table.brwsr2 th {
   font-size: 16px;
   font-weight: bold;
 }
-/* line 298, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 303, ../sass/screen.scss */
 table.brwsr2 td.data {
   padding: 0;
   margin: 0;
@@ -326,12 +326,12 @@ table.brwsr2 td.data {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 312, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 317, ../sass/screen.scss */
 table.brwsr2 td:fst-child {
   padding: 0 0 0 10px;
   vertical-align: middle;
 }
-/* line 317, D:/GoogleDrive/html/procon/sass/screen.scss */
+/* line 322, ../sass/screen.scss */
 table.brwsr2 td.bar {
   height: 1px;
   width: 100%;

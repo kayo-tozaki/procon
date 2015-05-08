@@ -1,4 +1,4 @@
-/* line 4, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 4, ../sass/modal.scss */
 #modal_window {
   font-family: 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
   width: 600px;
@@ -10,7 +10,7 @@
   z-index: 2;
 }
 
-/* line 15, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 15, ../sass/modal.scss */
 #modal_overlay {
   z-index: 1;
   display: none;
@@ -22,12 +22,12 @@
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-/* line 26, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 26, ../sass/modal.scss */
 .button_link:hover {
   cursor: pointer;
 }
 
-/* line 30, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 30, ../sass/modal.scss */
 #modal_title_bar {
   height: 30px;
   width: 100%;
@@ -35,7 +35,7 @@
   text-align: center;
 }
 
-/* line 38, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 38, ../sass/modal.scss */
 #modal_title {
   float: left;
   padding: 5px 0 0 0;
@@ -44,22 +44,28 @@
   font-size: 1.2em;
 }
 
-/* line 46, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 46, ../sass/modal.scss */
 #modal_content {
   margin: 20px;
 }
-/* line 48, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 48, ../sass/modal.scss */
 #modal_content p {
   margin: 1em 0 0 0;
 }
 
-/* line 54, D:/GoogleDrive/html/procon/sass/modal.scss */
-#pn {
-  width: 8em;
+/* line 54, ../sass/modal.scss */
+.inputBox {
+  width: 16em;
   font-size: 1.2em;
 }
 
-/* line 61, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 60, ../sass/modal.scss */
+textarea {
+  width: 500px;
+  resize: none;
+}
+
+/* line 65, ../sass/modal.scss */
 #close_botton {
   background-color: #777;
   float: right;
@@ -67,7 +73,7 @@
   height: 100%;
 }
 
-/* line 68, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 72, ../sass/modal.scss */
 #close {
   width: 20px;
   height: 4px;
@@ -78,7 +84,7 @@
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
 }
-/* line 80, D:/GoogleDrive/html/procon/sass/modal.scss */
+/* line 84, ../sass/modal.scss */
 #close:after {
   content: "";
   display: block;

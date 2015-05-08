@@ -20,28 +20,20 @@ $("#modal_open").click(function(){
 
 $(window).resize(centeringModal);
 
-	function centeringModal(){
-
-	   var w = $(window).width();
-	   var h = $(window).height();
-
-	   var cw = $("#modal_window").outerWidth({margin:true});
-	   var ch = $("#modal_window").outerHeight({margin:true});
-
-	   $("#modal_window").css({"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"})
-
-	}
+  centeringModal();
 
 });
 
-function check() 
-{
-  if(/^[a-zA-Z]+$/.test(document.modal_submit.team_name.value)){
-    
-    return true;
-  }
-alert('team name is only A~Z and a~z');
-return false;
+function centeringModal(){
+
+   var w = $(window).width();
+   var h = $(window).height();
+
+   var cw = $("#modal_window").width();
+   var ch = $("#modal_window").height();
+
+   $("#modal_window").css({"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"})
+
 }
 
 function team_name_cookie_submit(){

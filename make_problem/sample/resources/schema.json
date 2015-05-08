@@ -1,0 +1,301 @@
+{
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-03/schema",
+    "id": "http://jsonschema.net",
+    "required": false,
+    "properties": {
+        "contest": {
+            "type": "object",
+            "id": "http://jsonschema.net/contest",
+            "additionalProperties": false,
+            "required": false,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "contest name",
+                    "id": "http://jsonschema.net/contest/name",
+                    "required": true
+                },
+                "date": {
+                    "type": "object",
+                    "id": "http://jsonschema.net/contest/date",
+                    "required": true,
+                    "additionalProperties": false,
+                    "properties": {
+                        "year": {
+                            "type": "number",
+                            "minimum": 2014,
+                            "maximum": 2100,
+                            "id": "http://jsonschema.net/contest/date/year",
+                            "required": true
+                        },
+                        "month": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 12,
+                            "id": "http://jsonschema.net/contest/date/month",
+                            "required": true
+                        },
+                        "day": {
+                            "type": "number",
+                            "minimum": 1,
+                            "maximum": 31,
+                            "id": "http://jsonschema.net/contest/date/day",
+                            "required": true
+                        }
+                    }
+                },
+                "start": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 24,
+                    "description": "contest start time (hour)",
+                    "id": "http://jsonschema.net/contest/start",
+                    "required": true
+                },
+                "end": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 24,
+                    "description": "contest end time (hour)",
+                    "id": "http://jsonschema.net/contest/end",
+                    "required": true
+                },
+                "question": {
+                    "type": "array",
+
+                    "id": "http://jsonschema.net/contest/question",
+                    "required": true,
+                    "items": {
+                        "type": "object",
+                        "id": "http://jsonschema.net/contest/question/0",
+                        "additionalProperties": false,
+                        "required": true,
+                        "properties": {
+                            "problem": {
+                                "type": "string",
+                                "description": "problem number",
+                                "id": "http://jsonschema.net/contest/question/0/problem",
+                                "required": true
+                            },
+                            "title": {
+                                "type": "string",
+                                "description": "problem title",
+                                "id": "http://jsonschema.net/contest/question/0/title",
+                                "required": true
+                            },
+                            "author": {
+                                "type": "string",
+                                "id": "http://jsonschema.net/contest/question/0/author",
+                                "required": false
+                            },
+                            "time": {
+                                "type": "number",
+                                "minimum": 1,
+                                "id": "http://jsonschema.net/contest/question/0/time",
+                                "required": true
+                            },
+                            "mem": {
+                                "type": "number",
+                                "minimum": 1,
+                                "id": "http://jsonschema.net/contest/question/0/mem",
+                                "required": true
+                            },
+                            "numOfTestcase": {
+                                "type": "number",
+                                "minimum": 1,
+                                "id": "http://jsonschema.net/contest/question/0/numOfSample",
+                                "required": true
+                            },
+                            "precision": {
+                                "type": "number",
+                                "minimum": 0,
+                                "description": "answer's precision (if answers are integer,input 0)",
+                                "id": "http://jsonschema.net/contest/question/0/precision",
+                                "required": true
+                            },
+                            "statement": {
+                                "type": "array",
+
+                                "id": "http://jsonschema.net/contest/question/0/question",
+                                "required": true,
+                                "items": {
+                                    "type": [
+                                        "string",
+                                        {
+                                            "type": "array",
+                                            "required": false,
+
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/array",
+                                            "items": {
+                                                "type": "string",
+                                                "id": "http://jsonschema.net/contest/question/0/question/items/array/string",
+                                                "required": false
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/object",
+                                            "required": false,
+                                            "properties": {
+                                                "image": {
+                                                    "type": "string",
+                                                    "id": "http://jsonschema.net/contest/question/0/question/items/object/image",
+                                                    "required": false
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "id": "http://jsonschema.net/contest/question/0/input/0/items",
+                                    "required": false
+                                }
+                            },
+                            "input": {
+                                "type": "array",
+                                "id": "http://jsonschema.net/contest/question/0/input",
+                                "required": false,
+                                "items": {
+                                    "type": [
+                                        "string",
+                                        {
+                                            "type": "array",
+                                            "required": false,
+
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/array",
+                                            "items": {
+                                                "type": "string",
+                                                "id": "http://jsonschema.net/contest/question/0/question/items/array/string",
+                                                "required": false
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/object",
+                                            "required": false,
+                                            "properties": {
+                                                "image": {
+                                                    "type": "string",
+                                                    "id": "http://jsonschema.net/contest/question/0/question/items/object/image",
+                                                    "required": false
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "id": "http://jsonschema.net/contest/question/0/input/0/items",
+                                    "required": false
+                                }
+                            },
+                            "constraints": {
+                                "type": "array",
+                                "id": "http://jsonschema.net/contest/question/0/constraints",
+                                "required": true,
+                                "items": {
+                                    "type": [
+                                        "string",
+                                        {
+                                            "type": "array",
+                                            "required": false,
+
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/array",
+                                            "items": {
+                                                "type": "string",
+                                                "id": "http://jsonschema.net/contest/question/0/question/items/array/string",
+                                                "required": false
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/object",
+                                            "required": false,
+                                            "properties": {
+                                                "image": {
+                                                    "type": "string",
+                                                    "id": "http://jsonschema.net/contest/question/0/question/items/object/image",
+                                                    "required": false
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "id": "http://jsonschema.net/contest/question/0/input/0/items",
+                                    "required": false
+                                }
+                            },
+                            "output": {
+                                "type": "array",
+                                "id": "http://jsonschema.net/contest/question/0/output",
+                                "required": true,
+                                "items": {
+                                    "type": [
+                                        "string",
+                                        {
+                                            "type": "array",
+                                            "required": false,
+
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/array",
+                                            "items": {
+                                                "type": "string",
+                                                "id": "http://jsonschema.net/contest/question/0/question/items/array/string",
+                                                "required": false
+                                            }
+                                        },
+                                        {
+                                            "type": "object",
+                                            "id": "http://jsonschema.net/contest/question/0/question/items/object",
+                                            "required": false,
+                                            "properties": {
+                                                "image": {
+                                                    "type": "string",
+                                                    "id": "http://jsonschema.net/contest/question/0/question/items/object/image",
+                                                    "required": false
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    "id": "http://jsonschema.net/contest/question/0/input/0/items",
+                                    "required": false
+                                }
+                            
+                            },
+                            "sample": {
+                                "type": "array",
+
+                                "id": "http://jsonschema.net/contest/question/0/sample",
+                                "required": true,
+                                "items": {
+                                    "type": "object",
+                                    "id": "http://jsonschema.net/contest/question/0/sample/0",
+                                    "additionalProperties": false,
+                                    "required": false,
+                                    "properties": {
+                                        "sampleIn": {
+                                            "type": "string",
+                                            "description": "sample input file path",
+                                            "id": "http://jsonschema.net/contest/question/0/sample/0/sampleIn",
+                                            "required": true
+                                        },
+                                        "sampleOut": {
+                                            "type": "string",
+                                            "description": "sample output file path",
+                                            "id": "http://jsonschema.net/contest/question/0/sample/0/sampleOut",
+                                            "required": true
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "id": "http://jsonschema.net/contest/question/0/sample/0/image",
+                                            "required": false
+                                        },
+                                        "string": {
+                                            "type": "string",
+                                            "id": "http://jsonschema.net/contest/question/0/sample/0/string",
+                                            "required": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
