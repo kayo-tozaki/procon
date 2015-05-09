@@ -1,4 +1,0 @@
-main.c:4:8: warning: division by zero is undefined [-Wdivision-by-zero]
- a = 10/0;
-       ^~
-1 warning generated.

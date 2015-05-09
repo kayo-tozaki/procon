@@ -238,7 +238,38 @@ class Action
   end
 end
 
+#Action の継承
 class Action_C < Action
+	def make_command(times)
+		return ("./a.out ") 
+	end
+
+	def judge_tle
+		ATLE_C.new.judge_tle()
+	end
+end
+
+class Action_Cpp < Action
+	def make_command(times)
+		return ("./a.out ") 
+	end
+
+	def judge_tle
+		ATLE_Cpp.new.judge_tle()
+	end
+end
+
+class Action_Java < Action
+	def make_command(times)
+		return ("java Main") 
+	end
+
+	def judge_tle
+		ATLE_C.new.judge_tle()
+	end
+end
+
+class Action_Ruby < Action
 	def make_command(times)
 		return ("./a.out ") 
 	end

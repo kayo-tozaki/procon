@@ -1,5 +1,6 @@
 begin
-ret = IO.popen("./a.out > log && echo 'ok' || echo 'ng'" ,"r+"){|io|
+ret IO.popen("gcc main.c")
+ret = IO.popen("./a.out 2> log && echo 'ok' || echo 'ng'" ,"r+"){|io|
 	io.gets
 }
 puts ret
