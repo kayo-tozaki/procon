@@ -148,6 +148,9 @@ class TLE
 	def sleep_time
 		return 2	#please set wait time (for action_tle)
 	end
+	def status_code
+		return 2
+	end
 	def judge_tle
 		time = sleep_time()
 		sleep time
@@ -155,10 +158,11 @@ class TLE
 		puts "judge_tle start : #{command}"
 		#puts %x(ps alx |grep "#{command}").empty? 
 		if (%x(ps alx |grep "#{command}").empty? == true) then
-		 $status = 2 
+		 $status = status_code()
 		 puts "compile is complete."
 		else
-		 $status = 22 
+		 num = status_code()
+		 $status = num*10+2
 		 %x(kill `ps alx| grep "#{command}")
 		 puts "TLE,kill process"
 		end
@@ -217,12 +221,21 @@ class Action_C < Action
 	end
 end
 
-class ATLE_C < TLE
+class ATLE < TLE
 	def make_command()
-		return()
+		return("language別コマンド")
 	end
 	def sleep_time
 		return $action_sec
+	end
+	def status_code
+		return 3
+	end
+end
+
+class ATLE_C < ATLE
+	def make_command()
+		return("[a].out")
 	end
 end
 
