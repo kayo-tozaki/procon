@@ -98,7 +98,7 @@ class Compile
 		if !`cat ../log/#{$time}_compile |grep "warning"`.empty?
 	    	puts "warning occured"
 	    	$status_code = 23
-	    end
+	     end
 		#puts "puts #{size}"
 		if( size <= 0 ) then
 			$status = 2
@@ -107,12 +107,13 @@ class Compile
 			$status = 21
 			puts "compile fail"
 		end
-		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' where post_time = #{$time}"
-		#puts query
-		client.query(query)
-		puts "update database"
-		client.close
+		Update_db.new
+		# client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
+		# query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' where post_time = #{$time}"
+		# #puts query
+		# client.query(query)
+		# puts "update database"
+		# client.close
 	end
 
 end
@@ -180,6 +181,7 @@ class TLE		#TLE判断。親。
 		 puts "TLE,kill process"
 		end
 		puts "after judge_tle, $status is #{$status}"
+		Update_db.new
 	end
 end
 
@@ -218,13 +220,17 @@ class Action
 	    #TODO:status code 23の時でWAの時の処理
 	    judge_tle()
 	    size = File.open("../log/#{$time}_Aerror").size
-	    if (size <= 0)
+	    if (size > 0)
 	    	puts "action Error occured"
 	    end
-	    puts "#{times} input complete"
+	    
+	    #TODO:compare files
+	    Compare.new.start
+
 	    times += 1
-	end 
+	 end 
 	puts "all problem_num is complete"
+	Update_db.new
   end
   
   def judge_tle
@@ -260,6 +266,63 @@ class ATLE_C < ATLE
 	end
 end
 
+class Compare
+	def start
+		get_answers
+		if ($allowable > 0)
+			allowable()
+		end
+		compare
+
+	end
+	def get_answers
+		count = 0
+		@@answer = Array.new
+		@@result = Array.new
+		File.open("../compare_file/#{$questino_no}_out_#{$input_times}.txt") { |file|
+		file.each_line do |val|
+				@@answer[count] = val.chomp
+				count += 1
+			end
+	  	}
+		count  = 0
+		File.open("../log/#{$time}_result") { |file|
+			file.each_line do |val|
+				@@result[count] = val.chomp
+				count += 1
+			end
+		}
+	end
+	def allowable
+		count = 0
+		@@result.each do |value|
+			@@result_min = value.split(".")
+			@@result_min[1] = @@result_min[1].each_char.each_slice($allowable).map(&:join)
+			@@result[count] = @@result_min[0].to_s + "." + @@result_min[1][0].to_s
+			count+=1
+		end
+	end
+	def compare
+		if tf=(@@result == @@answer) == true
+			$status = 4
+			puts "get accept, status is #{$status}"
+		else
+			puts "get wrong answer , status is #{$status}"
+			$status = 41
+		end
+	end
+end
+
+class Update_db
+	def initialize
+		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
+		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' where post_time = #{$time}"
+		#puts query
+		client.query(query)
+		puts "update database"
+		client.close
+	end
+end
 
 #main doing block
 Preparation.new.startup()

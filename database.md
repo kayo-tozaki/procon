@@ -43,7 +43,8 @@ create table submit_test(post_time bigint ,team_name varchar(20),problem_num int
 | 3    | 実行済み                          |
 | 31   | 実行エラー(Runtime error)         |
 | 32   | 実行エラー(TLE)                   |
-| 4    | 比較済み                          |
+| 4    | 比較済み  (AC)                    |
+| 41   | 比較済み  (WA)                    |
 | 5    | 結果表示済み                      |
 
 

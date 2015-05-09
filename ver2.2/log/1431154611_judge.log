@@ -1,0 +1,11 @@
+start judge.rb
+complete getDB
+complete getQdata
+complete filename_changer
+start_compile command
+judge_tle start : g++ [m]ain.cpp -
+Not action.
+after judge_tle, $status is 2
+update database
+compile complete
+update database
