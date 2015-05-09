@@ -39,6 +39,7 @@ create table submit_test(post_time bigint ,team_name varchar(20),problem_num int
 | 2    | コンパイル済み                    |
 | 21   | コンパイル失敗(コンパイルエラー） |
 | 22   | コンパイル失敗（コンパイルのTLE） |
+| 23   | コンパル（ warnig occur)          |
 | 3    | 実行済み                          |
 | 31   | 実行エラー(Runtime error)         |
 | 32   | 実行エラー(TLE)                   |

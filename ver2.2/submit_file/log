@@ -1,0 +1,8 @@
+main.c:4:10: error: expected ';' after expression
+ a = 10/0
+         ^
+         ;
+main.c:4:8: warning: division by zero is undefined [-Wdivision-by-zero]
+ a = 10/0
+       ^~
+1 warning and 1 error generated.

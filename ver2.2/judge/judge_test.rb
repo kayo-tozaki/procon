@@ -1,12 +1,13 @@
 require 'mysql'
 
 class Preparation 
-	def startup()
-		getDB()
-		getQdata()
-		file_changer()
+	def startup()	#呼び出し関数
+		getDB()		
+		getQdata()	
+		file_changer()	
 	end
-	def getDB()
+
+	def getDB()		#DBからデータの取得
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
 		client.query("SELECT * FROM submit.submit_#{day} order by post_time desc").each do |post_time,team_name ,problem_num,language,status|  # テスト用にDesc入ってるので注意
@@ -20,26 +21,27 @@ class Preparation
 		puts "complete getDB"
 		client.close
 	end
-	def getQdata()
+	
+	def getQdata()		#問題configからのデータ取得
 		f = open("#{$questino_no}", "r")
 		num = 1
 		f.each_line do |data|
 			case num
 			when 1
-			 $action_sec = data
+			 $action_sec = data.to_i
 			when 2
-			 $limit_memory = data
+			 $limit_memory = data.to_i
 			when 3
-			 $input_times = data
+			 $input_times = data.to_i
 			when 4
-			 $allowable = data
+			 $allowable = data.to_i
 			end
 			num = num + 1
 		end
 	puts "complete getQdata"
 	end
 	
-	def file_changer()
+	def file_changer()		#操作するファイルのコピーとリネーム
 	    file_name = kind_file()
 	    if File.exist?(file_name)
 	      IO.popen("rm -rf #{file_name}")
@@ -54,7 +56,7 @@ class Preparation
 	    end
 	end
 	    
-	def kind_file()
+	def kind_file() 	#言語ごとのファイル名を返す
 		case $language
 		when 0
 			return("main.c")
@@ -75,23 +77,29 @@ class Preparation
 end
 
 class Compile 
-	def command_language()
-		return("no compile")		#コンパイル時のコマンドを記述
+	def command_language()		#言語ごとのコンパイルコマンドを返す
+		return("no compile")	
 	end
-	def compile
+	
+	def compile		#main関数。コンパイルの実行とTLEクラスへのジャンプ。
 		command = command_language()
 		puts "start_compile command"
 		IO.popen(command)
-		judge_tle()
-	end
-	def judge_compile_tle_command
-		commnand.new.judge_tle
+		judge_compile()
 	end
 
-	def judge_tle()
+	def judge_compile_tle_command	#各言語のclass TLEへの継承先コマンドの記述
+		commnand.new.judge_tle		#各言語で継承
+	end
+
+	def judge_compile()				#コンパイルができたかの判断とDBの更新
 		judge_compile_tle_command()
 		size = File.open("../log/#{$time}_compile").size
-		puts "puts #{size}"
+		if !`cat ../log/#{$time}_compile |grep "warning"`.empty?
+	    	puts "warning occured"
+	    	$status_code = 23
+	    end
+		#puts "puts #{size}"
 		if( size <= 0 ) then
 			$status = 2
 			puts "compile complete"
@@ -108,7 +116,8 @@ class Compile
 	end
 
 end
-#以下、継承したもの。
+
+#class Compileを継承したもの
 class Compile_C < Compile
 	def command_language()
 		return("g++ main.c 2> ../log/#{$time}_compile")
@@ -134,32 +143,36 @@ class Compile_Java < Compile
 	end
 end
 
-class TLE
-	def get_file_name
+class TLE		#TLE判断。親。
+	def get_file_name	#CTLEでのファイル名(grep対応)取得用
 		@submit_file_name = Preparation.new.kind_file()
 		@submit_file_name[0] = "[#{@submit_file_name[0]}]"
 		#puts "submit_file_name is #{@submit_file_name}"
 		#example file name "[m]ain.cpp"
 	end
-	def make_command
+
+	def make_command		#grep用のコマンドの作成。
 		get_file_name()
 		return("please insert compile command")
 	end
+	
 	def sleep_time
 		return 2	#please set wait time (for action_tle)
 	end
+	
 	def status_code
 		return 2
 	end
-	def judge_tle
+	
+	def judge_tle		#main関数。TLEのjudgeをし、殺す。
 		time = sleep_time()
 		sleep time
-		command = make_comand()
+		command = make_command()
 		puts "judge_tle start : #{command}"
 		#puts %x(ps alx |grep "#{command}").empty? 
 		if (%x(ps alx |grep "#{command}").empty? == true) then
 		 $status = status_code()
-		 puts "compile is complete."
+		 puts "Not action."
 		else
 		 num = status_code()
 		 $status = num*10+2
@@ -169,41 +182,49 @@ class TLE
 		puts "after judge_tle, $status is #{$status}"
 	end
 end
-#TLE の継承（コンパイル）。
+
+#compile TLE の継承
 class CTLE_C < TLE
-	def make_comand
+	def make_command
 		get_file_name()
 		return("g++ #{@submit_file_name} -")
 	end
 end
 class CTLE_Cpp < TLE
-	def make_comand
+	def make_command
 		get_file_name()
 		return("g++ #{@submit_file_name} -")
 	end
 end
 class CTLE_Java < TLE
-	def make_comand
+	def make_command
 		get_file_name()
 		return("javac #{@submit_file_name}")
 	end
 end
 
-class Action 
+class Action 		
   def make_command(times)
     return("Action command")
   end
   
-  def action
+  def action		#main関数
     puts "Start action"
     times = 1
-    while times <= $input_times
-	    command = make_comamnd(times)
-	    input_filename = $questino_no + "_" + times
-	    IO.popen("#{command} < #{input_filename}")
+    while times <= $input_times		#テストケースごとに実行する。ログを残すこと。
+	    command = make_command(times)
+	    input_filename = $questino_no.to_s + "_in_" + times.to_s
+	    IO.popen("#{command} < ../compare_file/#{input_filename}.txt > ../log/#{$time}_result 2> ../log/#{$time}_Aerror || echo 'error' > ../log/#{$time}_Aerror ")
+	    #TODO:status code 23の時でWAの時の処理
 	    judge_tle()
+	    size = File.open("../log/#{$time}_Aerror").size
+	    if (size <= 0)
+	    	puts "action Error occured"
+	    end
+	    puts "#{times} input complete"
 	    times += 1
 	end 
+	puts "all problem_num is complete"
   end
   
   def judge_tle
@@ -240,10 +261,12 @@ class ATLE_C < ATLE
 end
 
 
+#main doing block
 Preparation.new.startup()
 case $language
 when 0
 	Compile_C.new.compile()
+	Action_C.new.action()
 when 1
 	Compile_Cpp.new.compile()
 when 2
