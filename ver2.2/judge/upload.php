@@ -45,6 +45,7 @@ EOD;
   	$log_fh = fopen("../log/".$post_time."_run.log",'w');
   	fwrite($log_fh, $op);
   	fclose($log_fh);
+  	echo $op;
 
 }
 ?>

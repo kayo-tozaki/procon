@@ -49,6 +49,7 @@ class Preparation
 			return("main.py")
 		else
 			return("error,not data")
+			exit!()
 		end
 	end
 	def file_changer()		#操作するファイルのコピーとリネーム
@@ -71,7 +72,6 @@ class Preparation
 		getQdata()	
 		file_changer()	
 	end
-
 end
 
 class Compile 
@@ -104,8 +104,6 @@ class Compile
 		IO.popen(command)
 		judge_compile()
 	end
-
-
 end
 
 #class Compileを継承したもの
@@ -254,10 +252,28 @@ end
 
 class Action_Ruby < Action
 	def make_command(times)
-		return ("./a.out ") 
+		return ("ruby main.rb") 
 	end
 	def judge_tle
-		ATLE_C.new.judge_tle()
+		ATLE_Ruby.new.judge_tle()
+	end
+end
+
+class Action_Python2 < Action
+	def make_command(times)
+		return ("python main.py") 
+	end
+	def judge_tle
+		ATLE_Python.new.judge_tle()
+	end
+end
+
+class Action_Python3 < Action
+	def make_command(times)
+		return ("python3.3 main.py") 
+	end
+	def judge_tle
+		ATLE_Python.new.judge_tle()
 	end
 end
 
@@ -277,6 +293,24 @@ end
 class ATLE_C < ATLE
 	def make_command()
 		return("[a].out")
+	end
+end
+
+class ATLE_Cpp < ATLE
+	def make_command()
+		return("[a].out")
+	end
+end
+
+class ATLE_Ruby < ATLE
+	def make_command()
+		return("[r]uby")
+	end
+end
+
+class ATLE_Python < ATLE
+	def make_command()
+		return("[p]ython | grep [m]ain")
 	end
 end
 
@@ -313,8 +347,9 @@ class Compare
 			$status = 4
 			puts "get accept, status is #{$status}"
 		else
-			puts "get wrong answer , status is #{$status}"
 			$status = 41
+			puts "get wrong answer , status is #{$status}"
+			exit!()
 		end
 	end
 	def start
@@ -345,6 +380,14 @@ when 0
 	Action_C.new.action()
 when 1
 	Compile_Cpp.new.compile()
+	Action_Cpp.new.action()
 when 2
 	Compile_Java.new.compile()
+	Action_Java.new.action()
+when 3
+	Action_Ruby.new.action()
+when 4
+	Action_Python2.new.action()
+when 5
+	Action_Python3.new.action()	
 end

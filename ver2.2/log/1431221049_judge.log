@@ -1,0 +1,20 @@
+start judge.rb
+complete getDB
+complete getQdata
+complete filename_changer
+start_compile command
+judge_tle start : g++ [m]ain.c -
+Not action.
+after judge_tle, $status is 2
+update database
+compile fail
+update database
+Start action
+judge_tle start : [a].out
+Not action.
+after judge_tle, $status is 3
+update database
+action Error occured
+get wrong answer , status is 3
+all problem_num is complete
+update database
