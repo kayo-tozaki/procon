@@ -1,3 +1,4 @@
+
 require 'mysql'
 
 class Preparation 
@@ -49,7 +50,7 @@ class Preparation
 			return("main.py")
 		else
 			return("error,not data")
-			exit!()
+			exit()
 		end
 	end
 	def file_changer()		#操作するファイルのコピーとリネーム
@@ -156,15 +157,18 @@ class TLE		#TLE判断。親。
 		sleep time
 		command = make_command()
 		puts "judge_tle start : #{command}"
-		#puts %x(ps alx |grep "#{command}").empty? 
+		puts %x(ps alx |grep "#{command}").empty? 
 		if (%x(ps alx |grep "#{command}").empty? == true) then
 		 $status = status_code()
 		 puts "Not action."
 		else
 		 num = status_code()
 		 $status = num*10+2
-		 %x(kill `ps alx| grep "#{command}")
-		 puts "TLE,kill process"
+		 Update_db.new
+		 Process.kill('KILL',$io.pid)
+		 puts "TLE,kill process status is #{$status}"
+		 exec("ruby killer.rb &")	#terminated
+		 exit()
 		end
 		puts "after judge_tle, $status is #{$status}"
 		Update_db.new
@@ -203,16 +207,27 @@ class Action
   def action		#main関数
     puts "Start action"
     times = 1
+    return_words = ""
     while times <= $input_times		#テストケースごとに実行する。ログを残すこと。
 	    command = make_command(times)
 	    input_filename = $questino_no.to_s + "_in_" + times.to_s
-	    IO.popen("#{command} < ../compare_file/#{input_filename}.txt > ../log/#{$time}_result 2> ../log/#{$time}_Aerror || echo 'error' > ../log/#{$time}_Aerror ")
+	   	$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt 1>/dev/null 2>/dev/null")
+	   	judge_tle()
+	   	IO.popen("#{command} < ../compare_file/#{input_filename}.txt 1>../log/#{$time}_result 2> ../log/#{$time}_Aerror || echo 'error'") do |io|
+	   		return_words = io.gets
+	   	end
+	    puts "actioning"
 	    #TODO:status code 23の時でWAの時の処理
-	    judge_tle()
-	    size = File.open("../log/#{$time}_Aerror").size
-	    if (size > 0)
-	    	puts "action Error occured"
+	    sleep 0.05
+	    return_words = return_words.chomp
+	    if ((return_words == "error"))
+	    	$status = 31
+	    	puts "action Error occured, status is #{$status}"
+	    	sleep 1
+	    	exit()
 	    end
+	    puts "fin Aerror log judgement"
+   	    
 	    Compare.new.start
 
 	    times += 1
@@ -246,7 +261,7 @@ class Action_Java < Action
 		return ("java Main") 
 	end
 	def judge_tle
-		ATLE_C.new.judge_tle()
+		ATLE_Java.new.judge_tle()
 	end
 end
 
@@ -270,7 +285,7 @@ end
 
 class Action_Python3 < Action
 	def make_command(times)
-		return ("python3.3 main.py") 
+		return ("/opt/local/bin/python3.3 main.py") 
 	end
 	def judge_tle
 		ATLE_Python.new.judge_tle()
@@ -304,7 +319,7 @@ end
 
 class ATLE_Ruby < ATLE
 	def make_command()
-		return("[r]uby")
+		return("[r]uby main")
 	end
 end
 
@@ -349,7 +364,7 @@ class Compare
 		else
 			$status = 41
 			puts "get wrong answer , status is #{$status}"
-			exit!()
+			exit()
 		end
 	end
 	def start

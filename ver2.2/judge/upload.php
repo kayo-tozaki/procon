@@ -5,6 +5,7 @@
 </head>
 <body>
 <div id="base">
+now actionning. please wait...
 <img src="../images/loading.gif" width = "">
 <?php
 //check team name (if not alphabet...)
@@ -41,14 +42,15 @@ EOD;
   		die('Error. Insert cannot.'.mysql_error());
   	}
 
-  	exec('bash run.sh &',$op);
+  	passthru('bash run.sh',$op);
   	$log_fh = fopen("../log/".$post_time."_run.log",'w');
   	fwrite($log_fh, $op);
   	fclose($log_fh);
-  	echo $op;
 
 }
 ?>
+<br>
+after <font color="red">10</font>s, please access <a href="./20150210/result.html">result page </a>
 </div>
 
 </body>

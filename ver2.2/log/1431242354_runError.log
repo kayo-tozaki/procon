@@ -1,0 +1,7 @@
+sh: line 1: 19664 Segmentation fault      ./a.out < ../compare_file/2_in_1.txt
+judge_test.rb:351:in `initialize': No such file or directory - ../log/1431242354_result (Errno::ENOENT)
+	from judge_test.rb:351:in `open'
+	from judge_test.rb:351:in `get_answers'
+	from judge_test.rb:378:in `start'
+	from judge_test.rb:238:in `action'
+	from judge_test.rb:402:in `<main>'
