@@ -1,12 +1,6 @@
 require 'mysql'
 
 class Preparation 
-	def startup()	#呼び出し関数
-		getDB()		
-		getQdata()	
-		file_changer()	
-	end
-
 	def getDB()		#DBからデータの取得
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
@@ -21,7 +15,6 @@ class Preparation
 		puts "complete getDB"
 		client.close
 	end
-	
 	def getQdata()		#問題configからのデータ取得
 		f = open("#{$questino_no}", "r")
 		num = 1
@@ -38,24 +31,8 @@ class Preparation
 			end
 			num = num + 1
 		end
-	puts "complete getQdata"
+		puts "complete getQdata"
 	end
-	
-	def file_changer()		#操作するファイルのコピーとリネーム
-	    file_name = kind_file()
-	    if File.exist?(file_name)
-	      IO.popen("rm -rf #{file_name}")
-	    end
-	    command = %Q(cp ../submit_file/#{$time} #{file_name})
-	    IO.popen(command)
-	    sleep 0.01
-	    if File.exist?(file_name)
-	      puts "complete filename_changer"
-	    else
-	      puts "cannot change file_name"
-	    end
-	end
-	    
 	def kind_file() 	#言語ごとのファイル名を返す
 		case $language
 		when 0
@@ -74,31 +51,43 @@ class Preparation
 			return("error,not data")
 		end
 	end
+	def file_changer()		#操作するファイルのコピーとリネーム
+	    file_name = kind_file()
+	    if File.exist?(file_name)
+	      IO.popen("rm -rf #{file_name}")
+	    end
+	    command = %Q(cp ../submit_file/#{$time} #{file_name})
+	    IO.popen(command)
+	    sleep 0.01
+	    if File.exist?(file_name)
+	      puts "complete filename_changer"
+	    else
+	      puts "cannot change file_name"
+	    end
+	end
+
+	def startup()	#呼び出し関数
+		getDB()		
+		getQdata()	
+		file_changer()	
+	end
+
 end
 
 class Compile 
 	def command_language()		#言語ごとのコンパイルコマンドを返す
 		return("no compile")	
 	end
-	
-	def compile		#main関数。コンパイルの実行とTLEクラスへのジャンプ。
-		command = command_language()
-		puts "start_compile command"
-		IO.popen(command)
-		judge_compile()
-	end
-
 	def judge_compile_tle_command	#各言語のclass TLEへの継承先コマンドの記述
 		commnand.new.judge_tle		#各言語で継承
 	end
-
 	def judge_compile()				#コンパイルができたかの判断とDBの更新
 		judge_compile_tle_command()
 		size = File.open("../log/#{$time}_compile").size
 		if !`cat ../log/#{$time}_compile |grep "warning"`.empty?
 	    	puts "warning occured"
 	    	$status_code = 23
-	     end
+	    end
 		#puts "puts #{size}"
 		if( size <= 0 ) then
 			$status = 2
@@ -108,13 +97,14 @@ class Compile
 			puts "compile fail"
 		end
 		Update_db.new
-		# client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		# query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' where post_time = #{$time}"
-		# #puts query
-		# client.query(query)
-		# puts "update database"
-		# client.close
 	end
+	def compile		#main関数。コンパイルの実行とTLEクラスへのジャンプ。
+		command = command_language()
+		puts "start_compile command"
+		IO.popen(command)
+		judge_compile()
+	end
+
 
 end
 
@@ -127,6 +117,7 @@ class Compile_C < Compile
 		CTLE_C.new.judge_tle()
 	end
 end
+
 class Compile_Cpp < Compile
 	def command_language()
 		return("g++ main.cpp -std=c++11 2> ../log/#{$time}_compile")
@@ -135,6 +126,7 @@ class Compile_Cpp < Compile
 		CTLE_Cpp.new.judge_tle
 	end
 end
+
 class Compile_Java < Compile
 	def command_language()
 		return("/usr/local/src/jdk1.8.0_40/bin/javac Main.java 2> ../log/#{time}_compile")
@@ -145,26 +137,22 @@ class Compile_Java < Compile
 end
 
 class TLE		#TLE判断。親。
+	def sleep_time
+		return 2	#please set wait time (for action_tle)
+	end
 	def get_file_name	#CTLEでのファイル名(grep対応)取得用
 		@submit_file_name = Preparation.new.kind_file()
 		@submit_file_name[0] = "[#{@submit_file_name[0]}]"
 		#puts "submit_file_name is #{@submit_file_name}"
 		#example file name "[m]ain.cpp"
 	end
-
 	def make_command		#grep用のコマンドの作成。
 		get_file_name()
 		return("please insert compile command")
 	end
-	
-	def sleep_time
-		return 2	#please set wait time (for action_tle)
-	end
-	
 	def status_code
 		return 2
 	end
-	
 	def judge_tle		#main関数。TLEのjudgeをし、殺す。
 		time = sleep_time()
 		sleep time
@@ -192,12 +180,14 @@ class CTLE_C < TLE
 		return("g++ #{@submit_file_name} -")
 	end
 end
+
 class CTLE_Cpp < TLE
 	def make_command
 		get_file_name()
 		return("g++ #{@submit_file_name} -")
 	end
 end
+
 class CTLE_Java < TLE
 	def make_command
 		get_file_name()
@@ -209,7 +199,9 @@ class Action
   def make_command(times)
     return("Action command")
   end
-  
+  def judge_tle
+  	command.new.judge_tle
+  end  
   def action		#main関数
     puts "Start action"
     times = 1
@@ -223,18 +215,12 @@ class Action
 	    if (size > 0)
 	    	puts "action Error occured"
 	    end
-	    
-	    #TODO:compare files
 	    Compare.new.start
 
 	    times += 1
-	 end 
+	end 
 	puts "all problem_num is complete"
 	Update_db.new
-  end
-  
-  def judge_tle
-  	command.new.judge_tle
   end
 end
 
@@ -243,7 +229,6 @@ class Action_C < Action
 	def make_command(times)
 		return ("./a.out ") 
 	end
-
 	def judge_tle
 		ATLE_C.new.judge_tle()
 	end
@@ -253,7 +238,6 @@ class Action_Cpp < Action
 	def make_command(times)
 		return ("./a.out ") 
 	end
-
 	def judge_tle
 		ATLE_Cpp.new.judge_tle()
 	end
@@ -263,7 +247,6 @@ class Action_Java < Action
 	def make_command(times)
 		return ("java Main") 
 	end
-
 	def judge_tle
 		ATLE_C.new.judge_tle()
 	end
@@ -273,12 +256,12 @@ class Action_Ruby < Action
 	def make_command(times)
 		return ("./a.out ") 
 	end
-
 	def judge_tle
 		ATLE_C.new.judge_tle()
 	end
 end
 
+#Action TLEの継承
 class ATLE < TLE
 	def make_command()
 		return("language別コマンド")
@@ -290,7 +273,7 @@ class ATLE < TLE
 		return 3
 	end
 end
-
+#言語ごとの継承
 class ATLE_C < ATLE
 	def make_command()
 		return("[a].out")
@@ -298,14 +281,6 @@ class ATLE_C < ATLE
 end
 
 class Compare
-	def start
-		get_answers
-		if ($allowable > 0)
-			allowable()
-		end
-		compare
-
-	end
 	def get_answers
 		count = 0
 		@@answer = Array.new
@@ -334,13 +309,20 @@ class Compare
 		end
 	end
 	def compare
-		if tf=(@@result == @@answer) == true
+		if tf = (@@result == @@answer) == true
 			$status = 4
 			puts "get accept, status is #{$status}"
 		else
 			puts "get wrong answer , status is #{$status}"
 			$status = 41
 		end
+	end
+	def start
+		get_answers()
+		if ($allowable > 0)
+			allowable()
+		end
+		compare()
 	end
 end
 
