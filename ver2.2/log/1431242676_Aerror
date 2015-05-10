@@ -1,1 +1,0 @@
-main.rb:6:in `<main>': undefined method `+' for nil:NilClass (NoMethodError)

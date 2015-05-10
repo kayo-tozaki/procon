@@ -158,6 +158,7 @@ class TLE		#TLE判断。親。
 		command = make_command()
 		puts "judge_tle start : #{command}"
 		puts %x(ps alx |grep "#{command}").empty? 
+		
 		if (%x(ps alx |grep "#{command}").empty? == true) then
 		 $status = status_code()
 		 puts "Not action."
@@ -165,9 +166,9 @@ class TLE		#TLE判断。親。
 		 num = status_code()
 		 $status = num*10+2
 		 Update_db.new
-		 Process.kill('KILL',$io.pid)
 		 puts "TLE,kill process status is #{$status}"
-		 exec("ruby killer.rb &")	#terminated
+		 Process.kill('KILL',$io.pid)
+		 IO.popen("ruby killer.rb")	#terminated
 		 exit()
 		end
 		puts "after judge_tle, $status is #{$status}"
@@ -211,7 +212,7 @@ class Action
     while times <= $input_times		#テストケースごとに実行する。ログを残すこと。
 	    command = make_command(times)
 	    input_filename = $questino_no.to_s + "_in_" + times.to_s
-	   	$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt 1>/dev/null 2>/dev/null")
+	   	$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt ")
 	   	judge_tle()
 	   	IO.popen("#{command} < ../compare_file/#{input_filename}.txt 1>../log/#{$time}_result 2> ../log/#{$time}_Aerror || echo 'error'") do |io|
 	   		return_words = io.gets
@@ -219,7 +220,7 @@ class Action
 	    puts "actioning"
 	    #TODO:status code 23の時でWAの時の処理
 	    sleep 0.05
-	    return_words = return_words.chomp
+	    return_words == nil ? return_words ="" : return_words = return_words.chomp
 	    if ((return_words == "error"))
 	    	$status = 31
 	    	puts "action Error occured, status is #{$status}"
@@ -228,7 +229,7 @@ class Action
 	    end
 	    puts "fin Aerror log judgement"
    	    
-	    Compare.new.start
+	    Compare.new.start(times)
 
 	    times += 1
 	end 
@@ -330,11 +331,11 @@ class ATLE_Python < ATLE
 end
 
 class Compare
-	def get_answers
+	def get_answers(file_times)
 		count = 0
 		@@answer = Array.new
 		@@result = Array.new
-		File.open("../compare_file/#{$questino_no}_out_#{$input_times}.txt") { |file|
+		File.open("../compare_file/#{$questino_no}_out_#{file_times}.txt") { |file|
 		file.each_line do |val|
 				@@answer[count] = val.chomp
 				count += 1
@@ -358,7 +359,8 @@ class Compare
 		end
 	end
 	def compare
-		if tf = (@@result == @@answer) == true
+		puts "#{@@result} ?=? #{@@answer} "
+		if (@@result == @@answer)
 			$status = 4
 			puts "get accept, status is #{$status}"
 		else
@@ -367,8 +369,8 @@ class Compare
 			exit()
 		end
 	end
-	def start
-		get_answers()
+	def start(file_times)
+		get_answers(file_times)
 		if ($allowable > 0)
 			allowable()
 		end

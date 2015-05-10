@@ -6,7 +6,7 @@ while count <= a
 	while count2 <= a 
 		result = result + count2 * count
 		count2 = count2 + 1
-		#puts result
+		puts result
 	end
 	count2 = 1
 	count = count + 1

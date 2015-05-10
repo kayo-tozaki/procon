@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(void)
+{
+	int a;
+	
+	double F;
+	
+	
+	scanf("%d",&a);
+	
+	F=(pow(a,8)+6*a)/2;
+	
+	printf("%.1f\n",F);
+	
+	return 0;
+
+}

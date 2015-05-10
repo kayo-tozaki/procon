@@ -1,1 +1,0 @@
-sh: line 1: 19779 Segmentation fault      ./a.out < ../compare_file/2_in_1.txt > ../log/1431242502_result
