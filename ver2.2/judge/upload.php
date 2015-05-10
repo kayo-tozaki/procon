@@ -9,6 +9,8 @@ now actionning. please wait...
 <img src="../images/loading.gif" width = "">
 <?php
 //check team name (if not alphabet...)
+  	$input = 0;
+  	$Stocker = 0;
  if (ctype_alpha($_POST['team_name']) == false) {
   	$js = <<<EOD
  PHP Error. Please wirte team name only <font color = "red">Alphabet.</font><a href="javascript:history.back();"> please retry</a>
@@ -42,10 +44,34 @@ EOD;
   		die('Error. Insert cannot.'.mysql_error());
   	}
 
-  	passthru('bash run.sh',$op);
-  	$log_fh = fopen("../log/".$post_time."_run.log",'w');
-  	fwrite($log_fh, $op);
-  	fclose($log_fh);
+ 	#exec('bash run.sh &'); 
+  	#sleep(10);
+  	#passthru('bash run.sh &',$op);
+  	$fp = fopen("STOCK", "r");
+  	while (!feof($fp)) {
+  			$input = fgets($fp);
+  			echo "input num is".$input."<br>";
+  		}
+  		$input = (int)$input;
+  		$Stocker =  $input + 1;
+  		echo "write num is ".$Stocker;
+  	fclose($fp);
+	$fp = fopen("STOCK", "w+");
+ # 	echo $fp;
+	while (true) {
+	  	if(flock($fp, LOCK_EX)){    //排他的ロック
+		    fwrite($fp, $Stocker);
+		    break;
+		}
+		else{
+	    	sleep(1);
+		}
+	}
+ 
+	fclose($fp);    //ここでロックが解除される。
+  	#$log_fh = fopen("../log/".$post_time."_run.log",'w');
+  	#fwrite($log_fh, $op);
+  	#fclose($log_fh);
 
 }
 ?>

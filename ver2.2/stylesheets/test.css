@@ -22,24 +22,24 @@
 	border: 3px #A9A9A9 solid; /* テーブル全体の枠線（太さ・色・スタイル） */ 
 }
 .table_tr1{
-	border: 1px #1C79C6 solid; /* セルの枠線（太さ・色・スタイル） */ 
+	border: 1px #64C0AB solid; /* セルの枠線（太さ・色・スタイル） */ 
     padding: 5px; /* セル内の余白 */ 
     background-color: white;
 }
 .table_tr2{
 	border: 1px #1C79C6 solid; /* セルの枠線（太さ・色・スタイル） */ 
     padding: 5px; /* セル内の余白 */ 
-    background-color: #00BFFF;
+    background-color: #BEDFC2;
 }
 .table_th{
 	border: 1px #1C79C6 solid; /* セルの枠線（太さ・色・スタイル） */ 
     padding: 5px; /* セル内の余白 */ 
     text-align: center;
-    background-color: #1E90FF;
+    background-color: #64C0AB;
     color: white;
 }
 .table_td1{
-	border: 1px #1C79C6 solid; /* セルの枠線（太さ・色・スタイル） */ 
+	border: 1px #64C0AB solid; /* セルの枠線（太さ・色・スタイル） */ 
     padding: 5px; /* セル内の余白 */ 
     text-align: center;
 }

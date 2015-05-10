@@ -49,3 +49,4 @@ fi
 
 echo "parse.rbの実行"
 ruby parse.rb
+

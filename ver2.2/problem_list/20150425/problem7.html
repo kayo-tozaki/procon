@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/screen.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/modal.css" media="all">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../../javascripts/clock.js" type="text/javascript"></script>
+    <script src="../../javascripts/modal.js" type="text/javascript"></script>
+
+	<title>KogCoder Contest</title>
+</head>
+<body>
+    
+	<div id="header_navi_wrapper">
+    	<div id="header_navi" class="cf">
+            <a href="../../index.html">
+                <h1 id="header_navi_title">
+                    KogCoder Programing Contest
+                </h1>
+            </a>
+            <div class="pro"></div>
+            <div class="prob">
+                <a href="./result.html">結果</a>
+            </div>
+            <div class="prob">
+                <a id="modal_open" class="button_link">提出</a>
+            </div>
+            <div class="prob">
+				<a href="../problem20150425.html">問題</a>
+            </div>        
+        </div>
+    </div>
+    
+    <div id="head_margin">
+    </div>
+
+    <!-- modal window-->
+    <div id="modal_window">
+        <div id="modal_title_bar">
+            <div id="modal_title">
+                提出
+            </div>
+            <a id="close_botton" class="modal_close button_link">
+                <div id="close"></div>
+            </a>
+        </div>
+        <div id="modal_content">
+            <form action="../../judge/upload.php" method="post" enctype="multipart/form-data" name="modal_submit"onSubmit="return check()">
+                <p>チーム名</p>
+
+                <input type="text" name="team_name" maxlength="10" method="POST" accept-charset="utf-8">
+
+                <p>問題番号を選んで下さい</p>
+				<select name="problem_num" id="pn">
+					<option value = "1">Problem A</option>
+					<option value = "2">Problem B</option>
+					<option value = "3">Problem C</option>
+					<option value = "4">Problem D</option>
+					<option value = "5">Problem E</option>
+					<option value = "6">Problem F</option>
+					<option value = "7" selected >Problem G</option>
+					<option value = "8">Problem H</option>
+				</select>
+
+
+                <p>プログラミング言語</p>
+                <select name="language" id="la">
+                    <option value="0">C(g++ 4.7.2)</option>
+                    <option value="1">C++11(g++ 4.7.2 -std=c++11)</option>
+                    <option value="2">Java(javac 1.8.0_40)</option>
+                    <option value="3">Ruby(ruby 2.0.0p589)</option>
+                    <option value="4">Python2 (python 2.7.3)</option>
+                    <option value="5">Python3 (python 3.2.3)</option>
+
+
+                </select>
+                <p>ソースコード</p>
+
+                <textarea name="source" id="source" cols="60" rows="10"></textarea>
+                <br>
+                <input class="up" type="submit" value="Submit" onclick="team_name_cookie_submit()">
+            </form>   
+        </div>
+    </div>
+    <!-- /modal window-->
+
+    <div id="pageinfo">
+    	<h2 id="title">
+			分解作業
+        </h2>
+        <div id="limit">
+			Time Limit : 2 sec, Memory Limit : 65536 KB
+        </div>
+    </div>
+    
+	<div id="base">
+    	<h3>Question</h3>
+		<p class="sentence">
+			 現在R君はN個のパーツを手にかかえています.パーツx<sub>i</sub>はそれぞれコストというパラメーターを持っています.またこれらのパーツはx<sub>s</sub>はx<sub>t</sub>と連結しています.
+		</p>
+		<p class="sentence">
+			 R君はパーツを見ると分解したくてたまりません.ここでいう分解とは連結しているパーツを1つ1つのパーツに分ける,と定義されます.早速分解したいと考えたが,分解するにはそれ相応のコストがかかります.
+		</p>
+		<p class="sentence">
+			 分解について詳しく説明します.<br>パーツx<sub>i</sub>を分解するにはx<sub>i</sub>に直接隣接している全てのx<sub>j</sub>のコストの和がかかります.<br>つまり他のパーツをまたいでつながっていてもそのコストはかからないし,またx<sub>i</sub>自身のコストもかかりません. 
+		</p>
+		<p class="sentence">
+			 分解の方法が上記で分かりました.R君はパーツを全て分解したいと考えます.しかしR君は非常に怠け者です.「楽をしたい,楽をしたい」としきりに言いますが自分で考えることはしないようです.分解にかかるコストの最小値を求めてR君の負担を減らしてあげてください.
+		</p>
+
+        <h3>Input</h3>
+		<p class="sentence">
+			入力は以下のような形式で与えられます.
+		</p>
+		<div class="sample">
+<i>N</i><br><i>x<sub>0</sub></i> <i>x<sub>1</sub></i> ... <i>x<sub>n-1</sub></i><br><i>M</i><br><i>s<sub>0</sub></i> <i>t<sub>0</sub></i><br><i>s<sub>1</sub></i> <i>t<sub>1</sub></i><br>...<br><i>s<sub>m-1</sub></i> <i>t<sub>m-1</sub></i><br></div>
+
+        <h3>Constraints</h3>
+		<p class="sentence">
+			<i>N</i>:パーツの個数(<i>0≦N≦1000)</i> <br><i>x<sub>i</sub></i>:<i>i</i>番目のパーツのコスト <br><i>M</i>:パーツ同士の繋がってるペアの個数 <br><i>s<sub>i</sub> <i>t<sub>i</sub></i>:<i>s</i>番目のパーツと<i>t</i>番目のパーツがつながっていることをしめす.
+		</p>
+
+        <h3>Output</h3>
+		<p class="sentence">
+			分解にかかる最小のコスト
+		</p>
+
+        <h3>Sample</h3>
+		<h4>Sample Input 1</h4>
+		<pre class="sample">
+4 3
+10 20 30 40
+1 4
+1 2
+2 3
+</pre>
+		<h4>Sample Output 1</h4>
+		<pre class="sample">
+40
+</pre>
+		<p class="sentence">
+			最初にパーツ4を分解します.これにはコスト10かかり,残りのパーツは1，2，3の3つです.<br>次にパーツ3を分解します.これはコスト20がかかります.<br>次にパーツ2を分解します.これはコスト10かかります.<br>最後にパーツ1を分解します.隣接しているパーツがないのでこれはコスト0です.<br> <br>よって10 + 20 + 10 + 0 = 40より40を出力します.
+		</p>
+		<h4>Sample Input 2</h4>
+		<pre class="sample">
+4 4
+100 100 100 100
+1 2
+2 3
+2 4
+3 4
+</pre>
+		<h4>Sample Output 2</h4>
+		<pre class="sample">
+400
+</pre>
+
+    </div>
+    
+    <div id="head_margin">
+    </div>
+    
+   	<div id="footer_wrapper">	
+    	<div id="header_navi" class="cf">
+			<div id="footer_time"></div>
+			<div id="footer">Do your best.</div>
+        </div>
+	</div>
+	
+</body>
+</html>
+
