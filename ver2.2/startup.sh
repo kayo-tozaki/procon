@@ -50,3 +50,7 @@ fi
 echo "parse.rbの実行"
 ruby parse.rb
 
+echo "start procon"
+cd ./judge
+bash inotify.sh
+

@@ -5,7 +5,7 @@ class Preparation
 	def getDB()		#DBからデータの取得
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		client.query("SELECT * FROM submit.submit_#{day} order by post_time desc").each do |post_time,team_name ,problem_num,language,status|  # テスト用にDesc入ってるので注意
+		client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status|  # テスト用にDesc入ってるので注意
 		  $time = post_time.to_i
 		  $team_name = team_name
 		  $questino_no = problem_num.to_i
@@ -77,7 +77,7 @@ end
 
 class Compile 
 	def command_language()		#言語ごとのコンパイルコマンドを返す
-		return("no compile")	
+		return("各言語ごとのcompile文")	
 	end
 	def judge_compile_tle_command	#各言語のclass TLEへの継承先コマンドの記述
 		commnand.new.judge_tle		#各言語で継承
@@ -87,19 +87,20 @@ class Compile
 		size = File.open("../log/#{$time}_compile").size
 		if !`cat ../log/#{$time}_compile |grep "warning"`.empty?
 	    	puts "warning occured"
-	    	$status_code = 23
+	    	$status_code = 23		#division Error の場合は Runtime Errorになるので。
+	    	Update_db.new
 	    end
 		#puts "puts #{size}"
 		if( size <= 0 ) then
 			$status = 2
+			Update_db.new
 			puts "compile complete"
-		else
+		elsif !$status == 23
 			$status = 21
 			puts "compile fail"
 			Update_db.new
 			exit()
 		end
-		Update_db.new
 	end
 	def compile		#main関数。コンパイルの実行とTLEクラスへのジャンプ。
 		command = command_language()
@@ -159,7 +160,7 @@ class TLE		#TLE判断。親。
 		sleep time
 		command = make_command()
 		puts "judge_tle start : #{command}"
-		puts %x(ps alx |grep "#{command}").empty? 
+		#puts %x(ps alx |grep "#{command}").empty? 
 		
 		if (%x(ps alx |grep "#{command}").empty?) then
 		 $status = status_code()
@@ -169,11 +170,12 @@ class TLE		#TLE判断。親。
 		 $status = num*10+2
 		 Update_db.new
 		 puts "TLE,kill process status is #{$status}"
-		 Process.kill('KILL',$io.pid)
-		 IO.popen("ruby killer.rb &")	#terminated
+		 Process.kill('KILL',$io.pid)	#terminated
+		 puts "now runnnng judge.rb process..."
+		 IO.popen("ruby killer.rb &")	#if ruby, after action hear terminated
 		 exit()
 		end
-		puts "after judge_tle, $status is #{$status}"
+		puts "judge_tle complete. $status is #{$status}"
 		Update_db.new
 	end
 end
@@ -214,19 +216,18 @@ class Action
     while times <= $input_times		#テストケースごとに実行する。ログを残すこと。
 	    command = make_command(times)
 	    input_filename = $questino_no.to_s + "_in_" + times.to_s
-	   	$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt ")
+	   	$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt ") #TLE判断用に１回実行
 	   	judge_tle()
+	   	#本実行。
 	   	IO.popen("#{command} < ../compare_file/#{input_filename}.txt 1>../log/#{$time}_result 2> ../log/#{$time}_Aerror || echo 'error'") do |io|
 	   		return_words = io.gets
 	   	end
 	    puts "actioning"
-	    #TODO:status code 23の時でWAの時の処理
 	    sleep 0.05
 	    return_words == nil ? return_words ="" : return_words = return_words.chomp
 	    if ((return_words == "error"))
 	    	$status = 31
 	    	puts "action Error occured, status is #{$status}"
-	    	sleep 1
 	    	Update_db.new
 	    	exit()
 	    end
@@ -237,7 +238,7 @@ class Action
 	    times += 1
 	end 
 	puts "all problem_num is complete"
-	Update_db.new
+	#Update_db.new
   end
 end
 
@@ -367,9 +368,17 @@ class Compare
 		if (@@result == @@answer)
 			$status = 4
 			puts "get accept, status is #{$status}"
+			Update_db.new
+		# elsif $status == 23
+		# 	$status = 42
+		# 	puts "get Wrong Answer. Get compile error, if you get runtime error...?"
 		else
+		    #TODO:status code 23の時でWAの時の処理
 			$status = 41
 			puts "get wrong answer , status is #{$status}"
+			Update_db.new
+		end
+		if $status == 41
 			exit()
 		end
 	end

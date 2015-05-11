@@ -1,8 +1,10 @@
-require 'json'
+ require 'json'
 require 'mysql'
 
 #day = Time.now
-file_name = "20150210.json"#{day.year}#{day.month}#{day}"
+
+file_name = "20150425.json"#{day.year}#{day.month}#{day}"
+
 json_file_path = "./problem_list/#{file_name}"
 json_data = open(json_file_path) do |io|
   JSON.load(io)

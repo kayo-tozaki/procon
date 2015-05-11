@@ -1,0 +1,41 @@
+complete getDB
+complete getQdata
+complete filename_changer
+start_compile command
+judge_tle start : g++ [m]ain.c -
+true
+Not action.
+after judge_tle, $status is 2
+update database...update DB complete! 
+compile complete
+update database...update DB complete! 
+Start action
+judge_tle start : [a].out
+true
+Not action.
+after judge_tle, $status is 3
+update database...update DB complete! 
+actioning
+fin Aerror log judgement
+["4"] ?=? ["4"] 
+get accept, status is 4
+judge_tle start : [a].out
+true
+Not action.
+after judge_tle, $status is 3
+update database...update DB complete! 
+actioning
+fin Aerror log judgement
+["0"] ?=? ["0"] 
+get accept, status is 4
+judge_tle start : [a].out
+true
+Not action.
+after judge_tle, $status is 3
+update database...update DB complete! 
+actioning
+fin Aerror log judgement
+["99"] ?=? ["99"] 
+get accept, status is 4
+all problem_num is complete
+update database...update DB complete! 

@@ -1,0 +1,11 @@
+complete getDB
+complete getQdata
+complete filename_changer
+start_compile command
+judge_tle start : g++ [m]ain.c -
+true
+Not action.
+after judge_tle, $status is 2
+update database...update DB complete! 
+compile fail
+update database...update DB complete! 

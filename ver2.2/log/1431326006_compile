@@ -1,0 +1,16 @@
+main.c: 関数 ‘int main()’ 内:
+main.c:8:1: エラー: ‘itn’ was not declared in this scope
+ itn ans=0;
+ ^
+main.c:8:5: エラー: expected ‘;’ before ‘ans’
+ itn ans=0;
+     ^
+main.c:16:1: エラー: ‘ans’ was not declared in this scope
+ ans = i
+ ^
+main.c:17:1: エラー: expected ‘;’ before ‘}’ token
+ }
+ ^
+main.c:19:15: エラー: ‘ans’ was not declared in this scope
+ printf("%d\n",ans);
+               ^
