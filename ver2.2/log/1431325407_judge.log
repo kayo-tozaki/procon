@@ -1,0 +1,16 @@
+complete getDB
+complete getQdata
+complete filename_changer
+start_compile command
+judge_tle start : g++ [m]ain.cpp -
+true
+Not action.
+after judge_tle, $status is 2
+update database...update DB complete! 
+compile complete
+update database...update DB complete! 
+Start action
+judge_tle start : [a].out
+false
+update database...update DB complete! 
+TLE,kill process status is 32

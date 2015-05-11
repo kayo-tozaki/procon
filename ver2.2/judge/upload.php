@@ -48,13 +48,21 @@ EOD;
   	#sleep(10);
   	#passthru('bash run.sh &',$op);
   	$fp = fopen("STOCK", "r");
-  	while (!feof($fp)) {
-  			$input = fgets($fp);
-  			echo "input num is".$input."<br>";
-  		}
-  		$input = (int)$input;
-  		$Stocker =  $input + 1;
-  		echo "write num is ".$Stocker;
+  	while (true) {
+	  	if(flock($fp, LOCK_EX)){
+		  	while (!feof($fp)) {
+		  			$input = fgets($fp);
+		  			echo "input num is".$input."<br>";
+		  		}
+		  		$input = (int)$input;
+		  		$Stocker =  $input + 1;
+		  		echo "write num is ".$Stocker;  
+		  		break;		
+	  	}
+	  	else{
+	  		sleep(1);
+	  	}
+	}
   	fclose($fp);
 	$fp = fopen("STOCK", "w+");
  # 	echo $fp;

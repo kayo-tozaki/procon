@@ -96,6 +96,8 @@ class Compile
 		else
 			$status = 21
 			puts "compile fail"
+			Update_db.new
+			exit()
 		end
 		Update_db.new
 	end
@@ -159,7 +161,7 @@ class TLE		#TLE判断。親。
 		puts "judge_tle start : #{command}"
 		puts %x(ps alx |grep "#{command}").empty? 
 		
-		if (%x(ps alx |grep "#{command}").empty? == true) then
+		if (%x(ps alx |grep "#{command}").empty?) then
 		 $status = status_code()
 		 puts "Not action."
 		else
@@ -168,7 +170,7 @@ class TLE		#TLE判断。親。
 		 Update_db.new
 		 puts "TLE,kill process status is #{$status}"
 		 Process.kill('KILL',$io.pid)
-		 IO.popen("ruby killer.rb")	#terminated
+		 IO.popen("ruby killer.rb &")	#terminated
 		 exit()
 		end
 		puts "after judge_tle, $status is #{$status}"
@@ -225,6 +227,7 @@ class Action
 	    	$status = 31
 	    	puts "action Error occured, status is #{$status}"
 	    	sleep 1
+	    	Update_db.new
 	    	exit()
 	    end
 	    puts "fin Aerror log judgement"
@@ -326,7 +329,8 @@ end
 
 class ATLE_Python < ATLE
 	def make_command()
-		return("[p]ython | grep [m]ain")
+		command = %Q([p]ython" | grep "[m]ain)
+		return(command)
 	end
 end
 
@@ -380,12 +384,13 @@ end
 
 class Update_db
 	def initialize
+		print "update database..."
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
 		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' where post_time = #{$time}"
 		#puts query
 		client.query(query)
-		puts "update database"
 		client.close
+		print "update DB complete! \n"
 	end
 end
 
