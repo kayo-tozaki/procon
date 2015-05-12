@@ -85,22 +85,24 @@ class Compile
 	def judge_compile()				#コンパイルができたかの判断とDBの更新
 		judge_compile_tle_command()
 		size = File.open("../log/#{$time}_compile").size
-		if !`cat ../log/#{$time}_compile |grep "warning"`.empty?
+		puts "judge compile error #{$time}"
+		if !`cat ../log/#{$time}_compile |grep "警告"`.empty?
 	    	puts "warning occured"
 	    	$status_code = 23		#division Error の場合は Runtime Errorになるので。
 	    	Update_db.new
 	    end
-		#puts "puts #{size}"
+		puts "log file size is #{size}"
 		if( size <= 0 ) then
 			$status = 2
 			Update_db.new
 			puts "compile complete"
-		elsif !$status == 23
+		else
 			$status = 21
 			puts "compile fail"
 			Update_db.new
 			exit()
 		end
+		puts "fin compile error"
 	end
 	def compile		#main関数。コンパイルの実行とTLEクラスへのジャンプ。
 		command = command_language()
@@ -365,13 +367,15 @@ class Compare
 	end
 	def compare
 		puts "#{@@result} ?=? #{@@answer} "
+		#sleep 1
+		puts !`cat ../log/#{$time}_runError.log`.empty?
 		if (@@result == @@answer)
 			$status = 4
 			puts "get accept, status is #{$status}"
 			Update_db.new
-		# elsif $status == 23
-		# 	$status = 42
-		# 	puts "get Wrong Answer. Get compile error, if you get runtime error...?"
+		elsif $status == 23 || !`cat ../log/#{$time}_runError.log`.empty?
+			$status = 42
+			puts "get Wrong Answer. Get compile error, if you get runtime error...?"
 		else
 		    #TODO:status code 23の時でWAの時の処理
 			$status = 41

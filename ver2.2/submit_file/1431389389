@@ -1,0 +1,9 @@
+struct { int i; char c; } spam;
+int main(){
+  void* p;
+  int i;
+  for(i=0; i<1024; ++i){
+     p = malloc(sizeof(struct spam));
+  }
+  pause();
+}

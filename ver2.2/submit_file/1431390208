@@ -1,0 +1,12 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    
+    int a = 0;
+    
+    cout << 10 / a << endl;;
+    
+    return 0;
+}
