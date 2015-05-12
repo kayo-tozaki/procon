@@ -1,0 +1,12 @@
+complete getDB
+complete getQdata
+complete filename_changer
+start_compile command
+judge_tle start : g++ [m]ain.c -
+Not action.
+judge_tle complete. $status is 2
+update database...update DB complete! 
+judge compile error 1431390702
+log file size is 280
+compile fail
+update database...update DB complete! 
