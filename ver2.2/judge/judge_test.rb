@@ -407,7 +407,7 @@ class Update_db
 	def initialize
 		print "update database..."
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' part_point = \'#{$part_point}\' where post_time = #{$time}"
+		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\',part_point = \'#{$part_point}\' where post_time = #{$time}"
 		#puts query
 		client.query(query)
 		client.close

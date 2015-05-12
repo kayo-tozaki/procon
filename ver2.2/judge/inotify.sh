@@ -5,7 +5,6 @@ File=STOCK
 #m_account=aki-yam
 events=(-e CREATE -e MODIFY -e MOVED_TO)
 while /usr/local/bin/inotifywait ${events[@]} $psout_dir; do
-	while [[ true ]]; do
 	isable=`ps ax |grep "[r]uby"|grep "main"|awk '{print $1}'|sed -s 's/[^0-9]//g'`
 	if [[ ! $isable -gt 0 ]]; then
 	counter=`cat STOCK`
@@ -24,7 +23,6 @@ while /usr/local/bin/inotifywait ${events[@]} $psout_dir; do
 	else
 		sleep 1
 	fi
-	done
   #psfile=$psout_dir/`ls -rt $psout_dir | tail -n1`
   #echo "ok,actionning $DATE" > result
   #bash ./run.sh & 

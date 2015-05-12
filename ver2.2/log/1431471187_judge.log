@@ -1,0 +1,14 @@
+complete getDB
+complete getQdata
+complete filename_changer
+start_compilejudge_tlejudge_tle start : g++ [m]ain.c -
+Not action.
+judge_tle complete. $status is 2
+update database...update DBactioning
+fin Aerror log judgement
+["Hello"] ?=? ["1"] 
+false
+get wrong answer , status is 41
+update database...update DB complete! 
+or
+Start action
