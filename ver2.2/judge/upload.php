@@ -53,6 +53,7 @@ EOD;
 		  	while (!feof($fp)) {
 		  			$input = fgets($fp);
 		  			echo "input num is".$input."<br>";
+		  			break;
 		  		}
 		  		$input = (int)$input;
 		  		$Stocker =  $input + 1;

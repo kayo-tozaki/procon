@@ -1,1 +1,0 @@
-template<class T>class L{L<T*>operator->()};L<int>i=i->

@@ -5,8 +5,8 @@ class Preparation
 	def getDB()		#DBからデータの取得
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		#client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status|  # テスト用にDesc入ってるので注意
-		client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status|  
+		client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status|  # テスト用にDesc入ってるので注意
+		#client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status|  
 		  $time = post_time.to_i
 		  $team_name = team_name
 		  $questino_no = problem_num.to_i

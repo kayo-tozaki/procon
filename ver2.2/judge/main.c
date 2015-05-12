@@ -1,1 +1,8 @@
-/usr/include; perl -e "@c=\"x\"x(2**16); while(1) {print @c}" 1>&2
+#include<stdio.h>
+int main(void){
+ while(1){
+  int a = 1;
+  a++;
+}
+return 0;
+}

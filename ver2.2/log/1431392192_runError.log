@@ -1,6 +1,0 @@
-judge_test.rb:21:in `initialize': No such file or directory -  (Errno::ENOENT)
-	from judge_test.rb:21:in `open'
-	from judge_test.rb:21:in `getQdata'
-	from judge_test.rb:74:in `startup'
-	from judge_test.rb:412:in `<main>'
-error
