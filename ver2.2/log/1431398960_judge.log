@@ -1,8 +1,0 @@
-complete getDB
-complete getQdata
-complete filename_changer
-Start action
-judge_tle start : [r]uby main
-update database...update DB complete! 
-TLE,kill process status is 32
-now runnnng judge.rb process...
