@@ -1,11 +1,11 @@
-/usr/local/rbenv/versions/2.0.0-p598/lib/ruby/gems/2.0.0/gems/ruby-mysql-2.9.13/lib/mysql/protocol.rb:504:in `read': You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'part_point = '0' where post_time = 1431423205' at line 1 (Mysql::ServerError::ParseError)
+/usr/local/rbenv/versions/2.0.0-p598/lib/ruby/gems/2.0.0/gems/ruby-mysql-2.9.13/lib/mysql/protocol.rb:504:in `read': You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'part_point = '0' where post_time = 1431436358' at line 1 (Mysql::ServerError::ParseError)
 	from /usr/local/rbenv/versions/2.0.0-p598/lib/ruby/gems/2.0.0/gems/ruby-mysql-2.9.13/lib/mysql/protocol.rb:227:in `get_result'
 	from /usr/local/rbenv/versions/2.0.0-p598/lib/ruby/gems/2.0.0/gems/ruby-mysql-2.9.13/lib/mysql/protocol.rb:215:in `query_command'
 	from /usr/local/rbenv/versions/2.0.0-p598/lib/ruby/gems/2.0.0/gems/ruby-mysql-2.9.13/lib/mysql.rb:326:in `query'
 	from judge_test.rb:412:in `initialize'
 	from judge_test.rb:180:in `new'
 	from judge_test.rb:180:in `judge_tle'
-	from judge_test.rb:296:in `judge_tle'
+	from judge_test.rb:287:in `judge_tle'
 	from judge_test.rb:229:in `action'
-	from judge_test.rb:433:in `<main>'
-error
+	from judge_test.rb:431:in `<main>'
+main.rb:1:in `<main>': Interrupt

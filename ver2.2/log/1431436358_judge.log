@@ -1,0 +1,6 @@
+complete getDB
+complete getQdata
+complete filename_changer
+Start action
+judge_tle start : [r]uby main
+update database...
