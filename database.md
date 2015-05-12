@@ -1,13 +1,13 @@
 #mysql table登録
 ##日付毎にテーブルの作成
 ```
-create table submit_`date +"%y%m%d"` (post_time bigint ,team_name varchar(20),problem_num int,language int,status int)
+create table submit_`date +"%y%m%d"` (post_time bigint ,team_name varchar(20),problem_num int,language int,status int,part_point int)
 ```
 
 ##単純テーブルの作成
 
 ```
-create table submit_test(post_time bigint ,team_name varchar(20),problem_num int,language int,status int)
+create table submit_test(post_time bigint ,team_name varchar(20),problem_num int,language int,status int,part_point int)
 ```
 
 ###テーブルの要素

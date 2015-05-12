@@ -1,0 +1,4 @@
+complete getDB
+complete getQdata
+complete filename_changer
+Start actiojujudge_tle start : [p]ython" | grep "[m]aiupupdate database...

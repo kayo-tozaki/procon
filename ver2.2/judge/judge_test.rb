@@ -5,13 +5,14 @@ class Preparation
 	def getDB()		#DBからデータの取得
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status|  # テスト用にDesc入ってるので注意
+		client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
 		#client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status|  
 		  $time = post_time.to_i
 		  $team_name = team_name
 		  $questino_no = problem_num.to_i
 		  $language = language.to_i
 		  $status = status.to_i 
+		  $part_point = part_point.to_i
 		  break
 		end
 		puts "complete getDB"
@@ -377,6 +378,7 @@ class Compare
 		puts !`cat ../log/#{$time}_runError.log`.empty?
 		if (@@result == @@answer)
 			$status = 4
+			$part_point = $part_point + 1
 			puts "get accept, status is #{$status}"
 			Update_db.new
 		elsif $status == 23 || !`cat ../log/#{$time}_runError.log`.empty?
@@ -405,7 +407,7 @@ class Update_db
 	def initialize
 		print "update database..."
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' where post_time = #{$time}"
+		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\' part_point = \'#{$part_point}\' where post_time = #{$time}"
 		#puts query
 		client.query(query)
 		client.close

@@ -1,0 +1,6 @@
+complete getDB
+complete getQdata
+cannot change file_name
+Start action
+judge_tle start : [p]ython" | grep "[m]ain
+update database...

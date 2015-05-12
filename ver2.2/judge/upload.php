@@ -52,12 +52,12 @@ EOD;
 	  	if(flock($fp, LOCK_EX)){
 		  	while (!feof($fp)) {
 		  			$input = fgets($fp);
-		  			echo "input num is".$input."<br>";
+		  			#echo "input num is".$input."<br>";
 		  			break;
 		  		}
 		  		$input = (int)$input;
 		  		$Stocker =  $input + 1;
-		  		echo "write num is ".$Stocker;  
+		  		echo "<br> In que : ".$Stocker;  
 		  		break;		
 	  	}
 	  	else{

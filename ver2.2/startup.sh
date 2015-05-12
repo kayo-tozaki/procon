@@ -34,7 +34,7 @@ FLAG=`mysql -uroot -e "show tables from submit like 'submit_$DATE'"`
  if [[ -n $FLAG ]]; then
  	echo "table was already created"
  else
- 	mysql -uroot -e "create table submit.submit_$DATE(post_time bigint ,team_name varchar(20),problem_num int,language int,status int);"&& echo "table create comp" || echo "faild create table"
+ 	mysql -uroot -e "create table submit.submit_$DATE(post_time bigint ,team_name varchar(20),problem_num int,language int,status int,part_point int);"&& echo "table create comp" || echo "faild create table"
  	mysql -uroot -e "GRANT ALL ON submit.* to procon@localhost;" && echo "comp set grant" || echo "faild grant"
 fi
 
