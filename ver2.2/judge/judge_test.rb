@@ -380,7 +380,6 @@ class Compare
 			$status = 4
 			$part_point = $part_point + 1
 			puts "get accept, status is #{$status}"
-			Update_db.new
 		elsif $status == 23 || !`cat ../log/#{$time}_runError.log`.empty?
 			$status = 42
 			puts "get Wrong Answer. Get compile error, if you get runtime error...?"
@@ -393,6 +392,7 @@ class Compare
 		if $status == 41 || $status ==42
 			exit()
 		end
+		Update_db.new
 	end
 	def start(file_times)
 		get_answers(file_times)

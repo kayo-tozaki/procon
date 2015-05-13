@@ -1,4 +1,0 @@
-while True:
- a = 1
- a = a + 1
-

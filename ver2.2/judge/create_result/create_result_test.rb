@@ -125,6 +125,10 @@ end
 $time = ARGV[0].to_i
 puts $time
 GetData.new.main
-Make_html.new.create_html
+if !($status == 1 || $status == 2 || $status == 3) 
+	Make_html.new.create_html
+end
 
+#only rewrite
+#Make_html.new.make_file
 
