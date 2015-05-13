@@ -65,7 +65,7 @@ class Preparation
 	    if File.exist?(file_name)
 	      IO.popen("rm -rf #{file_name}")
 	    end
-	    command = %Q(cp ../submit_file/#{$time} #{file_name})
+	    command = %Q(cp -f ../submit_file/#{$time} #{file_name})
 	    IO.popen(command)
 	    sleep 0.01
 	    if File.exist?(file_name)
@@ -390,7 +390,7 @@ class Compare
 			puts "get wrong answer , status is #{$status}"
 			Update_db.new
 		end
-		if $status == 41
+		if $status == 41 || $status ==42
 			exit()
 		end
 	end
@@ -406,6 +406,11 @@ end
 class Update_db
 	def initialize
 		print "update database..."
+		stack = 0
+		stack = File.read("Result")
+		puts stack.to_i
+		stack = stack.to_i + 1
+		File.write("Result",stack)
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
 		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\',part_point = \'#{$part_point}\' where post_time = #{$time}"
 		#puts query
