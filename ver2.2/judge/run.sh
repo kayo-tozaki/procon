@@ -1,4 +1,10 @@
-DATE=`date +"%s"`
+#DATE=`date +"%s"`
+cd /var/www/html/ver2.2/judge
+# File=Time
+# while read stock; do
+# 	DATE=$stock
+# done < $File
+DATE=`cat Time`
 # echo "start judge.rb" > ../log/$DATE\_judge.log | /usr/local/rbenv/shims/ruby judge_test.
 #count=`ps -ef | grep "ruby" | grep "judge"| wc -l`
 #if [ $count = 0 ]; then

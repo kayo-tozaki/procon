@@ -5,8 +5,8 @@ class Preparation
 	def getDB()		#DBからデータの取得
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
-		#client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status|  
+		#client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
+		client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status,part_point|  
 		  $time = post_time.to_i
 		  $team_name = team_name
 		  $questino_no = problem_num.to_i
@@ -65,7 +65,7 @@ class Preparation
 	    if File.exist?(file_name)
 	      IO.popen("rm -rf #{file_name}")
 	    end
-	    command = %Q(cp -f ../submit_file/#{$time} #{file_name})
+	    command = %Q(cp -r ../submit_file/#{$time} #{file_name})
 	    IO.popen(command)
 	    sleep 0.01
 	    if File.exist?(file_name)
@@ -406,16 +406,16 @@ end
 class Update_db
 	def initialize
 		print "update database..."
-		stack = 0
-		stack = File.read("Result")
-		puts stack.to_i
-		stack = stack.to_i + 1
-		File.write("Result",stack)
+		stack = $time
+		# stack = File.read("Result")
+		# puts stack.to_i
+		# stack = stack.to_i + 1
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
 		query = "update submit.submit_#{Time.now.strftime("%y%m%d")} set status = \'#{$status}\',part_point = \'#{$part_point}\' where post_time = #{$time}"
 		#puts query
 		client.query(query)
 		client.close
+		File.write("Result",stack)
 		print "update DB complete! \n"
 	end
 end

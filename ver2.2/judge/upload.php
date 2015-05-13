@@ -66,10 +66,20 @@ EOD;
 	}
   	fclose($fp);
 	$fp = fopen("STOCK", "w+");
+	$fp2 = fopen("Time","w+");
  # 	echo $fp;
 	while (true) {
 	  	if(flock($fp, LOCK_EX)){    //排他的ロック
 		    fwrite($fp, $Stocker);
+		    break;
+		}
+		else{
+	    	sleep(1);
+		}
+	}
+	while (true) {
+	  	if(flock($fp2, LOCK_EX)){    //排他的ロック
+		    fwrite($fp2, $post_time);
 		    break;
 		}
 		else{

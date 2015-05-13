@@ -26,6 +26,41 @@
     </div>
     <div id="head_margin">
     </div>
+    <!-- modal window-->
+    <div id="modal_window">
+        <div id="modal_title_bar">
+            <div id="modal_title">
+                提出
+            </div>
+            <a id="close_botton" class="modal_close button_link">
+                <div id="close"></div>
+            </a>
+        </div>
+        <div id="modal_content">
+            <form action="../../php/upload.php" method="post" name="modal_submit" enctype="multipart/form-data">
+                <p>チーム名</p>
+
+                <input type="text" name="team_name" maxlength="10" method="POST" accept-charset="utf-8">
+                <br>
+                問題番号を選んで下さい
+                <br>
+                <select name="problem_num" id="pn">
+                    <option value="1" selected>問題A</option>
+                    <option value="2">問題B</option>
+                    <option value="3">問題C</option>
+                    <option value="4">問題D</option>
+                    <option value="5">問題E</option>
+                </select>
+
+                <p>ソースコード</p>
+
+                <textarea name="source" id="source" cols="60" rows="10"></textarea>
+                <br>
+                <input class="up" type="submit" value="Submit" onclick="team_name_cookie_submit()">
+            </form>
+        </div>
+    </div>
+    <!-- /modal window-->
 
     <div id="pageinfo">
     	<h2 id="title">
@@ -41,8 +76,6 @@
                 <th class="table_th"> </th>
                 <th class="table_th">Team Name</th>
                 <td class="table_th">Problem</td>
-                <td class="table_th">Language</td>
                 <th class="table_th">Status</th>
                 <th class="table_th">Time</th>
             </tr>
-           

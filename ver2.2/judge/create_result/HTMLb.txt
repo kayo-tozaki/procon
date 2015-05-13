@@ -1,0 +1,20 @@
+</table>
+    </div>
+    <div id="head_margin"></div>
+	<div id="footer_wrapper">
+    	<div id="header_navi" class="cf">
+			<div id="footer_time"></div>
+			<div id="footer">Do your best.</div>
+        </div>
+	</div>
+	<SCRIPT Language="JavaScript">
+	<!--
+	function Rld()
+	{
+	location.reload();
+	}
+	setTimeout("Rld()",10000);
+	// -->
+	</SCRIPT>
+</body>
+</html>

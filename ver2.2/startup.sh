@@ -52,6 +52,6 @@ ruby parse.rb
 
 echo "start procon"
 cd ./judge
-bash inotify_result.sh
+bash result_notify.sh 
 #bash inotify.sh	#cronによる自動起動あり
 
