@@ -18,7 +18,7 @@ while /usr/local/bin/inotifywait ${events[@]} $psout_dir; do
 			counter=$stock
 		done < $File
 		echo $counter
-		echo `pwd`
+		#echo `pwd`
 		ruby create_result/create_result_test.rb $counter 1> ../log/$counter\_CreateResult.log 2> ../log/$counter\_CRrunError.log 
 	#done
 	else

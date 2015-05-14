@@ -1,7 +1,7 @@
 require 'mysql'
 class GetData
 	def getFromDB
-		day = Time.now.strftime("%y%m%d")
+		day = 150514#Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
 		client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time}").each do |post_time,team_name ,problem_num,language,status,part_point| 
 		#client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time} order by desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
@@ -125,36 +125,75 @@ end
 class Count_AC
 	def  find_data
 		$last_time = 0
-		day = Time.now.strftime("%y%m%d")
+		$array_countAC_team_name = Array.new
+		array_team_name = Array.new
+		day = 150514#Time.now.strftime("%y%m%d")
 		$hash = {}
+		$time_hash = {}	#last_submit hash
+		rank = 1	#for rank
+		#reset core file 
+		File.write("create_result/Screen_core.txt","")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		client.query("SELECT team_name , problem_num , post_time FROM submit.submit_150514 where status = 4 group by problem_num ,team_name order by post_time asc").each do |team_name,problem_num,post_time| 
+		client.query("SELECT team_name , problem_num , post_time FROM submit.submit_#{day} where status = 4 group by problem_num ,team_name order by post_time asc").each do |team_name,problem_num,post_time| 
 		#client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time} order by desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
-		  team = team_name
-		  if $last_time < post_time
-		  	$last_time = post_time
-		  end
-		  $hash["#{team}"] = $hash["#{team}"].to_i + 1
+		  insert_hash(team_name,post_time)
 		end
 		puts "complete find_data"
 		client.close
+		$hash = $hash.sort {|(k1, v1, m1), (k2, v2,m2)| (v2 <=> v1 && m1<=>m2) }
+		$hash.each do |name,num,time|
+			puts %Q(#{rank}.#{name} , #{num[0]} ,#{num[1]} )#{$time_hash["#{name}"]}")
+			create_screen_html(name,num[0],rank)
+			rank += 1
+		end
+		puts "result"
+		p $hash
+		finalize()
 	end
 
-	def judge_multi
-		
+	def insert_hash(team,post_time)
+		if ($time_hash["#{team}"].to_i < post_time.to_i)
+			  $time_hash["#{team}"] = post_time.to_i
+		  end
+		  #first input
+		  p $hash["#{team}"] == nil
+		  if ($hash["#{team}"] == nil)
+		  	ac_counter = 1
+		  else
+			ac_counter = $hash["#{team}"][0].to_i + 1
+		  end
+
+		  $hash["#{team}"] = ["#{ac_counter}","#{$time_hash["#{team}"]}"] 		#hash[team_name] => [CountAC,lastSubmit_time]
 	end
 
-	def create
+	def create_screen_html(team_name,countAC,rank)
+		#insert tag :<div class="rank">1. [ fakkin ] accept : 5</div>
+		front_tag = %Q(<div class="rank">)
+		end_tag = %Q(</div>)
+		full_tag = "#{front_tag}#{rank}. [ #{team_name} ] accept : #{countAC} #{end_tag} \n"
+		open('create_result/Screen_core.txt','a'){ |f|
+			f.puts(full_tag)
+		}
+		puts "Write to core complete"
+	end
 
+	def finalize
+		que = "#{open('create_result/Screena.txt').read}#{open('create_result/Screen_core.txt').read}#{open('create_result/Screenb.txt').read}"
+		#Flle.write("result.html",que)
+		f = open('../problem_list/20150425/screen_result.html','w')
+		f.write(que)
+		f.close()
+		puts "write Screen html complete"
 	end
 end
 
-$time = ARGV[0].to_i
-puts $time
-GetData.new.main
-if !($status == 1 || $status == 2 || $status == 3) 
-	Make_html.new.create_html
-end
+#$time = ARGV[0].to_i
+#puts $time
+# GetData.new.main
+# if !($status == 1 || $status == 2 || $status == 3) 
+# 	Make_html.new.create_html
+	Count_AC.new.find_data
+#end
 
 #only rewrite
 #Make_html.new.make_file

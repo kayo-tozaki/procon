@@ -1,0 +1,50 @@
+complete getDB
+complete getQdata
+complete filename_changer
+start_compile command
+judge_tle start : g++ [m]ain.c -
+Not action.
+judge_tle complete. $status is 2
+update database...wirte Result
+update DB complete! 
+judge compile error 1431598621
+log file size is 0
+update database...wirte Result
+update DB complete! 
+compile complete
+fin compile error
+Start action
+judge_tle start : [a].out
+Not action.
+judge_tle complete. $status is 3
+update database...wirte Result
+update DB complete! 
+actioning
+fin Aerror log judgement
+["1"] ?=? ["1"] 
+false
+get accept, status is 4
+update database...update DB complete! 
+judge_tle start : [a].out
+Not action.
+judge_tle complete. $status is 3
+update database...wirte Result
+update DB complete! 
+actioning
+fin Aerror log judgement
+["2"] ?=? ["2"] 
+false
+get accept, status is 4
+update database...update DB complete! 
+judge_tle start : [a].out
+Not action.
+judge_tle complete. $status is 3
+update database...wirte Result
+update DB complete! 
+actioning
+fin Aerror log judgement
+["0"] ?=? ["0"] 
+false
+get accept, status is 4
+update database...update DB complete! 
+all problem_num is complete
