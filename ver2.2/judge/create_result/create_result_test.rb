@@ -3,8 +3,8 @@ class GetData
 	def getFromDB
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
-		client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time}").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
-		#client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status|  
+		client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time}").each do |post_time,team_name ,problem_num,language,status,part_point| 
+		#client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time} order by desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
 		  $time = post_time.to_i
 		  $team_name = team_name
 		  $questino_no = problem_num.to_i
@@ -93,7 +93,7 @@ class Make_html
 	def make_file
 		que = "#{open('create_result/HTMLa.txt').read}#{open('create_result/HTMLcore.txt').read}#{open('create_result/HTMLb.txt').read}"
 		#Flle.write("result.html",que)
-		f = open('create_result/result.html','w')
+		f = open('../problem_list/20150425/result.html','w')
 		f.write(que)
 		f.close()
 		puts "write html complete"
@@ -120,6 +120,33 @@ class Make_html
 		make_file()
 	end
 
+end
+
+class Count_AC
+	def  find_data
+		$last_time = 0
+		day = Time.now.strftime("%y%m%d")
+		$hash = {}
+		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
+		client.query("SELECT team_name , problem_num , post_time FROM submit.submit_150514 where status = 4 group by problem_num ,team_name order by post_time asc").each do |team_name,problem_num,post_time| 
+		#client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time} order by desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
+		  team = team_name
+		  if $last_time < post_time
+		  	$last_time = post_time
+		  end
+		  $hash["#{team}"] = $hash["#{team}"].to_i + 1
+		end
+		puts "complete find_data"
+		client.close
+	end
+
+	def judge_multi
+		
+	end
+
+	def create
+
+	end
 end
 
 $time = ARGV[0].to_i

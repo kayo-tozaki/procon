@@ -319,14 +319,20 @@ std::string genSection(picojson::array section, std::string id, std::string clas
 
 		} else if (j->is<picojson::object>()) {	// Image or Code
 			picojson::object& obj = j->get<picojson::object>();
-
+			bool flag = true;
 			if (obj["image"].is<std::string>()) {		// if the object is image 
 				std::string imgName = obj["image"].get<std::string>();
 				ssm << "\t\t<div class=\"image\"><img src=\"./" << imgName << "\"></div>" << std::endl;
-			} else if (obj["code"].is<std::string>()) {	// if the object is code
+				flag = false;
+			}
+
+			if (obj["code"].is<std::string>()) {	// if the object is code
 				std::string filename = obj["code"].get<std::string>();
 				ssm << genCodeBlock(filename) << std::endl;
-			} else {
+				flag = false;
+			} 
+
+			if (flag) {
 				picojson::object::iterator unknown = obj.begin();
 				std::cout << unknown->first << " is a unknown property" << std::endl;
 			}

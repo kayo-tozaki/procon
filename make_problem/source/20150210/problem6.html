@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/screen.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/modal.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/prism.css" media="all">
+
+    <script src="../../javascripts/jquery-2.1.3.min.js"></script>
+    <script src="../../javascripts/clock.js" type="text/javascript"></script>
+    <script src="../../javascripts/modal.js" type="text/javascript"></script>
+    <script src="../../javascripts/prism.js" type="text/javascript"></script>
+
+	<title>KogCoder Contest</title>
+</head>
+<body>
+    
+	<div id="header_navi_wrapper">
+    	<div id="header_navi" class="cf">
+            <a href="../../index.html">
+                <h1 id="header_navi_title">
+                    KogCoder Programing Contest
+                </h1>
+            </a>
+            <div class="pro"></div>
+            <div class="prob">
+                <a href="./result.html">結果</a>
+            </div>
+            <div class="prob">
+                <a id="modal_open" class="button_link">提出</a>
+            </div>
+            <div class="prob">
+				<a href="../problem20150210.html">問題</a>
+            </div>        
+        </div>
+    </div>
+    
+    <div id="head_margin">
+    </div>
+
+    <!-- modal window-->
+    <div id="modal_window">
+        <div id="modal_title_bar">
+            <div id="modal_title">
+                提出
+            </div>
+            <a id="close_botton" class="modal_close button_link">
+                <div id="close"></div>
+            </a>
+        </div>
+        <div id="modal_content">
+            <form action="../../judge/upload.php" method="post" enctype="multipart/form-data" name="modal_submit"onSubmit="return check()">
+                <p>チーム名</p>
+
+                <input type="text" name="team_name" maxlength="10" method="POST" accept-charset="utf-8" class="inputBox">
+
+                <p>問題番号を選んで下さい</p>
+				<select name="problem_num" id="pn"  class="inputBox">
+					<option value = "1">Problem A</option>
+					<option value = "2">Problem B</option>
+					<option value = "3">Problem C</option>
+					<option value = "4">Problem D</option>
+					<option value = "5">Problem E</option>
+					<option value = "6" selected >Problem F</option>
+				</select>
+
+
+                <p>プログラミング言語</p>
+                <select name="language" id="la" class="inputBox">
+                    <option value="0">C(g++ 4.7.2)</option>
+                    <option value="1">C++11(g++ 4.7.2 -std=c++11)</option>
+                    <option value="2">Java(javac 1.8.0_40)</option>
+                    <option value="3">Ruby(ruby 2.0.0p589)</option>
+                    <option value="4">Python2 (python 2.7.3)</option>
+                    <option value="5">Python3 (python 3.2.3)</option>
+
+
+                </select>
+                <p>ソースコード</p>
+
+                <textarea name="source" id="source" cols="60" rows="10"></textarea>
+                <br>
+                <input class="up" type="submit" value="Submit" onclick="team_name_cookie_submit()">
+            </form>   
+        </div>
+    </div>
+    <!-- /modal window-->
+
+    <div id="pageinfo">
+    	<h2 id="title">
+			problem gen test case
+        </h2>
+        <div id="limit">
+			Time Limit : 1 sec, Memory Limit : 16 KB
+        </div>
+    </div>
+    
+	<div id="base">
+    	<h3>Question</h3>
+		<p class="sentence">
+			色々な言語のHalloWorld( ＾ω＾)
+		</p>
+		<p class="sentence">
+			C言語
+		</p>
+<div class="source"><pre><code class="language-c">/* A Hello World program in C. */
+#include &lt;stdio.h&gt;
+int main()
+{
+	printf("Hello World\n");
+	return 0;
+}</code></pre></div>
+		<p class="sentence">
+			C++
+		</p>
+<div class="source"><pre><code class="language-cpp">// A Hello World program in C++.
+#include &lt;iostream&gt;
+int main(){
+	std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;
+	return 0;
+}</code></pre></div>
+		<p class="sentence">
+			C#
+		</p>
+<div class="source"><pre><code class="language-csharp">// A Hello World program in C#.
+using System;
+class HelloWorld{
+	[STAThread]
+	static void Main(string[] args){
+		Console.WriteLine("Hello World");
+	}
+}</code></pre></div>
+		<p class="sentence">
+			Erlang
+		</p>
+<div class="source"><pre><code class="language-erlang">%% A Hello World program in Erlang
+-module(hello).
+-export([start/0]).
+start() -&gt; io:fwrite("Hello World!\n").</code></pre></div>
+		<p class="sentence">
+			Fortran90
+		</p>
+<div class="source"><pre><code class="language-fortran">! A Hello World program in Fortran90
+PROGRAM HELLO
+	PRINT *, 'Hello World'
+END PROGRAM</code></pre></div>
+		<p class="sentence">
+			Go言語
+		</p>
+<div class="source"><pre><code class="language-go">// A Hello World program in Go
+package main
+import "fmt"
+func main() {
+	fmt.Print("Hello World\n")
+}</code></pre></div>
+		<p class="sentence">
+			Haskell
+		</p>
+<div class="source"><pre><code class="language-haskell">-- A Hello World program in Haskell
+main=putStrLn "Hello World"</code></pre></div>
+		<p class="sentence">
+			JAVA
+		</p>
+<div class="source"><pre><code class="language-java">// A Hello World program in Java
+public class Hello {
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+	}
+}</code></pre></div>
+		<p class="sentence">
+			JavaScript
+		</p>
+<div class="source"><pre><code class="language-javascript">// A Hello World program in JavaScript
+hello = function() {
+  if (typeof console === "object") {
+    console.log("Hello World");
+  } else {
+    print("Hello World");
+  }
+};
+hello();</code></pre></div>
+		<p class="sentence">
+			Pascal
+		</p>
+<div class="source"><pre><code class="language-clike">{ A Hello World program in Pascal }
+program hello;
+begin
+	WriteLn('Hello World');
+end.</code></pre></div>
+		<p class="sentence">
+			Python(2.*)
+		</p>
+<div class="source"><pre><code class="language-python"># A Hello World program in Python(~2.7)
+print "Hello world"</code></pre></div>
+		<p class="sentence">
+			R
+		</p>
+<div class="source"><pre><code class="language-r"># A Hello World program in R
+print("Hello World")</code></pre></div>
+		<p class="sentence">
+			Ruby
+		</p>
+<div class="source"><pre><code class="language-ruby"># A Hello World program in Ruby
+puts "Hello World"</code></pre></div>
+		<p class="sentence">
+			Swift
+		</p>
+<div class="source"><pre><code class="language-swift"># A Hello World program in Swift
+println("Hello World")</code></pre></div>
+
+        <h3>Input</h3>
+		<p class="sentence">
+			入力は与えられない
+		</p>
+		<div class="sample">
+　<br></div>
+
+        <h3>Constraints</h3>
+		<p class="sentence">
+			　
+		</p>
+
+        <h3>Output</h3>
+		<p class="sentence">
+			Hello World
+		</p>
+
+        <h3>Sample</h3>
+		<h4>Sample Input 1</h4>
+		<pre class="sample">
+</pre>
+		<h4>Sample Output 1</h4>
+		<pre class="sample">
+Hello World</pre>
+		<p class="sentence">
+			簡単ですね( ＾ω＾)
+		</p>
+
+    </div>
+    
+    <div id="head_margin">
+    </div>
+    
+   	<div id="footer_wrapper">	
+    	<div id="header_navi" class="cf">
+			<div id="footer_time"></div>
+			<div id="footer">Do your best.</div>
+        </div>
+	</div>
+	
+</body>
+</html>
+

@@ -415,7 +415,15 @@ class Update_db
 		#puts query
 		client.query(query)
 		client.close
-		File.write("Result",stack)
+		unless $status == 4 then
+		 if $part_point == $input_times then
+			File.write("Result",stack)
+			puts "wirte Result"
+		 else
+			File.write("Result",stack)
+			puts "wirte Result"
+	 	 end
+		end
 		print "update DB complete! \n"
 	end
 end
