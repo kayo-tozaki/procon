@@ -1,7 +1,13 @@
+#create_result_test.rb
+#実行時引数に、結果表示に追加したい提出時刻を取る。
+
+#GetData : 全結果表示。
+#CountAC : AC数表示ページの生成 
+
 require 'mysql'
 class GetData
 	def getFromDB
-		day = 150514#Time.now.strftime("%y%m%d")
+		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
 		client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time}").each do |post_time,team_name ,problem_num,language,status,part_point| 
 		#client.query("SELECT * FROM submit.submit_#{day} WHERE post_time = #{$time} order by desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
@@ -93,7 +99,7 @@ class Make_html
 	def make_file
 		que = "#{open('create_result/HTMLa.txt').read}#{open('create_result/HTMLcore.txt').read}#{open('create_result/HTMLb.txt').read}"
 		#Flle.write("result.html",que)
-		f = open('../problem_list/20150425/result.html','w')
+		f = open("#{$file_path}result.html",'w')
 		f.write(que)
 		f.close()
 		puts "write html complete"
@@ -126,8 +132,7 @@ class Count_AC
 	def  find_data
 		$last_time = 0
 		$array_countAC_team_name = Array.new
-		array_team_name = Array.new
-		day = 150514#Time.now.strftime("%y%m%d")
+		day = Time.now.strftime("%y%m%d")
 		$hash = {}
 		$time_hash = {}	#last_submit hash
 		rank = 1	#for rank
@@ -154,7 +159,7 @@ class Count_AC
 	def insert_hash(team,post_time)
 		if ($time_hash["#{team}"].to_i < post_time.to_i)
 			  $time_hash["#{team}"] = post_time.to_i
-		  end
+		end
 		  #first input
 		  p $hash["#{team}"] == nil
 		  if ($hash["#{team}"] == nil)
@@ -180,20 +185,21 @@ class Count_AC
 	def finalize
 		que = "#{open('create_result/Screena.txt').read}#{open('create_result/Screen_core.txt').read}#{open('create_result/Screenb.txt').read}"
 		#Flle.write("result.html",que)
-		f = open('../problem_list/20150425/screen_result.html','w')
+		f = open("#{$file_path}screen_result.html",'w')
 		f.write(que)
 		f.close()
 		puts "write Screen html complete"
 	end
 end
 
-#$time = ARGV[0].to_i
-#puts $time
-# GetData.new.main
-# if !($status == 1 || $status == 2 || $status == 3) 
-# 	Make_html.new.create_html
+$time = ARGV[0].to_i
+$file_path = "../problem_list/20150425/"	#環境変数になるので注意
+puts $time
+GetData.new.main
+if !($status == 1 || $status == 2 || $status == 3) 
+	Make_html.new.create_html
 	Count_AC.new.find_data
-#end
+end
 
 #only rewrite
 #Make_html.new.make_file

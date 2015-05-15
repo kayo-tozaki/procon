@@ -16,7 +16,7 @@
     	<div id="header_navi" class="cf">
             <a href="../../index.html">
                 <h1 id="header_navi_title">
-                   Programing Contest
+                   Kogcoder Closed Programing Contest
                 </h1>
             </a>
         </div>

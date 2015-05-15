@@ -5,7 +5,7 @@
 </head>
 <body>
 <div id="base">
-now actionning. please wait...
+Your program was submitted! <br> please wait...
 <img src="../images/loading.gif" width = "">
 <?php
 //check team name (if not alphabet...)
@@ -95,8 +95,17 @@ EOD;
 }
 ?>
 <br>
-after <font color="red">10</font>s, please access <a href="./20150210/result.html">result page </a>
+after <font color="red">20</font>s, please access <a href="../problem_list/20150425/result.html">result page </a>
 </div>
 
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function autoLink()
+{
+location.href="../problem_list/20150425/result.html";
+}
+setTimeout("autoLink()",20000); 
+// -->
+</SCRIPT>
 </body>
 </html>

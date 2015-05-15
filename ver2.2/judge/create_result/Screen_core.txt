@@ -1,4 +1,0 @@
-<div class="rank">1. [ fee ] accept : 3 </div> 
-<div class="rank">2. [ afee ] accept : 1 </div> 
-<div class="rank">3. [ testA ] accept : 1 </div> 
-<div class="rank">4. [ testB ] accept : 1 </div> 
