@@ -1,17 +1,17 @@
 
 require 'mysql'
 
-class Preparation 
+class Preparation
 	def getDB()		#DBからデータの取得
 		day = Time.now.strftime("%y%m%d")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
 		#client.query("SELECT * FROM submit.submit_#{day} WHERE status < 40 && status != 4 order by post_time desc").each do |post_time,team_name ,problem_num,language,status,part_point|  # テスト用にDesc入ってるので注意
-		client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status,part_point|  
+		client.query("SELECT * FROM submit.submit_#{day} WHERE status = 1").each do |post_time,team_name ,problem_num,language,status,part_point|
 		  $time = post_time.to_i
 		  $team_name = team_name
 		  $questino_no = problem_num.to_i
 		  $language = language.to_i
-		  $status = status.to_i 
+		  $status = status.to_i
 		  $part_point = part_point.to_i
 		  break
 		end
@@ -76,15 +76,15 @@ class Preparation
 	end
 
 	def startup()	#呼び出し関数
-		getDB()		
-		getQdata()	
-		file_changer()	
+		getDB()
+		getQdata()
+		file_changer()
 	end
 end
 
-class Compile 
+class Compile
 	def command_language()		#言語ごとのコンパイルコマンドを返す
-		return("各言語ごとのcompile文")	
+		return("各言語ごとのcompile文")
 	end
 	def judge_compile_tle_command	#各言語のclass TLEへの継承先コマンドの記述
 		commnand.new.judge_tle		#各言語で継承
@@ -123,7 +123,7 @@ end
 class Compile_C < Compile
 	def command_language()
 		return("g++ main.c 2> ../log/#{$time}_compile")
-	end	
+	end
 	def judge_compile_tle_command
 		CTLE_C.new.judge_tle()
 	end
@@ -132,7 +132,7 @@ end
 class Compile_Cpp < Compile
 	def command_language()
 		return("g++ main.cpp -std=c++11 2> ../log/#{$time}_compile")
-	end	
+	end
 	def judge_compile_tle_command
 		CTLE_Cpp.new.judge_tle
 	end
@@ -141,7 +141,7 @@ end
 class Compile_Java < Compile
 	def command_language()
 		return("/usr/local/src/jdk1.8.0_40/bin/javac Main.java 2> ../log/#{time}_compile")
-	end	
+	end
 	def judge_compile_tle_command
 		CTLE_Java.new.judge_tle
 	end
@@ -169,8 +169,8 @@ class TLE		#TLE判断。親。
 		sleep time
 		command = make_command()
 		puts "judge_tle start : #{command}"
-		#puts %x(ps alx |grep "#{command}").empty? 
-		
+		#puts %x(ps alx |grep "#{command}").empty?
+
 		if (%x(ps alx |grep "#{command}").empty?) then
 		 $status = status_code()
 		 puts "Not action."
@@ -211,13 +211,13 @@ class CTLE_Java < TLE
 	end
 end
 
-class Action 		
+class Action
   def make_command(times)
     return("Action command")
   end
   def judge_tle
   	command.new.judge_tle
-  end  
+  end
   def action		#main関数
     puts "Start action"
     times = 1
@@ -241,11 +241,11 @@ class Action
 	    	exit()
 	    end
 	    puts "fin Aerror log judgement"
-   	    
+
 	    Compare.new.start(times)
 
 	    times += 1
-	end 
+	end
 	puts "all problem_num is complete"
 	#Update_db.new
   end
@@ -254,7 +254,7 @@ end
 #Action の継承
 class Action_C < Action
 	def make_command(times)
-		return ("./a.out ") 
+		return ("./a.out ")
 	end
 	def judge_tle
 		ATLE_C.new.judge_tle()
@@ -263,7 +263,7 @@ end
 
 class Action_Cpp < Action
 	def make_command(times)
-		return ("./a.out ") 
+		return ("./a.out ")
 	end
 	def judge_tle
 		ATLE_Cpp.new.judge_tle()
@@ -272,7 +272,7 @@ end
 
 class Action_Java < Action
 	def make_command(times)
-		return ("java Main") 
+		return ("java Main")
 	end
 	def judge_tle
 		ATLE_Java.new.judge_tle()
@@ -281,7 +281,7 @@ end
 
 class Action_Ruby < Action
 	def make_command(times)
-		return ("ruby main.rb") 
+		return ("ruby main.rb")
 	end
 	def judge_tle
 		ATLE_Ruby.new.judge_tle()
@@ -290,7 +290,7 @@ end
 
 class Action_Python2 < Action
 	def make_command(times)
-		return ("python main.py") 
+		return ("python main.py")
 	end
 	def judge_tle
 		ATLE_Python.new.judge_tle()
@@ -299,7 +299,7 @@ end
 
 class Action_Python3 < Action
 	def make_command(times)
-		return ("/opt/local/bin/python3.3 main.py") 
+		return ("/opt/local/bin/python3.3 main.py")
 	end
 	def judge_tle
 		ATLE_Python.new.judge_tle()
@@ -445,5 +445,60 @@ when 3
 when 4
 	Action_Python2.new.action()
 when 5
-	Action_Python3.new.action()	
+	Action_Python3.new.action()
 end
+
+=begin
+
+##judge.rb各クラスの動き（メモ）
+##Preparation
+各種データの取得を行います。取得するデータは次の通り。
+###From DB
+ * 提出時間
+ * チーム名
+ * 問題番号
+ * 提出言語
+ * ステータスコード
+
+##From Question_config Data
+ * 実行時間
+ * メモリー制限
+ * テストケース数
+ * 誤差容認の桁数
+
+また、実行するファイルを拡張子付きで再保存します。 (`def file_changer`)
+
+##Compile
+提出されたプログラムのコンパイルを行います。コンパイル時のコンパイル爆撃を防止するために、TLEを設け、時間を過ぎたものはTLEとして判断します。（結果表示は別途）
+
+コンパイルコマンドは、別途 子クラスで作成したものを使用します。言語によってTLEのコマンドも変更させます。
+
+##TLE
+TLE（TimeLongError）の判断を行います。本プログラムでは、
+
+ * コンパイル
+ * 実行
+
+のTLE判断を実施します。
+
+TLEの判断に使用されるコマンドは各言語によって異なるため、言語ごとに子クラスで指定しています。
+
+##Action
+コンパイルされたコード、及びインタプリタ型のコードを実行します。
+
+実行用のコードは、子クラスで指定します。
+
+##Compare
+実行結果を比較します。
+
+#inotify.sh
+STOCK（テキストファイル）の変化イベントをキャッチし、run.sh → judge.rbを実行させるスクリプト。
+ストックがたまっているときは、残弾が０になるまでやり続ける。
+また、`judge.rb`が実行時は、何もしない（そのうち実行されるため。)
+
+Killによる消失からの復旧のため、`../crontab.sh`を用意。それからも実行される
+
+#Time (txtファイル。拡張子なし)
+PHPが生成している。各種ログの時間表示のために生成。
+中身は、提出時刻。ログファイルを整える関係上登場
+=end

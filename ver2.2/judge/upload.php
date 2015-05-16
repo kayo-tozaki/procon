@@ -13,7 +13,7 @@ Your program was submitted! <br> please wait...
   	$Stocker = 0;
  if (ctype_alpha($_POST['team_name']) == false) {
   	$js = <<<EOD
- PHP Error. Please wirte team name only <font color = "red">Alphabet.</font><a href="javascript:history.back();"> please retry</a>
+ PHP Error. Please wirte team name only <font color = "red">Alphabet.</font><a href="javascript:history.back();"> please retry</a> <br>
 EOD;
  	echo($js);
  }else{
@@ -27,7 +27,7 @@ EOD;
 	$table_name = "submit_".date("ymd");
 	if(!$link = mysql_connect('localhost','procon','procon')){
 		die('Connection Error.'.mysql_error());
-	}		
+	}
 	if(!$db_select = mysql_select_db('submit',$link)){
 		die('Selection Error.'.mysql_error());
 	}
@@ -44,7 +44,7 @@ EOD;
   		die('Error. Insert cannot.'.mysql_error());
   	}
 
- 	#exec('bash run.sh &'); 
+ 	#exec('bash run.sh &');
   	#sleep(10);
   	#passthru('bash run.sh &',$op);
   	$fp = fopen("STOCK", "r");
@@ -57,8 +57,8 @@ EOD;
 		  		}
 		  		$input = (int)$input;
 		  		$Stocker =  $input + 1;
-		  		echo "<br> In que : ".$Stocker;  
-		  		break;		
+		  		echo "<br> In que : ".$Stocker;
+		  		break;
 	  	}
 	  	else{
 	  		sleep(1);
@@ -86,7 +86,7 @@ EOD;
 	    	sleep(1);
 		}
 	}
- 
+
 	fclose($fp);    //ここでロックが解除される。
   	#$log_fh = fopen("../log/".$post_time."_run.log",'w');
   	#fwrite($log_fh, $op);
@@ -104,7 +104,7 @@ function autoLink()
 {
 location.href="../problem_list/20150425/result.html";
 }
-setTimeout("autoLink()",20000); 
+setTimeout("autoLink()",15000); 
 // -->
 </SCRIPT>
 </body>
