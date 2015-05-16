@@ -2,7 +2,6 @@ echo "各種サービスの開始"
 #sudo service apache2 start
 #sudo service mysql start
 
-
 echo "MySQL の初期化"
 
 FLAG=`mysql -uroot -e "select user from mysql.user where user='procon'"`
@@ -50,7 +49,7 @@ fi
 echo "parse.rbの実行"
 ruby parse.rb
 
-echo "start procon"
+echo "start procon programs"
 cd ./judge
 bash result_notify.sh 
 #bash inotify.sh	#cronによる自動起動あり

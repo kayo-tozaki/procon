@@ -216,24 +216,29 @@ class Action
     return("Action command")
   end
   def judge_tle
-  	command.new.judge_tle
+  	command.new.judge_tle		#言語ごとに異なる(継承する。)
   end
   def action		#main関数
     puts "Start action"
     times = 1
     return_words = ""
+ 	command = make_command(times)
+	input_filename = $questino_no.to_s + "_in_" + times.to_s
+	$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt ") #TLE判断用に１回実行
+	judge_tle()
+
     while times <= $input_times		#テストケースごとに実行する。ログを残すこと。
 	    command = make_command(times)
 	    input_filename = $questino_no.to_s + "_in_" + times.to_s
-	   	$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt ") #TLE判断用に１回実行
-	   	judge_tle()
+	   	#$io = IO.popen("#{command} < ../compare_file/#{input_filename}.txt ") #TLE判断用に１回実行
+	   	#judge_tle()
 	   	#本実行。
 	   	IO.popen("#{command} < ../compare_file/#{input_filename}.txt 1>../log/#{$time}_result 2> ../log/#{$time}_Aerror || echo 'error'") do |io|
 	   		return_words = io.gets
 	   	end
 	    puts "actioning"
 	    sleep 0.05
-	    return_words == nil ? return_words ="" : return_words = return_words.chomp
+	    return_words == nil ? return_words ="" : return_words = return_words.chomp		#if文判断用
 	    if ((return_words == "error"))
 	    	$status = 31
 	    	puts "action Error occured, status is #{$status}"
@@ -245,7 +250,7 @@ class Action
 	    Compare.new.start(times)
 
 	    times += 1
-	end
+	 end
 	puts "all problem_num is complete"
 	#Update_db.new
   end
@@ -345,10 +350,11 @@ class ATLE_Python < ATLE
 end
 
 class Compare
-	def get_answers(file_times)
+	def get_answers(file_times)		
 		count = 0
 		@@answer = Array.new
 		@@result = Array.new
+		#ジャッジ解から取得
 		File.open("../compare_file/#{$questino_no}_out_#{file_times}.txt") { |file|
 		file.each_line do |val|
 				@@answer[count] = val.chomp
@@ -356,6 +362,7 @@ class Compare
 			end
 	  	}
 		count  = 0
+		#提出プログラムの実行結果から取得
 		File.open("../log/#{$time}_result") { |file|
 			file.each_line do |val|
 				@@result[count] = val.chomp
@@ -363,7 +370,7 @@ class Compare
 			end
 		}
 	end
-	def allowable
+	def allowable		#誤差のある場合の解答作成
 		count = 0
 		@@result.each do |value|
 			@@result_min = value.split(".")
@@ -372,10 +379,9 @@ class Compare
 			count+=1
 		end
 	end
-	def compare
+	def compare		#比較.
 		puts "#{@@result} ?=? #{@@answer} "
-		#sleep 1
-		puts !`cat ../log/#{$time}_runError.log`.empty?
+		#puts !`cat ../log/#{$time}_runError.log`.empty?
 		if (@@result == @@answer)
 			$status = 4
 			$part_point = $part_point + 1
@@ -394,16 +400,22 @@ class Compare
 		end
 		Update_db.new
 	end
-	def start(file_times)
+	def start(file_times)	#main関数
 		get_answers(file_times)
 		if ($allowable > 0)
-			allowable()
+			begin
+				allowable()				
+			rescue Exception => e
+				puts "not good format"
+				$status = 41
+				Update_db.new			
+			end
 		end
 		compare()
 	end
 end
 
-class Update_db
+class Update_db		#データベースの更新
 	def initialize
 		print "update database..."
 		stack = $time
@@ -415,13 +427,22 @@ class Update_db
 		#puts query
 		client.query(query)
 		client.close
-		unless $status == 4 then
+		unless $status == 4 then		#ACの時は、最終的にでた結果のみでページを更新する必要がある。（2個も3個も出したくないわい）
+			#puts "unless status not 4"
+			if !($status == 1 || $status == 2 || $status == 3) 
+				File.write("Result",stack)
+				puts "wirte Result"
+			end
+		else
+			#puts "status is 4"
 		 if $part_point == $input_times then
+		 	puts "last dance"
 			File.write("Result",stack)
 			puts "wirte Result"
 		 else
-			File.write("Result",stack)
-			puts "wirte Result"
+		 	#puts "not last"
+			# File.write("Result",stack)
+			# puts "wirte Result"
 	 	 end
 		end
 		print "update DB complete! \n"
@@ -448,57 +469,4 @@ when 5
 	Action_Python3.new.action()
 end
 
-=begin
 
-##judge.rb各クラスの動き（メモ）
-##Preparation
-各種データの取得を行います。取得するデータは次の通り。
-###From DB
- * 提出時間
- * チーム名
- * 問題番号
- * 提出言語
- * ステータスコード
-
-##From Question_config Data
- * 実行時間
- * メモリー制限
- * テストケース数
- * 誤差容認の桁数
-
-また、実行するファイルを拡張子付きで再保存します。 (`def file_changer`)
-
-##Compile
-提出されたプログラムのコンパイルを行います。コンパイル時のコンパイル爆撃を防止するために、TLEを設け、時間を過ぎたものはTLEとして判断します。（結果表示は別途）
-
-コンパイルコマンドは、別途 子クラスで作成したものを使用します。言語によってTLEのコマンドも変更させます。
-
-##TLE
-TLE（TimeLongError）の判断を行います。本プログラムでは、
-
- * コンパイル
- * 実行
-
-のTLE判断を実施します。
-
-TLEの判断に使用されるコマンドは各言語によって異なるため、言語ごとに子クラスで指定しています。
-
-##Action
-コンパイルされたコード、及びインタプリタ型のコードを実行します。
-
-実行用のコードは、子クラスで指定します。
-
-##Compare
-実行結果を比較します。
-
-#inotify.sh
-STOCK（テキストファイル）の変化イベントをキャッチし、run.sh → judge.rbを実行させるスクリプト。
-ストックがたまっているときは、残弾が０になるまでやり続ける。
-また、`judge.rb`が実行時は、何もしない（そのうち実行されるため。)
-
-Killによる消失からの復旧のため、`../crontab.sh`を用意。それからも実行される
-
-#Time (txtファイル。拡張子なし)
-PHPが生成している。各種ログの時間表示のために生成。
-中身は、提出時刻。ログファイルを整える関係上登場
-=end

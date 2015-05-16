@@ -1,0 +1,7 @@
+judge_test.rb:377:in `block in allowable': undefined method `each_char' for nil:NilClass (NoMethodError)
+	from judge_test.rb:375:in `each'
+	from judge_test.rb:375:in `allowable'
+	from judge_test.rb:406:in `start'
+	from judge_test.rb:250:in `action'
+	from judge_test.rb:459:in `<main>'
+error

@@ -1,0 +1,1 @@
+main.rb:1:in `<main>': undefined method `to_i' for ["4", "3"]:Array (NoMethodError)

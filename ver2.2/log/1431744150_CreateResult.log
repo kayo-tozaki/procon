@@ -1,0 +1,15 @@
+1431744150
+complete getDB
+complete getQdata
+team_name is rubymans Question is A , Language is Ruby , Status is Accept , count Ac is 3/3 
+write html complete
+true
+true
+complete find_data
+1.rubyman , 1 ,1431744007 
+Write to core complete
+2.rubymans , 1 ,1431744150 
+Write to core complete
+result
+[["rubyman", ["1", "1431744007"]], ["rubymans", ["1", "1431744150"]]]
+write Screen html complete

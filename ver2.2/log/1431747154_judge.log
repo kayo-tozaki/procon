@@ -1,0 +1,33 @@
+complete getDB
+complete getQdata
+complete filename_changer
+Start action
+judge_tle start : [r]uby main
+Not action.
+judge_tle complete. $status is 3
+update database...unless status not 4
+wirte Result
+update DB complete! 
+actioning
+fin Aerror log judgement
+["1"] ?=? ["1"] 
+get accept, status is 4
+update database...status is 4
+not last
+update DB complete! 
+actioning
+fin Aerror log judgement
+["2"] ?=? ["2"] 
+get accept, status is 4
+update database...status is 4
+not last
+update DB complete! 
+actioning
+fin Aerror log judgement
+["0"] ?=? ["0"] 
+get accept, status is 4
+update database...status is 4
+last dance
+wirte Result
+update DB complete! 
+all problem_num is complete
