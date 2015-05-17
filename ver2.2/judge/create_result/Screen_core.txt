@@ -1,3 +1,0 @@
-<div class="rank">1. [ rubyman ] accept : 1 </div> 
-<div class="rank">2. [ rubymans ] accept : 1 </div> 
-<div class="rank">3. [ manofruby ] accept : 1 </div> 

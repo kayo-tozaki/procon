@@ -86,7 +86,7 @@ class GetData
 	end
 end
 
-class Make_html　#一般結果ページの生成
+class Make_html		#一般結果ページの生成
 	def table_header()
 		header = %Q(<tr class="table_tr1"> \n <td class="table_td1"></td>  )
 		return(header)
@@ -192,16 +192,18 @@ class Count_AC	#AC数の計算
 	end
 end
 
-#main starting block
+	#main starting block
 $time = ARGV[0].to_i
 $file_path = "../problem_list/20150425/"	#環境変数になるので注意
-puts $time
-GetData.new.main
-if !($status == 1 || $status == 2 || $status == 3) 
-	Make_html.new.create_html
-	Count_AC.new.find_data
-end
-
+if $time > 0 then
+	puts $time
+	GetData.new.main
+	if !($status == 1 || $status == 2 || $status == 3) 
+		Make_html.new.create_html
+		Count_AC.new.find_data
+	end
+else
 #only rewrite
-#Make_html.new.make_file
-
+	Make_html.new.make_file
+	Count_AC.new.finalize
+end
