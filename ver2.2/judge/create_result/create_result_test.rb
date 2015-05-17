@@ -135,7 +135,7 @@ class Count_AC	#AC数の計算
 		day = Time.now.strftime("%y%m%d")
 		$hash = {}
 		$time_hash = {}	#last_submit hash
-		rank = 1	#for rank
+		@@rank = 1	#for rank
 		#reset core file 
 		File.write("create_result/Screen_core.txt","")
 		client= Mysql.connect('localhost', 'procon', 'procon', 'submit')
@@ -145,11 +145,49 @@ class Count_AC	#AC数の計算
 		end
 		puts "complete find_data"
 		client.close
-		$hash = $hash.sort {|(k1, v1, m1), (k2, v2,m2)| (v2 <=> v1 && m1<=>m2) }
+		$hash = $hash.sort {|(k1, v1, m1), (k2, v2,m2)|
+		 v2 <=> v1 
+		}
+		times = 0
+		nowcheckAC = 0
+		ac_time_hash = {}
 		$hash.each do |name,num,time|
-			puts %Q(#{rank}.#{name} , #{num[0]} ,#{num[1]} )#{$time_hash["#{name}"]}")
-			create_screen_html(name,num[0],rank)
-			rank += 1
+			#p $hash
+			nowAC = $hash[times][1][0]
+			puts "#{nowAC} , #{times}"
+			if times == 0 then 
+				nowcheckAC = nowAC
+				ac_time_hash["#{name}"] = $hash[times][1][1]
+				puts ac_time_hash["#{name}"]
+				times = times +  1
+				puts times
+			elsif nowAC != nowcheckAC
+				#時間でソート。 
+				if ac_time_hash.length != 1 then ac_time_hash = ac_time_hash.sort{|a,b| a <=> b} end
+					ac_time_hash.each do |team_name,time|
+					puts %Q(#{@@rank}.#{team_name} , #{nowcheckAC} ,#{time} )#{$time_hash["#{name}"]}")
+					create_screen_html(team_name,nowcheckAC,@@rank)
+					@@rank = @@rank + 1
+				end
+					#times = 0
+					p name
+					ac_time_hash = {}
+					ac_time_hash["#{name}"] = $hash[times][1][1]
+					puts ac_time_hash["#{name}"]
+					times = times + 1
+					nowcheckAC = nowAC
+			else
+				#ストックしておく。
+				ac_time_hash["#{name}"] = $hash[times][1][1]
+				puts ac_time_hash["#{name}"]
+				times = times + 1
+			end
+		end
+		if ac_time_hash.length != 1 then ac_time_hash = ac_time_hash.sort{|a,b| a <=> b} end
+		ac_time_hash.each do |team_name,time|
+			puts %Q(#{@@rank}.#{team_name} , #{nowcheckAC} ,#{time} )#{$time_hash["#{name}"]}")
+			create_screen_html(team_name,nowcheckAC,@@rank)
+			@@rank = @@rank+1
 		end
 		puts "result"
 		p $hash
