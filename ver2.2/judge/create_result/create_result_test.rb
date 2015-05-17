@@ -86,7 +86,7 @@ class GetData
 	end
 end
 
-class Make_html
+class Make_html　#一般結果ページの生成
 	def table_header()
 		header = %Q(<tr class="table_tr1"> \n <td class="table_td1"></td>  )
 		return(header)
@@ -128,7 +128,7 @@ class Make_html
 
 end
 
-class Count_AC
+class Count_AC	#AC数の計算
 	def  find_data
 		$last_time = 0
 		$array_countAC_team_name = Array.new
@@ -192,6 +192,7 @@ class Count_AC
 	end
 end
 
+#main starting block
 $time = ARGV[0].to_i
 $file_path = "../problem_list/20150425/"	#環境変数になるので注意
 puts $time
